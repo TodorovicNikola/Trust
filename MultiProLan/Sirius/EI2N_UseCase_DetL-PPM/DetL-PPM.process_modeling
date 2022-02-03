@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mod:Process xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mod="http://www.trust40.com/process-modeling">
+  <elements xsi:type="mod:ProcessStep" id="bdc3eee5-8c52-47fa-a3ed-dd557daaa6b1" name="Assemble Blue Brick" exposeToCollaboratingParties="true" isTraced="true" logStartTime="true" logEndTime="true" inRelationships="//@relationships.8" outRelationships="//@relationships.6">
+    <capability id="23398f1b-ad3a-4816-9847-5f113697b403" name="Assemble">
+      <parameters id="as_cap_par_1" key="rx" value="0"/>
+      <parameters id="as_cap_par_2" key="ry" value="0"/>
+      <parameters id="as_cap_par_3" key="rz" value="0"/>
+    </capability>
+    <inProducts id="6dc49cd0-ea1f-45ac-a66a-20566ceca8a5" name="Brick" isStored="true" equivalent="//@elements.12/@outProducts.0" quantity="1">
+      <constraints id="in_c_1" physicalDimension="Color" relationalOperator="=" value="Blue"/>
+      <constraints id="in_c_2" physicalDimension="Width" relationalOperator="=" value="0.025" metricUnit="m"/>
+      <constraints id="in_c_3" physicalDimension="Height" relationalOperator="=" value="0.016" metricUnit="m"/>
+    </inProducts>
+    <outProducts id="d21b7bb9-abb8-430c-96d9-c5721cacca48" name="Assem. Brick" isStored="true" quantity="1">
+      <constraints id="in_c_1" physicalDimension="Color" relationalOperator="=" value="Blue"/>
+      <constraints id="in_c_2" physicalDimension="Width" relationalOperator="=" value="0.025" metricUnit="m"/>
+      <constraints id="in_c_3" physicalDimension="Height" relationalOperator="=" value="0.016" metricUnit="m"/>
+      <storage id="8efddb5a-157f-49a4-8ac5-bd1399dd2fa0" isActuator="false" isStorage="true" type="MACHINE"/>
+    </outProducts>
+    <resource id="a1a43387-f29a-4640-bb47-f4ddf34da83f" type="HUMAN"/>
+  </elements>
+  <elements xsi:type="mod:ProcessStep" id="2d4ef802-435c-4bc4-96b3-42ecdff68c02" name="Assemble Red Brick" exposeToCollaboratingParties="true" isTraced="true" logStartTime="true" logEndTime="true" inRelationships="//@relationships.11" outRelationships="//@relationships.7">
+    <capability id="8c56f803-3ba7-4c4c-b31a-42b3be775f20"/>
+    <resource id="8d4cc855-8cb8-49e7-93f0-7fe859bfcf70" type="MACHINE"/>
+  </elements>
+  <elements xsi:type="mod:Gate" id="19245656-9c21-44a6-840b-dd9677532cd2" name="Parallelism" inRelationships="//@relationships.2" outRelationships="//@relationships.10 //@relationships.16" type="PARALLELISM"/>
+  <elements xsi:type="mod:ProcessStep" id="6ee427cd-9f82-4808-8b88-9fe293702e39" name="Inspect Assem. Bricks" exposeToCollaboratingParties="true" inRelationships="//@relationships.5" outRelationships="//@relationships.3" notation="INSPECTION">
+    <capability id="4d33d1a4-127e-4031-817e-3e5cbad5888a"/>
+    <resource id="56b29d0f-3b1c-4ca5-bb98-a2b68f93e84e" type="HUMAN"/>
+  </elements>
+  <elements xsi:type="mod:Gate" id="8e39919f-f601-4fc9-84b5-1d175a20ae00" name="Decision" inRelationships="//@relationships.3" outRelationships="//@relationships.0 //@relationships.4"/>
+  <elements xsi:type="mod:Gate" id="9b283632-f555-4249-baa8-a4b909b9afe9" name="Parallelism" inRelationships="//@relationships.7 //@relationships.6" outRelationships="//@relationships.5" type="PARALLELISM"/>
+  <elements xsi:type="mod:Gate" id="fae1f1ba-c92f-42a3-ba0f-bea36464e4ab" name="Decision" inRelationships="//@relationships.19 //@relationships.25" outRelationships="//@relationships.1"/>
+  <elements xsi:type="mod:ProcessStep" id="8f3d8e96-70a5-45de-add9-1f235c6c090e" name="Calibrate Robot" exposeToCollaboratingParties="true" inRelationships="//@relationships.4" outRelationships="//@relationships.22" notation="CONFIGURATION">
+    <capability id="39f98f7e-f3d8-4271-9d49-112e267e692f"/>
+    <resource id="30727550-f51e-4ca0-b4ad-626defaf864e" type="MACHINE"/>
+  </elements>
+  <elements xsi:type="mod:ProcessStep" id="bdec5dd5-3231-4cbd-8d1c-2333b42ca257" name="Pick Assem. Bricks" inRelationships="//@relationships.0" outRelationships="//@relationships.17">
+    <capability id="82b8586e-90b6-4e92-856c-523dde3443b3" name="" exposeToCollaboratingParties="true"/>
+    <resource id="a0a11c91-2766-4458-a578-41df351ededb" type="HUMAN"/>
+  </elements>
+  <elements xsi:type="mod:ProcessStep" id="7def31e1-a912-412e-ad6d-75558669b071" name="Start" outRelationships="//@relationships.2" type="START"/>
+  <elements xsi:type="mod:ProcessStep" id="ff1b1849-5a44-4778-815c-2a01db8bd5ba" name="End" inRelationships="//@relationships.1" type="END"/>
+  <elements xsi:type="mod:ProcessStep" id="eaeaa6d4-9161-408f-929c-a66edec48841" name="Move to Table" inRelationships="//@relationships.9" outRelationships="//@relationships.8" notation="TRANSPORTATION">
+    <capability id="0b0aef6b-75ba-4b8f-b7c2-353b66dca405"/>
+    <resource id="4aa6ff2d-5662-41b4-b87b-24f7d71dba60" type="HUMAN"/>
+  </elements>
+  <elements xsi:type="mod:ProcessStep" id="65c43194-59bc-4a1a-b785-1fa7b43afac9" name="Pick Blue Brick" inRelationships="//@relationships.20" outRelationships="//@relationships.9">
+    <capability id="fedead8a-7b1d-4a06-afe8-247537a29781" name="Pick"/>
+    <inProducts id="6dc49cd0-ea1f-45ac-a66a-20566ceca858" name="Brick" isStored="true" quantity="1">
+      <constraints id="in_c_1" physicalDimension="Color" relationalOperator="=" value="Blue"/>
+      <constraints id="in_c_2" physicalDimension="Width" relationalOperator="=" value="0.025" metricUnit="m"/>
+      <constraints id="in_c_3" physicalDimension="Height" relationalOperator="=" value="0.016" metricUnit="m"/>
+      <storage id="6fdea54c-05fe-4984-ae35-b44bed448ddd" isActuator="false" isStorage="true" type="MACHINE"/>
+    </inProducts>
+    <outProducts id="fde682a4-fb69-4fa7-b50e-faeaf6c8ff6a" name="Brick" quantity="1">
+      <constraints id="in_c_1" physicalDimension="Color" relationalOperator="=" value="Blue"/>
+      <constraints id="in_c_2" physicalDimension="Width" relationalOperator="=" value="0.025" metricUnit="m"/>
+      <constraints id="in_c_3" physicalDimension="Height" relationalOperator="=" value="0.016" metricUnit="m"/>
+    </outProducts>
+    <resource id="a00294f9-d9fb-4787-9c75-ab5ece48b97f" type="HUMAN"/>
+  </elements>
+  <elements xsi:type="mod:ProcessStep" id="7c614621-42b5-4fce-bdf3-0291fd454503" name="Move to Shelf" inRelationships="//@relationships.10" outRelationships="//@relationships.20" notation="TRANSPORTATION">
+    <capability id="5d1d0fab-e305-4269-a341-ed80036ab7ab"/>
+    <resource id="10f0d459-98d3-4f2e-b3bb-f72b58025164" type="HUMAN"/>
+  </elements>
+  <elements xsi:type="mod:ProcessStep" id="86f4bd74-e0f7-4e87-b209-3952714990bc" name="Calibrate Robot" inRelationships="//@relationships.12" outRelationships="//@relationships.11" notation="CONFIGURATION">
+    <capability id="fbd3bffd-2b48-4998-8c43-38de332ebcd3"/>
+    <resource id="9b6fed65-1c43-4968-a119-6431c107cc83" type="MACHINE"/>
+  </elements>
+  <elements xsi:type="mod:ProcessStep" id="671c21e8-3ca8-42b4-ad7d-6d6a1ef17a86" name="Move to Table" inRelationships="//@relationships.13" outRelationships="//@relationships.12" notation="TRANSPORTATION">
+    <capability id="0905ec57-3da8-43c4-9416-f484739a49d5"/>
+    <resource id="8c90754a-56df-42f6-a9fa-bd6abe28fb8f" type="MACHINE"/>
+  </elements>
+  <elements xsi:type="mod:ProcessStep" id="2455a244-fda5-4cda-8a1c-7f656338b9d7" name="Pick Red Brick" inRelationships="//@relationships.14" outRelationships="//@relationships.13">
+    <capability id="354782bc-e9d2-4312-8a38-2de4d33911b9"/>
+    <resource id="f5ce5feb-c00b-41b7-bcb9-14ed97b44fd9" type="MACHINE"/>
+  </elements>
+  <elements xsi:type="mod:ProcessStep" id="86f4bd74-e0f7-4e87-b209-3952714990bd" name="Calibrate Robot" inRelationships="//@relationships.15" outRelationships="//@relationships.14" notation="CONFIGURATION">
+    <capability id="fbd3bffd-2b48-4998-8c43-38de332ebcd3"/>
+    <resource id="9b6fed65-1c43-4968-a119-6431c107cc83" type="MACHINE"/>
+  </elements>
+  <elements xsi:type="mod:ProcessStep" id="8313c435-89f9-4c87-9070-159a7584c7ee" name="Move to Shelf" inRelationships="//@relationships.16" outRelationships="//@relationships.15" notation="TRANSPORTATION">
+    <capability id="1ac47798-3b55-4b87-a7ae-8f3416b770ee"/>
+    <resource id="ead9cbcd-8595-41c7-a225-9a5c2d69d9b5" type="MACHINE"/>
+  </elements>
+  <elements xsi:type="mod:ProcessStep" id="8374e34d-9187-4b65-8874-808cdca35bdb" name="Move to Junk Area" inRelationships="//@relationships.17" outRelationships="//@relationships.18" notation="TRANSPORTATION">
+    <capability id="275edc7f-dffe-4910-88d9-cc68c54eece0"/>
+    <resource id="1e0afe1c-457f-4c0d-a653-d3d0c36365bd" type="HUMAN"/>
+  </elements>
+  <elements xsi:type="mod:ProcessStep" id="0c3f70ae-d1a0-48c8-8fe6-567247252b7f" name="Place Assem. Bricks" inRelationships="//@relationships.18" outRelationships="//@relationships.19">
+    <capability id="e2529fd7-39de-4044-8fcb-1eceeb4da700"/>
+    <resource id="9d84c1a6-8653-4488-90d4-1c013b1f69b4" type="HUMAN"/>
+  </elements>
+  <elements xsi:type="mod:ProcessStep" id="8c79be42-6c84-49ec-ae09-657ca020c9f3" name="Pick Assem. Bricks" inRelationships="//@relationships.22" outRelationships="//@relationships.21">
+    <capability id="c5484b0d-c62e-4a80-b5cb-b029add8a492"/>
+    <resource id="35ff7829-40be-4be0-826a-1ee28c82dfd4" type="MACHINE"/>
+  </elements>
+  <elements xsi:type="mod:ProcessStep" id="286c3a04-06f4-4871-889b-bd0f20c4bdcc" name="Move to Shelf" inRelationships="//@relationships.21" outRelationships="//@relationships.23" notation="TRANSPORTATION">
+    <capability id="d63f35fd-52e5-4cf0-a9f1-39007f8a0024"/>
+    <resource id="e38c9a6d-6e8b-45f6-b5dc-5a5ff50597a2" type="MACHINE"/>
+  </elements>
+  <elements xsi:type="mod:ProcessStep" id="8f3d8e96-70a5-45de-add9-1f235c6c0985" name="Calibrate Robot" exposeToCollaboratingParties="true" inRelationships="//@relationships.23" outRelationships="//@relationships.24" notation="CONFIGURATION">
+    <capability id="39f98f7e-f3d8-4271-9d49-112e267e692f"/>
+    <resource id="30727550-f51e-4ca0-b4ad-626defaf864e" type="MACHINE"/>
+  </elements>
+  <elements xsi:type="mod:ProcessStep" id="8c79be42-6c84-49ec-ae09-657ca020c985" name="Place Assem. Bricks In Box" inRelationships="//@relationships.24" outRelationships="//@relationships.25">
+    <capability id="c5484b0d-c62e-4a80-b5cb-b029add8a492"/>
+    <resource id="35ff7829-40be-4be0-826a-1ee28c82dfd4" type="MACHINE"/>
+  </elements>
+  <relationships id="f34ac7b3-aa43-4d25-ab4b-96eb2b85c99a" name="8e39919f-f601-4fc9-84b5-1d175a20ae00_bdec5dd5-3231-4cbd-8d1c-2333b42ca257_flow" logicalCondition="isCorrect = False" source="//@elements.4" target="//@elements.8"/>
+  <relationships id="51edf8fe-1546-411c-9449-4d495ea6f58c" name="fae1f1ba-c92f-42a3-ba0f-bea36464e4ab_ff1b1849-5a44-4778-815c-2a01db8bd5ba_flow" source="//@elements.6" target="//@elements.10"/>
+  <relationships id="0868268f-e054-458a-997c-d2fabac33372" name="7def31e1-a912-412e-ad6d-75558669b071_19245656-9c21-44a6-840b-dd9677532cd2_flow" source="//@elements.9" target="//@elements.2"/>
+  <relationships id="549dc4a3-e46a-4c03-b0d0-d20a74486e58" name="6ee427cd-9f82-4808-8b88-9fe293702e39_8e39919f-f601-4fc9-84b5-1d175a20ae00_flow" source="//@elements.3" target="//@elements.4"/>
+  <relationships id="acf4c3aa-b848-4a53-b884-3c45d03ca823" name="8e39919f-f601-4fc9-84b5-1d175a20ae00_8f3d8e96-70a5-45de-add9-1f235c6c090e_flow" logicalCondition="isCorrect = True" source="//@elements.4" target="//@elements.7"/>
+  <relationships id="f209bc05-7b08-4ba4-94d6-218b6e0bf91f" name="9b283632-f555-4249-baa8-a4b909b9afe9_6ee427cd-9f82-4808-8b88-9fe293702e39_flow" source="//@elements.5" target="//@elements.3"/>
+  <relationships id="e4b765c1-01d4-43e2-bfe9-c4db562c271f" name="bdc3eee5-8c52-47fa-a3ed-dd557daaa6b1_9b283632-f555-4249-baa8-a4b909b9afe9_flow" source="//@elements.0" target="//@elements.5"/>
+  <relationships id="6ff11af2-1dea-4477-a8fe-9a35e0021ce8" name="2d4ef802-435c-4bc4-96b3-42ecdff68c02_9b283632-f555-4249-baa8-a4b909b9afe9_flow" source="//@elements.1" target="//@elements.5"/>
+  <relationships id="3a127694-f1d6-4c88-8c0b-e9dcf0cc74cf" name="eaeaa6d4-9161-408f-929c-a66edec48841_bdc3eee5-8c52-47fa-a3ed-dd557daaa6b1_flow" source="//@elements.11" target="//@elements.0"/>
+  <relationships id="373cc892-d4b2-4d16-8997-29772f39b438" name="65c43194-59bc-4a1a-b785-1fa7b43afac9_eaeaa6d4-9161-408f-929c-a66edec48841_flow" source="//@elements.12" target="//@elements.11"/>
+  <relationships id="d95e52d6-7eed-418b-b3e4-04796de3a9a4" name="19245656-9c21-44a6-840b-dd9677532cd2_7c614621-42b5-4fce-bdf3-0291fd454503_flow" source="//@elements.2" target="//@elements.13"/>
+  <relationships id="7be76dba-577c-4d89-9822-17e014a762b6" name="86f4bd74-e0f7-4e87-b209-3952714990bc_2d4ef802-435c-4bc4-96b3-42ecdff68c02_flow" source="//@elements.14" target="//@elements.1"/>
+  <relationships id="46cd2029-7052-4f3f-87f0-53a63a620e0e" name="671c21e8-3ca8-42b4-ad7d-6d6a1ef17a86_86f4bd74-e0f7-4e87-b209-3952714990bc_flow" source="//@elements.15" target="//@elements.14"/>
+  <relationships id="d2a9d7de-3c79-48a2-8627-29c26527a95f" name="2455a244-fda5-4cda-8a1c-7f656338b9d7_671c21e8-3ca8-42b4-ad7d-6d6a1ef17a86_flow" source="//@elements.16" target="//@elements.15"/>
+  <relationships id="97ce810c-5245-4f74-94de-022188f4d3f9" name="86f4bd74-e0f7-4e87-b209-3952714990bd_2455a244-fda5-4cda-8a1c-7f656338b9d7_flow" source="//@elements.17" target="//@elements.16"/>
+  <relationships id="70f99fc1-7e93-4fb1-b00a-272dd64a0ed2" name="8313c435-89f9-4c87-9070-159a7584c7ee_86f4bd74-e0f7-4e87-b209-3952714990bd_flow" source="//@elements.18" target="//@elements.17"/>
+  <relationships id="75257575-5214-4aa7-9cb5-676531df4837" name="19245656-9c21-44a6-840b-dd9677532cd2_8313c435-89f9-4c87-9070-159a7584c7ee_flow" source="//@elements.2" target="//@elements.18"/>
+  <relationships id="40632406-7a07-4122-b183-9880d01d90ae" name="bdec5dd5-3231-4cbd-8d1c-2333b42ca257_8374e34d-9187-4b65-8874-808cdca35bdb_flow" source="//@elements.8" target="//@elements.19"/>
+  <relationships id="a5e34558-8505-4ab3-bc1f-8948e90c5204" name="8374e34d-9187-4b65-8874-808cdca35bdb_0c3f70ae-d1a0-48c8-8fe6-567247252b7f_flow" source="//@elements.19" target="//@elements.20"/>
+  <relationships id="ed81a8f7-8e7b-4e31-a2ad-fc74dba39c60" name="0c3f70ae-d1a0-48c8-8fe6-567247252b7f_fae1f1ba-c92f-42a3-ba0f-bea36464e4ab_flow" source="//@elements.20" target="//@elements.6"/>
+  <relationships id="fbfc06c0-9fbf-41d5-88ec-873dc698492a" name="7c614621-42b5-4fce-bdf3-0291fd454503_65c43194-59bc-4a1a-b785-1fa7b43afac9_flow" source="//@elements.13" target="//@elements.12"/>
+  <relationships id="eec6ed8c-a277-4605-966c-8f649036a08c" name="8c79be42-6c84-49ec-ae09-657ca020c9f3_286c3a04-06f4-4871-889b-bd0f20c4bdcc_flow" source="//@elements.21" target="//@elements.22"/>
+  <relationships id="099053fc-59fb-46ef-b237-8a633359c8a3" name="8f3d8e96-70a5-45de-add9-1f235c6c090e_8c79be42-6c84-49ec-ae09-657ca020c9f3_flow" source="//@elements.7" target="//@elements.21"/>
+  <relationships id="0abca9a1-69cc-4ee4-a1e6-2142b787b1b6" name="286c3a04-06f4-4871-889b-bd0f20c4bdcc_8f3d8e96-70a5-45de-add9-1f235c6c0985_flow" source="//@elements.22" target="//@elements.23"/>
+  <relationships id="4eed0a30-7ec7-470b-ae72-691028488c7f" name="8f3d8e96-70a5-45de-add9-1f235c6c0985_8c79be42-6c84-49ec-ae09-657ca020c985_flow" source="//@elements.23" target="//@elements.24"/>
+  <relationships id="02b77acf-1906-466a-838b-3b009da476ce" name="8c79be42-6c84-49ec-ae09-657ca020c985_fae1f1ba-c92f-42a3-ba0f-bea36464e4ab_flow" source="//@elements.24" target="//@elements.6"/>
+</mod:Process>
