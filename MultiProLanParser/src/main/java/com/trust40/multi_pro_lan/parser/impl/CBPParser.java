@@ -3,6 +3,8 @@ package com.trust40.multi_pro_lan.parser.impl;
 import com.trust40.multi_pro_lan.parser.AbstractParser;
 import com.trust40.multi_pro_lan.parser.model.*;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
@@ -21,6 +23,49 @@ public class CBPParser extends AbstractParser {
         parseModel(path);
         printSelectedElements();
         return generateValueMap();
+    }
+
+    public Pool parsePool(String path) throws ParserConfigurationException, IOException, SAXException, XPathExpressionException {
+        Pool pool = new Pool();
+        Document document = prepareDocument(path);
+        XPathFactory xpathFactory = XPathFactory.newInstance();
+        XPath xpath = xpathFactory.newXPath();
+        NodeList XMLElements = (NodeList) xpath.evaluate("Process/elements", document,
+                XPathConstants.NODESET);
+
+        for (int i = 0; i < XMLElements.getLength(); i++) {
+            Node node = XMLElements.item(i);
+            if (node.getNodeType() == Node.ELEMENT_NODE) {
+
+                Element element = (Element) node;
+
+                if(element.getAttribute("xsi:type").equals("mod:Pool")) {
+                    String id = element.getAttribute("id");
+                    String name = element.getAttribute("name");
+                    String endorsementPolicy = element.getAttribute("endorsementPolicy");
+
+                    pool = new Pool(id, name, endorsementPolicy);
+
+                    NodeList swimlanesNodes = element.getChildNodes();
+
+                    for (int j = 0; j < swimlanesNodes.getLength(); j++) {
+                            Node swimlane = swimlanesNodes.item(j);
+                        if (swimlane.getNodeType() == Node.ELEMENT_NODE) {
+                            Element swimlaneElement = (Element) swimlane;
+                            String idSwimlane = swimlaneElement.getAttribute("id");
+                            String nameSwimlane = swimlaneElement.getAttribute("OrganizationName");
+                            String role = swimlaneElement.getAttribute("OrganizationRole");
+                            String host = swimlaneElement.getAttribute("host");
+                            String port = swimlaneElement.getAttribute("port");
+                            Swimlanes swimlanes = new Swimlanes(idSwimlane, nameSwimlane, role, host, port);
+                            pool.addSwimlanes(swimlanes);
+                        }
+                    }
+                }
+            }
+        }
+
+        return pool;
     }
 
 
