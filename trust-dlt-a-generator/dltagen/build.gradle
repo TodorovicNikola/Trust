@@ -12,10 +12,13 @@ repositories {
 	mavenCentral()
 }
 
+
 dependencies {
+	implementation files('lib/MultiProLanParser-1.0-SNAPSHOT.jar')
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	runtimeOnly 'org.postgresql:postgresql'
+	runtimeOnly 'com.h2database:h2'
+	//runtimeOnly 'org.postgresql:postgresql'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
