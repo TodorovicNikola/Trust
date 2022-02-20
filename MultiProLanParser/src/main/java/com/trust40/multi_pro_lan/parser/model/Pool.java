@@ -35,6 +35,22 @@ public class Pool {
         return Objects.hash(id);
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getEndorsementPolicy() {
+        return endorsementPolicy;
+    }
+
+    public List<Swimlanes> getSwimlanes() {
+        return swimlanes;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

@@ -52,12 +52,7 @@ public class CBPParser extends AbstractParser {
                             Node swimlane = swimlanesNodes.item(j);
                         if (swimlane.getNodeType() == Node.ELEMENT_NODE) {
                             Element swimlaneElement = (Element) swimlane;
-                            String idSwimlane = swimlaneElement.getAttribute("id");
-                            String nameSwimlane = swimlaneElement.getAttribute("OrganizationName");
-                            String role = swimlaneElement.getAttribute("OrganizationRole");
-                            String host = swimlaneElement.getAttribute("host");
-                            String port = swimlaneElement.getAttribute("port");
-                            Swimlanes swimlanes = new Swimlanes(idSwimlane, nameSwimlane, role, host, port);
+                            Swimlanes swimlanes = new Swimlanes(swimlaneElement);
                             pool.addSwimlanes(swimlanes);
                         }
                     }

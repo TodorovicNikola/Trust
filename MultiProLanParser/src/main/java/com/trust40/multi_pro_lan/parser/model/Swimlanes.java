@@ -1,11 +1,13 @@
 package com.trust40.multi_pro_lan.parser.model;
 
+import org.w3c.dom.Element;
+
 import java.util.Objects;
 
 public class Swimlanes {
     private String id;
     private String name;
-    private OrganizationRole role;
+    private String role;
     private String host;
     private String port;
 
@@ -15,12 +17,20 @@ public class Swimlanes {
         this.host = host;
         this.port = port;
 
-        if("".equals(role)) {
-            this.role = OrganizationRole.BROKER;
-        } else if("CORE_PARTNER".equals(role)) {
-            this.role = OrganizationRole.CORE_PARTNER;
-        } else if("ADDITIONAL_PARTNER".equals(role)) {
-            this.role = OrganizationRole.ADDITIONAL_PARTNER;
+        if(role.equals("")) {
+            this.role = "BROKER";
+        }
+    }
+
+    public Swimlanes(Element element) {
+        this.id = element.getAttribute("id");
+        this.name = element.getAttribute("OrganizationName");
+        this.role = element.getAttribute("OrganizationRole");
+        this.host = element.getAttribute("host");
+        this.port = element.getAttribute("port");
+
+        if(this.role.equals("")) {
+            this.role = "BROKER";
         }
     }
 
@@ -44,5 +54,25 @@ public class Swimlanes {
                 "\n\trole = " + role +
                 "\n\thost = " + host +
                 "\n\tport = " + port + "\n\n";
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public String getHost() {
+        return host;
+    }
+
+    public String getPort() {
+        return port;
     }
 }
