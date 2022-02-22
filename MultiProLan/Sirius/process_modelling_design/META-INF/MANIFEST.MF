@@ -10,15 +10,12 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.resources,
  org.eclipse.sirius,
  org.eclipse.sirius.common.acceleo.aql,
- MultiProLan;bundle-version="0.1.0",
  org.eclipse.sirius.diagram;bundle-version="6.1.2",
  org.eclipse.sirius.diagram.ui;bundle-version="6.1.2",
  org.eclipse.core.expressions;bundle-version="3.6.300",
- org.eclipse.ui.workbench
+ org.eclipse.ui.workbench,
+ MultiProLanUpdated;bundle-version="0.1.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Vendor: %providerName
 Automatic-Module-Name: project_modelling_design
-Bundle-ClassPath: .,
- libraries/slf4j-simple-1.7.32.jar,
- libraries/slf4j-api-1.7.32.jar
