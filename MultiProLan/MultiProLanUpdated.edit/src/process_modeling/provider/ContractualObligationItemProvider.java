@@ -156,7 +156,7 @@ public class ContractualObligationItemProvider extends PersistableItemProvider {
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(Process_modelingPackage.Literals.CONTRACTUAL_OBLIGATION__PARAMETERS);
+			childrenFeatures.add(Process_modelingPackage.Literals.CONTRACTUAL_OBLIGATION__CONSTRAINTS);
 		}
 		return childrenFeatures;
 	}
@@ -218,7 +218,7 @@ public class ContractualObligationItemProvider extends PersistableItemProvider {
 			case Process_modelingPackage.CONTRACTUAL_OBLIGATION__ALIAS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case Process_modelingPackage.CONTRACTUAL_OBLIGATION__PARAMETERS:
+			case Process_modelingPackage.CONTRACTUAL_OBLIGATION__CONSTRAINTS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -238,8 +238,8 @@ public class ContractualObligationItemProvider extends PersistableItemProvider {
 
 		newChildDescriptors.add
 			(createChildParameter
-				(Process_modelingPackage.Literals.CONTRACTUAL_OBLIGATION__PARAMETERS,
-				 Process_modelingFactory.eINSTANCE.createParameter()));
+				(Process_modelingPackage.Literals.CONTRACTUAL_OBLIGATION__CONSTRAINTS,
+				 Process_modelingFactory.eINSTANCE.createConstraint()));
 	}
 
 }

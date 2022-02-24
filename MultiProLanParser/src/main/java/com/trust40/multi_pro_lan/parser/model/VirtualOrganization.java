@@ -4,30 +4,30 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Pool {
+public class VirtualOrganization {
     private String id;
     private String name;
     private String endorsementPolicy;
-    private List<Swimlanes> swimlanes = new ArrayList<>();
+    private List<Organization> organizations = new ArrayList<>();
 
-    public Pool() {}
+    public VirtualOrganization() {}
 
-    public Pool(String id, String name, String endorsementPolicy) {
+    public VirtualOrganization(String id, String name, String endorsementPolicy) {
         this.id = id;
         this.name = name;
         this.endorsementPolicy = endorsementPolicy;
     }
 
-    public void addSwimlanes(Swimlanes swimlane) {
-        swimlanes.add(swimlane);
+    public void addOrganization(Organization organization) {
+        organizations.add(organization);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Pool pool = (Pool) o;
-        return Objects.equals(id, pool.id);
+        VirtualOrganization virtualOrganization = (VirtualOrganization) o;
+        return Objects.equals(id, virtualOrganization.id);
     }
 
     @Override
@@ -47,8 +47,8 @@ public class Pool {
         return endorsementPolicy;
     }
 
-    public List<Swimlanes> getSwimlanes() {
-        return swimlanes;
+    public List<Organization> getOrganizations() {
+        return organizations;
     }
 
     @Override
@@ -57,8 +57,8 @@ public class Pool {
         sb.append("id = " + id +
                 "\nname = " + name +
                 "\nendorsementPolicy = " + endorsementPolicy +
-                "\nswimlanes:\n");
-        for(Swimlanes sl: swimlanes) {
+                "\norganizations:\n");
+        for(Organization sl: organizations) {
             sb.append(sl);
         }
         return sb.toString();

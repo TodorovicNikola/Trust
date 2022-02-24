@@ -13,7 +13,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link process_modeling.ContractualObligation#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link process_modeling.ContractualObligation#getConstraints <em>Constraints</em>}</li>
  * </ul>
  *
  * @see process_modeling.Process_modelingPackage#getContractualObligation()
@@ -22,15 +22,15 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface ContractualObligation extends Persistable, IDNamedElement {
 	/**
-	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
-	 * The list contents are of type {@link process_modeling.Parameter}.
+	 * Returns the value of the '<em><b>Constraints</b></em>' containment reference list.
+	 * The list contents are of type {@link process_modeling.Constraint}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Parameters</em>' containment reference list.
-	 * @see process_modeling.Process_modelingPackage#getContractualObligation_Parameters()
+	 * @return the value of the '<em>Constraints</em>' containment reference list.
+	 * @see process_modeling.Process_modelingPackage#getContractualObligation_Constraints()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Parameter> getParameters();
+	EList<Constraint> getConstraints();
 
 } // ContractualObligation

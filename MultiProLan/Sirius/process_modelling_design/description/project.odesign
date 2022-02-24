@@ -3614,8 +3614,8 @@
               </conditionnalStyles>
             </subContainerMappings>
             <subContainerMappings name="ContractualObligation" semanticCandidatesExpression="feature:eAllContents" synchronizationLock="true" documentation="aql: self.eContainer().eContainer().eClass() = process_modeling::Organization" domainClass="process_modeling::ContractualObligation" childrenPresentation="List">
-              <subNodeMappings name="Parameter" semanticCandidatesExpression="feature:eAllContents" domainClass="process_modeling::Parameter">
-                <style xsi:type="style:SquareDescription" labelSize="9" showIcon="false" labelExpression="aql: self.key + ' : ' + self.value" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
+              <subNodeMappings name="Constraint" semanticCandidatesExpression="feature:eAllContents" domainClass="process_modeling::Constraint">
+                <style xsi:type="style:SquareDescription" labelSize="9" showIcon="false" labelExpression="aql: self.physicalDimension + ' ' + self.relationalOperator + ' ' + self.value" labelAlignment="LEFT" labelPosition="node" resizeKind="NSEW">
                   <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
                   <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
                   <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
@@ -3705,11 +3705,11 @@
                           <subModelOperations xsi:type="tool_1:SetValue" featureName="id" valueExpression="service:generateRandomNumber()"/>
                           <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="Contract Params"/>
                           <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:self">
-                            <subModelOperations xsi:type="tool_1:CreateInstance" typeName="process_modeling::Parameter" referenceName="parameters">
-                              <subModelOperations xsi:type="tool_1:SetValue" featureName="key" valueExpression="Pieces"/>
+                            <subModelOperations xsi:type="tool_1:CreateInstance" typeName="process_modeling::Constraint" referenceName="constraints">
+                              <subModelOperations xsi:type="tool_1:SetValue" featureName="physicalDimension" valueExpression="Pieces"/>
                             </subModelOperations>
-                            <subModelOperations xsi:type="tool_1:CreateInstance" typeName="process_modeling::Parameter" referenceName="parameters">
-                              <subModelOperations xsi:type="tool_1:SetValue" featureName="key" valueExpression="Deadline"/>
+                            <subModelOperations xsi:type="tool_1:CreateInstance" typeName="process_modeling::Constraint" referenceName="constraints">
+                              <subModelOperations xsi:type="tool_1:SetValue" featureName="physicalDimension" valueExpression="Deadline"/>
                             </subModelOperations>
                           </subModelOperations>
                         </subModelOperations>
@@ -3800,7 +3800,7 @@
           </ownedTools>
         </toolSections>
         <toolSections name="OrganizationsAndVirtualOrganizations" label="Organizations and Virtual Organizations">
-          <ownedTools xsi:type="tool:ContainerCreationDescription" name="VirtualOrganization" label="Virtual Organization" forceRefresh="true" containerMappings="//@ownedViewpoints[name='MyViewpoint']/@ownedRepresentations[name='CBP']/@defaultLayer/@containerMappings[name='VirtualOrganization']">
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="VirtualOrganization" label="Virtual Organization" forceRefresh="true" containerMappings="//@ownedViewpoints[name='MyViewpoint']/@ownedRepresentations[name='CBP']/@defaultLayer/@containerMappings[name='VirtualOrganization']" iconPath="/process_modelling_design/icons/VO/VO.png">
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
@@ -3811,7 +3811,7 @@
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:ContainerCreationDescription" name="Organization" forceRefresh="true" containerMappings="//@ownedViewpoints[name='MyViewpoint']/@ownedRepresentations[name='CBP']/@defaultLayer/@containerMappings[name='VirtualOrganization']/@subContainerMappings[name='Organization']">
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="Organization" forceRefresh="true" containerMappings="//@ownedViewpoints[name='MyViewpoint']/@ownedRepresentations[name='CBP']/@defaultLayer/@containerMappings[name='VirtualOrganization']/@subContainerMappings[name='Organization']" iconPath="/process_modelling_design/icons/VO/ORG.png">
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
@@ -3827,12 +3827,12 @@
           </ownedTools>
         </toolSections>
         <toolSections name="Contractual Obligations">
-          <ownedTools xsi:type="tool:NodeCreationDescription" name="Parameter" label="Contract Parameter" forceRefresh="true" nodeMappings="//@ownedViewpoints[name='MyViewpoint']/@ownedRepresentations[name='CBP']/@defaultLayer/@containerMappings[name='VirtualOrganization']/@subContainerMappings[name='Organization']/@subContainerMappings[name='ContractualObligation']/@subNodeMappings[name='Parameter']" iconPath="/process_modelling_design/icons/process_step/products_and_capability/ContractualObligationParameter55x32.png">
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="Constraint" label="Contract Constraint" forceRefresh="true" nodeMappings="//@ownedViewpoints[name='MyViewpoint']/@ownedRepresentations[name='CBP']/@defaultLayer/@containerMappings[name='VirtualOrganization']/@subContainerMappings[name='Organization']/@subContainerMappings[name='ContractualObligation']/@subNodeMappings[name='Constraint']" iconPath="/process_modelling_design/icons/process_step/products_and_capability/ContractualObligationConstraint55x32.png">
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
               <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
-                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="process_modeling::Parameter" referenceName="parameters"/>
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="process_modeling::Constraint" referenceName="constraints"/>
               </firstModelOperations>
             </initialOperation>
           </ownedTools>

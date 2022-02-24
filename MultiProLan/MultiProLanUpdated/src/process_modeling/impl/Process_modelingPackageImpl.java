@@ -1476,7 +1476,7 @@ public class Process_modelingPackageImpl extends EPackageImpl implements Process
 	 * @generated
 	 */
 	@Override
-	public EReference getContractualObligation_Parameters() {
+	public EReference getContractualObligation_Constraints() {
 		return (EReference)contractualObligationEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -1797,7 +1797,7 @@ public class Process_modelingPackageImpl extends EPackageImpl implements Process
 		createEAttribute(organizationEClass, ORGANIZATION__DLT_PEER_ADDRESS);
 
 		contractualObligationEClass = createEClass(CONTRACTUAL_OBLIGATION);
-		createEReference(contractualObligationEClass, CONTRACTUAL_OBLIGATION__PARAMETERS);
+		createEReference(contractualObligationEClass, CONTRACTUAL_OBLIGATION__CONSTRAINTS);
 
 		// Create enums
 		eResourceTypeEEnum = createEEnum(ERESOURCE_TYPE);
@@ -2000,7 +2000,7 @@ public class Process_modelingPackageImpl extends EPackageImpl implements Process
 		initEAttribute(getOrganization_DltPeerAddress(), ecorePackage.getEString(), "dltPeerAddress", null, 1, 1, Organization.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(contractualObligationEClass, ContractualObligation.class, "ContractualObligation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getContractualObligation_Parameters(), this.getParameter(), null, "parameters", null, 0, -1, ContractualObligation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getContractualObligation_Constraints(), this.getConstraint(), null, "constraints", null, 0, -1, ContractualObligation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(eResourceTypeEEnum, EResourceType.class, "EResourceType");

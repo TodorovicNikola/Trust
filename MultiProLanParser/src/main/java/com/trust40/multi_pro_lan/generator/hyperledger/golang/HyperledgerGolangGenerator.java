@@ -24,10 +24,10 @@ public class HyperledgerGolangGenerator {
 
     public static void generateForCBP(Map<String, Object> valueMap) {
         String pathFlowExecutionState = String.format(PATH_FORMAT_FLOW_EXECUTION, "cbp", "flow_execution_state");
-        generateForTemplate(valueMap, pathFlowExecutionState, Templates.MASL_PPM_FLOW_EXECUTION_STATE_FTL);
+        generateForTemplate(valueMap, pathFlowExecutionState, Templates.CBP_FLOW_EXECUTION_STATE_FTL);
 
         String pathFlowExecution = String.format(PATH_FORMAT_FLOW_EXECUTION, "cbp", "flow_execution");
-        generateForTemplate(valueMap, pathFlowExecution, Templates.MASL_PPM_FLOW_EXECUTION_FTL);
+        generateForTemplate(valueMap, pathFlowExecution, Templates.CBP_FLOW_EXECUTION_FTL);
     }
 
     private static void generateForTemplate(Map<String, Object> valueMap, String path, String templatePath) {
