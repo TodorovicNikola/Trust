@@ -8,18 +8,13 @@ import com.trust.dltagen.model.OrganizationStatus;
 import com.trust.dltagen.repository.ChannelRepository;
 import com.trust.dltagen.utils.FilesystemUtil;
 import com.trust40.multi_pro_lan.parser.impl.CBPParser;
-import com.trust40.multi_pro_lan.parser.model.OrganizationRole;
-import com.trust40.multi_pro_lan.parser.model.Pool;
+import com.trust40.multi_pro_lan.parser.model.VirtualOrganization;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,15 +82,19 @@ public class ChannelService {
 
     private Channel parse(String path) {
         CBPParser parser = new CBPParser();
-        Pool pool = null;
+        VirtualOrganization vo = null;
         try {
-            pool = parser.parsePool(path);
+            vo = parser.parseVirtualOrganization(path);
         } catch (ParserConfigurationException|IOException|SAXException|XPathExpressionException e) {
             //TODO: exception handling
             e.printStackTrace();
         }
 
-        return new Channel(pool);
+        return new Channel(vo);
+    }
+
+    public Channel getById(String id) {
+        return repository.getById(id);
     }
 
 }

@@ -1,8 +1,6 @@
 package com.trust.dltagen.model;
 
-import com.trust40.multi_pro_lan.parser.model.Pool;
-import com.trust40.multi_pro_lan.parser.model.Swimlanes;
-
+import com.trust40.multi_pro_lan.parser.model.VirtualOrganization;
 import javax.persistence.CascadeType;
 import javax.persistence.Id;
 import javax.persistence.Entity;
@@ -48,18 +46,18 @@ public class Channel {
         this.endorsementPolicy = endorsementPolicy;
     }
 
-    public Channel(Pool pool) {
-        this.id = pool.getId();
-        this.name = pool.getName();
-        this.endorsementPolicy = pool.getEndorsementPolicy();
+    public Channel(VirtualOrganization vo) {
+        this.id = vo.getId();
+        this.name = vo.getName();
+        this.endorsementPolicy = vo.getEndorsementPolicy();
         this.status = ChannelStatus.NOT_CREATED;
 
-        pool.getSwimlanes().forEach(this::addOrganization);
+        vo.getOrganizations().forEach(this::addOrganization);
     }
 
-    private void addOrganization(Swimlanes swimlanes) {
-        Organization organization = new Organization(swimlanes);
-        this.organizations.add(organization);
+    private void addOrganization(com.trust40.multi_pro_lan.parser.model.Organization organization) {
+        Organization org = new Organization(organization);
+        this.organizations.add(org);
     }
 
     public String getId() {
@@ -92,5 +90,18 @@ public class Channel {
 
     public void setOrganizations(List<Organization> organizations) {
         this.organizations = organizations;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Channel{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                //", orderer=" + orderer +
+                ", status=" + status +
+                ", organizations=" + organizations +
+                ", endorsementPolicy='" + endorsementPolicy + '\'' +
+                '}';
     }
 }

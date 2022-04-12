@@ -1,14 +1,8 @@
-package com.trust.dltagen.model;
+package com.trust.dltagen.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.trust.dltagen.model.CertificateAuthority;
 
-@Entity
-public class CertificateAuthority {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class CertificateAuthorityDTO {
     private Long id;
     private String name;
     private String host;
@@ -17,11 +11,11 @@ public class CertificateAuthority {
     private String adminName;
     private String adminPassword;
 
-    public CertificateAuthority() {
+    public CertificateAuthorityDTO() {
 
     }
 
-    public CertificateAuthority(Long id, String name, String host, String port, String opPort, String adminName, String adminPassword) {
+    public CertificateAuthorityDTO(Long id, String name, String host, String port, String opPort, String adminName, String adminPassword) {
         this.id = id;
         this.name = name;
         this.host = host;
@@ -29,6 +23,16 @@ public class CertificateAuthority {
         this.opPort = opPort;
         this.adminName = adminName;
         this.adminPassword = adminPassword;
+    }
+
+    public CertificateAuthorityDTO(CertificateAuthority ca) {
+        this.id = ca.getId();
+        this.name = ca.getName();
+        this.host = ca.getHost();
+        this.port = ca.getPort();
+        this.opPort = ca.getOpPort();
+        this.adminName = ca.getAdminName();
+        this.adminPassword = ca.getAdminPassword();
     }
 
     public Long getId() {

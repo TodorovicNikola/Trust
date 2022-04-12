@@ -12,7 +12,7 @@ public class ChannelProcessDTO {
     private String name;
     private ChannelStatus status;
     private String endorsementPolicy;
-    private List<ChannelOrganizationDTO> organizations = new ArrayList<>();
+    private List<OrganizationDTO> organizations = new ArrayList<>();
 
     public ChannelProcessDTO() {
 
@@ -35,7 +35,7 @@ public class ChannelProcessDTO {
     }
 
     public void addOrganization(Organization organization) {
-        ChannelOrganizationDTO organizationDTO = new ChannelOrganizationDTO(organization);
+        OrganizationDTO organizationDTO = new OrganizationDTO(organization);
         organizations.add(organizationDTO);
     }
 
@@ -55,7 +55,7 @@ public class ChannelProcessDTO {
         return endorsementPolicy;
     }
 
-    public List<ChannelOrganizationDTO> getOrganizations() {
+    public List<OrganizationDTO> getOrganizations() {
         return organizations;
     }
 
