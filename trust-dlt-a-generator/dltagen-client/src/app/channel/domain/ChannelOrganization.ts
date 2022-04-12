@@ -1,7 +1,6 @@
+import { Organization } from "./Organization";
+
 export interface ChannelOrganization {
-    id: String,
-    name: String,
-    host: String,
-    port: String,
-    status: String,
+    channelId: String,
+    organization: Organization,
 }

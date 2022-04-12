@@ -1,0 +1,9 @@
+<h4>Channel</h4>
+<app-view-channel [channel]="channel"></app-view-channel>
+
+<h5>Organizations</h5>
+
+<app-edit-organization *ngFor="let org of channel.organizations" [organization]="org"></app-edit-organization>
+
+
+<button>CREATE</button>

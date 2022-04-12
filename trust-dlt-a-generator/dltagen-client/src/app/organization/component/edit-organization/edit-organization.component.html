@@ -1,0 +1,102 @@
+<div class="organization">
+    <table>
+        <tbody>
+            <tr>
+                <td><label>id:</label></td>
+                <td>{{organization.id}}</td>
+            </tr>
+            <tr>
+                <td><label>name:</label></td>
+                <td>{{organization.name}}</td>
+            </tr>
+            <tr>
+                <td><label>host:</label></td>
+                <td>{{organization.host}}</td>
+            </tr>
+            <tr>
+                <td><label>port:</label></td>
+                <td>{{organization.port}}</td>
+            </tr>
+            <tr>
+                <td><label>role:</label></td>
+                <td>{{organization.role}}</td>
+            </tr>
+            <tr>
+                <td><label>status:</label></td>
+                <td>{{organization.status}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table *ngIf="organization.status == 'NOT_CREATED'">
+        <tbody>
+            <tr>
+                <td><label>CA host:</label></td>
+                <td><input type="text" [(ngModel)]="ca.host"></td>
+            </tr>
+
+            <tr>
+                <td><label>CA port:</label></td>
+                <td><input type="text" [(ngModel)]="ca.port"></td>
+            </tr>
+            <tr>
+                <td><label>CA op port:</label></td>
+                <td><input type="text" [(ngModel)]="ca.opPort"></td>
+            </tr>
+            <tr>
+                <td><label>CA admin name:</label></td>
+                <td><input type="text" [(ngModel)]="ca.adminName"></td>
+            </tr>
+            <tr>
+                <td><label>CA admin password:</label></td>
+                <td><input type="password" [(ngModel)]="ca.adminPassword"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><button [disabled]="!caFilled()" (click)="send()">Send</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table *ngIf="organization.status == 'CA_READY' || organization.status == 'UP'">
+        <tbody>
+            <tr>
+                <td><label>CA name:</label></td>
+                <td>{{organization.ca?.name}}</td>
+            </tr>
+            <tr>
+                <td><label>CA host:</label></td>
+                <td>{{organization.ca?.host}}</td>
+            </tr>
+            <tr>
+                <td><label>CA port:</label></td>
+                <td>{{organization.ca?.port}}</td>
+            </tr>
+            <tr>
+                <td><label>CA op port:</label></td>
+                <td>{{organization.ca?.opPort}}</td>
+            </tr>
+            <tr>
+                <td><label>CA admin name:</label></td>
+                <td>{{organization.ca?.adminName}}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><button (click)="getCAConfig()">Get config</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<hr>
+
+
+
+        
+            
+
+
+
+
+
+

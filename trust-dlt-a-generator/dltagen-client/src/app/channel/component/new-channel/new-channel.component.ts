@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
+import { Channel } from '../../domain/Channel';
 import { FileUploadService } from '../../service/file-upload.service';
 
 @Component({
@@ -11,6 +11,7 @@ import { FileUploadService } from '../../service/file-upload.service';
 export class NewChannelComponent implements OnInit, OnDestroy {
 
   fileUpload!: Subscription;
+  channel!: Channel;
 
   constructor(private fileUploadService: FileUploadService) { }
   
@@ -28,7 +29,7 @@ export class NewChannelComponent implements OnInit, OnDestroy {
       if(file) {
         const formData = new FormData();
         formData.append("channel", file);
-        this.fileUpload = this.fileUploadService.upload(formData).subscribe();
+        this.fileUpload = this.fileUploadService.upload(formData).subscribe(channel => this.channel = channel);
 
       }
     }
