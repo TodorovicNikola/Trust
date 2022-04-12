@@ -6,7 +6,7 @@ type ExecutionState struct {
     <#if !elementTypeMap[elementId]?lower_case?contains("gate")>
     ${elementUniqueNameMap[elementId]}Active bool
     </#if>
-    <#if capabilityMap[elementId]?has_content && capabilityMap[elementId].constraints?has_content>
+    <#if contractualObligationMap[elementId]?has_content && contractualObligationMap[elementId].constraints?has_content>
     ${elementUniqueNameMap[elementId]}Var ${elementUniqueNameMap[elementId]}Struct
     </#if>
 
@@ -17,10 +17,10 @@ type ExecutionState struct {
 }
 
 <#list elementIds as elementId>
-    <#if capabilityMap[elementId]?has_content && capabilityMap[elementId].constraints?has_content>
+    <#if contractualObligationMap[elementId]?has_content && contractualObligationMap[elementId].constraints?has_content>
 
 type ${elementUniqueNameMap[elementId]}Struct struct {
-            <#list capabilityMap[elementId].constraints as constraint>
+            <#list contractualObligationMap[elementId].constraints as constraint>
     ${constraint.physicalDimension} float64
     ${constraint.physicalDimension}Fulfilled bool
             </#list>

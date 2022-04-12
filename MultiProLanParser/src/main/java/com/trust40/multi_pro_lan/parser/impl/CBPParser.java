@@ -25,8 +25,8 @@ public class CBPParser extends AbstractParser {
         return generateValueMap();
     }
 
-    public Pool parsePool(String path) throws ParserConfigurationException, IOException, SAXException, XPathExpressionException {
-        Pool pool = new Pool();
+    public VirtualOrganization parseVirtualOrganization(String path) throws ParserConfigurationException, IOException, SAXException, XPathExpressionException {
+        VirtualOrganization virtualOrganization = new VirtualOrganization();
         Document document = prepareDocument(path);
         XPathFactory xpathFactory = XPathFactory.newInstance();
         XPath xpath = xpathFactory.newXPath();
@@ -39,40 +39,35 @@ public class CBPParser extends AbstractParser {
 
                 Element element = (Element) node;
 
-                if(element.getAttribute("xsi:type").equals("mod:Pool")) {
+                if(element.getAttribute("xsi:type").equals("mod:VirtualOrganization")) {
                     String id = element.getAttribute("id");
                     String name = element.getAttribute("name");
                     String endorsementPolicy = element.getAttribute("endorsementPolicy");
 
-                    pool = new Pool(id, name, endorsementPolicy);
+                    virtualOrganization = new VirtualOrganization(id, name, endorsementPolicy);
 
-                    NodeList swimlanesNodes = element.getChildNodes();
+                    NodeList organizationNodes = element.getChildNodes();
 
-                    for (int j = 0; j < swimlanesNodes.getLength(); j++) {
-                            Node swimlane = swimlanesNodes.item(j);
-                        if (swimlane.getNodeType() == Node.ELEMENT_NODE) {
-                            Element swimlaneElement = (Element) swimlane;
-                            String idSwimlane = swimlaneElement.getAttribute("id");
-                            String nameSwimlane = swimlaneElement.getAttribute("OrganizationName");
-                            String role = swimlaneElement.getAttribute("OrganizationRole");
-                            String host = swimlaneElement.getAttribute("host");
-                            String port = swimlaneElement.getAttribute("port");
-                            Swimlanes swimlanes = new Swimlanes(idSwimlane, nameSwimlane, role, host, port);
-                            pool.addSwimlanes(swimlanes);
+                    for (int j = 0; j < organizationNodes.getLength(); j++) {
+                            Node organizationNode = organizationNodes.item(j);
+                        if (organizationNode.getNodeType() == Node.ELEMENT_NODE) {
+                            Element organizationElement = (Element) organizationNode;
+                            Organization organization = new Organization(organizationElement);
+                            virtualOrganization.addOrganization(organization);
                         }
                     }
                 }
             }
         }
 
-        return pool;
+        return virtualOrganization;
     }
 
 
     protected Map<String, ProcessElement> extractProcessElements(Document document) throws XPathExpressionException {
         XPathFactory xpathFactory = XPathFactory.newInstance();
         XPath xpath = xpathFactory.newXPath();
-        NodeList XMLElements = (NodeList) xpath.evaluate("Process/elements/swimlanes/elements", document,
+        NodeList XMLElements = (NodeList) xpath.evaluate("Process/elements/organizations/elements", document,
                 XPathConstants.NODESET);
 
         Map<String, ProcessElement> elementMap = new HashMap<>();
@@ -82,18 +77,18 @@ public class CBPParser extends AbstractParser {
             if (node.getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
 
                 org.w3c.dom.Element element = (org.w3c.dom.Element) node;
-                org.w3c.dom.Element swimlaneElement = (org.w3c.dom.Element) element.getParentNode();
+                org.w3c.dom.Element organizationElement = (org.w3c.dom.Element) element.getParentNode();
                 String elementType = element.getAttribute("xsi:type");
 
                 switch (elementType) {
                     case "mod:ProcessStep": {
-                        ProcessStep processStep = new ProcessStep(element, swimlaneElement);
+                        ProcessStep processStep = new ProcessStep(element, organizationElement);
                         elementMap.put(processStep.getId(), processStep);
 
                         break;
                     }
                     case "mod:Gate": {
-                        Gate gate = new Gate(element, swimlaneElement);
+                        Gate gate = new Gate(element, organizationElement);
                         elementMap.put(gate.getId(), gate);
                     }
                 }
@@ -114,7 +109,7 @@ public class CBPParser extends AbstractParser {
         Map<String, List<String>> previousElementIdsMap = new HashMap<>();
         Map<String, List<String>> nextElementIdsMap = new HashMap<>();
         Map<String, String> elementTypeMap = new HashMap<>();
-        Map<String, Capability> capabilityMap = new HashMap<>();
+        Map<String, ContractualObligation> contractualObligationMap = new HashMap<>();
         Map<String, List<Product>> inputProductsMap = new HashMap<>();
 
         for (String id : relevantElementKeySet) {
@@ -125,7 +120,7 @@ public class CBPParser extends AbstractParser {
 
 
             if (relevantElements.get(id) instanceof ProcessStep) {
-                capabilityMap.put(id, ((ProcessStep) relevantElements.get(id)).getCapability());
+                contractualObligationMap.put(id, ((ProcessStep) relevantElements.get(id)).getContractualObligation());
                 inputProductsMap.put(id, ((ProcessStep) relevantElements.get(id)).getInputProducts());
             }
 
@@ -141,7 +136,7 @@ public class CBPParser extends AbstractParser {
         valueMap.put("previousElementIdsMap", previousElementIdsMap);
         valueMap.put("nextElementIdsMap", nextElementIdsMap);
         valueMap.put("elementTypeMap", elementTypeMap);
-        valueMap.put("capabilityMap", capabilityMap);
+        valueMap.put("contractualObligationMap", contractualObligationMap);
         valueMap.put("inputProductsMap", inputProductsMap);
 
         return valueMap;

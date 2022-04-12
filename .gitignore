@@ -28,3 +28,12 @@ bin/
 .idea/
 .code/
 build/
+
+# for now
+Simulator/
+
+##############################
+## Gradle
+##############################
+.gradle
+!gradle-wrapper.jar

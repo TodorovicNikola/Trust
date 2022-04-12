@@ -22,7 +22,7 @@ public abstract class IDNamedElement {
     protected IDNamedElement(Element namedElement, String defaultTypeForSubclass) {
         id = namedElement.getAttribute("id");
         name = namedElement.getAttribute("name");
-        type = namedElement.hasAttribute("type") ? namedElement.getAttribute("type") : defaultTypeForSubclass;
+        type = namedElement.hasAttribute("type") ? namedElement.getAttribute("type") : namedElement.hasAttribute("role") ? namedElement.getAttribute("role") : defaultTypeForSubclass;
 
     }
 

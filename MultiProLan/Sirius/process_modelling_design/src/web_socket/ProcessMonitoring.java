@@ -35,7 +35,7 @@ public class ProcessMonitoring {
 		Resource resource = resourceSet.getResource(URI.createURI(path), true);
 
 		// create a process modeling object
-		Process_modelingPackage.eINSTANCE.eClass();
+//		Process_modelingPackage.eINSTANCE.eClass();
 		Process_modelingFactory factory = Process_modelingFactory.eINSTANCE;
 		process_modeling.Process process = factory.createProcess();
 		process = (process_modeling.Process) resource.getContents().get(0);
