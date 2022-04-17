@@ -2,19 +2,16 @@ package com.trust.dltagen.utils;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 @Component
 public class FilesystemUtil {
 
-    @Value("${filesystem.rootDir}")
+    @Value("${filesystem.rootDir:files}")
     private String rootDir;
 
     private boolean createDirectory(String ... directories) {
@@ -35,5 +32,9 @@ public class FilesystemUtil {
         }
 
         return path.toString();
+    }
+
+    public String getRootDir(){
+        return rootDir;
     }
 }

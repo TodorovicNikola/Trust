@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
@@ -34,7 +37,7 @@ public class OrganizationController {
     }
 
     @GetMapping(value = "{id}/ca-config", produces = "application/x-yaml")
-    public ResponseEntity caConfig(@PathVariable String id) throws TemplateException, IOException {
+    public ResponseEntity<InputStreamResource> caConfig(@PathVariable String id) throws TemplateException, IOException {
         byte[] bytes = service.getCAConfig(id);
 
         InputStreamResource body = new InputStreamResource(new ByteArrayInputStream(bytes));
@@ -44,4 +47,14 @@ public class OrganizationController {
                 .body(body);
     }
 
+    @PostMapping("{id}/crypto")
+    public ResponseEntity<InputStreamResource> generateCryptomaterial(@PathVariable String id, @RequestParam("pem")MultipartFile pem) throws TemplateException, IOException {
+        byte[] cryptomaterial = service.generateCryptomaterial(id, pem);
+
+        InputStreamResource body = new InputStreamResource(new ByteArrayInputStream(cryptomaterial));
+
+        return ResponseEntity.ok().contentType(MediaType.parseMediaType("application/zip"))
+                .header("Content-Disposition", "attachment; filename=crypto.zip")
+                .body(body);
+    }
 }

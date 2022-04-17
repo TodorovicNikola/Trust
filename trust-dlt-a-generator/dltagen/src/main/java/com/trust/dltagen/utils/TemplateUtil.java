@@ -1,6 +1,7 @@
 package com.trust.dltagen.utils;
 
 import com.trust.dltagen.DltAGenApplication;
+import freemarker.ext.beans.BeansWrapperBuilder;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateExceptionHandler;
@@ -22,6 +23,7 @@ public class TemplateUtil {
             instance.setLogTemplateExceptions(false);
             instance.setWrapUncheckedExceptions(true);
             instance.setFallbackOnNullLoopVariable(false);
+            instance.setObjectWrapper((new BeansWrapperBuilder(Configuration.VERSION_2_3_31)).build());
         }
 
         return instance;

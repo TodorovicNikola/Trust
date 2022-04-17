@@ -6,7 +6,6 @@ import com.trust.dltagen.model.ChannelStatus;
 import com.trust.dltagen.model.Organization;
 import com.trust.dltagen.model.OrganizationStatus;
 import com.trust.dltagen.repository.ChannelRepository;
-import com.trust.dltagen.utils.FilesystemUtil;
 import com.trust40.multi_pro_lan.parser.impl.CBPParser;
 import com.trust40.multi_pro_lan.parser.model.VirtualOrganization;
 import org.springframework.stereotype.Service;
@@ -23,22 +22,16 @@ public class ChannelService {
 
     private final ChannelRepository repository;
     private final OrganizationService organizationService;
-    private final FilesystemUtil fsUtil;
+    private final FileService fileService;
 
-    public ChannelService(ChannelRepository repository, OrganizationService organizationService, FilesystemUtil fsUtil) {
+    public ChannelService(ChannelRepository repository, OrganizationService organizationService, FileService multipartFileService) {
         this.repository = repository;
         this.organizationService = organizationService;
-        this.fsUtil = fsUtil;
+        this.fileService = multipartFileService;
     }
 
     public ChannelProcessDTO process(MultipartFile multipartFile) {
-        String filePath = "";
-        try {
-            filePath = fsUtil.saveToFile(multipartFile.getBytes(), multipartFile.getOriginalFilename(), "cbp");
-        } catch (IOException e) {
-            //TODO: exception handling
-            e.printStackTrace();
-        }
+        String filePath = fileService.store(multipartFile, "cbp");
 
         return process(filePath);
     }
@@ -95,6 +88,10 @@ public class ChannelService {
 
     public Channel getById(String id) {
         return repository.getById(id);
+    }
+
+    public List<Channel> getAll() {
+        return repository.findAll();
     }
 
 }

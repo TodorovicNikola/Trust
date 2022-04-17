@@ -1,5 +1,6 @@
 package com.trust.dltagen.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
@@ -9,44 +10,37 @@ public class Organization {
     @Id
     private String id;
     private String name;
-    private String role;
-    private String domain;
     private String host;
     private String port;
+    private String role;
     private String mspId;
-    private String adminName;
-    private String adminSecret;
-    @OneToOne
-    private Client client;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Client user;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Client admin;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Client peer;
     @OneToOne
     private CertificateAuthority certificateAuthority;
     private OrganizationStatus status;
 
     public Organization() {
-
+        this.admin = new Client("admin", "adminpw");
+        this.peer = new Client("peer0", "peer0pw");
+        this.user = new Client("user1", "user1pw");
     }
 
-    public Organization(String id, String name, String role, String domain, String host, String port, String mspId, String adminName, String adminSecret, Client client, CertificateAuthority certificateAuthority, OrganizationStatus status) {
+    public Organization(String id, String name, String host, String port, String role) {
+        this();
         this.id = id;
         this.name = name;
         this.role = role;
-        this.domain = domain;
         this.host = host;
         this.port = port;
-        this.mspId = mspId;
-        this.adminName = adminName;
-        this.adminSecret = adminSecret;
-        this.client = client;
-        this.certificateAuthority = certificateAuthority;
-        this.status = status;
     }
 
     public Organization(com.trust40.multi_pro_lan.parser.model.Organization organization) {
-        this.id = organization.getId();
-        this.name = organization.getName();
-        this.host = organization.getHost();
-        this.port = organization.getPort();
-        this.role = organization.getRole();
+        this(organization.getId(), organization.getName(), organization.getHost(), organization.getPort(), organization.getRole());
     }
 
     public String getId() {
@@ -55,10 +49,6 @@ public class Organization {
 
     public String getName() {
         return name;
-    }
-
-    public String getDomain() {
-        return domain;
     }
 
     public String getHost() {
@@ -73,16 +63,8 @@ public class Organization {
         return mspId;
     }
 
-    public String getAdminName() {
-        return adminName;
-    }
-
-    public String getAdminSecret() {
-        return adminSecret;
-    }
-
-    public Client getClient() {
-        return client;
+    public Client getUser() {
+        return user;
     }
 
     public CertificateAuthority getCertificateAuthority() {
@@ -95,6 +77,14 @@ public class Organization {
 
     public String getRole() {
         return role;
+    }
+
+    public Client getAdmin() {
+        return admin;
+    }
+
+    public Client getPeer() {
+        return peer;
     }
 
     public void setStatus(OrganizationStatus status) {
@@ -112,13 +102,10 @@ public class Organization {
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", role=" + role +
-                ", domain='" + domain + '\'' +
                 ", host='" + host + '\'' +
                 ", port='" + port + '\'' +
                 ", mspId='" + mspId + '\'' +
-                ", adminName='" + adminName + '\'' +
-                ", adminSecret='" + adminSecret + '\'' +
-                ", client=" + client +
+                ", client=" + user +
                 //", certificateAuthority=" + certificateAuthority +
                 ", status=" + status +
                 '}';
