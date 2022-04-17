@@ -1,5 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { Channel } from '../../domain/Channel';
 import { FileUploadService } from '../../service/file-upload.service';
 
@@ -8,16 +7,11 @@ import { FileUploadService } from '../../service/file-upload.service';
   templateUrl: './new-channel.component.html',
   styleUrls: ['./new-channel.component.scss']
 })
-export class NewChannelComponent implements OnInit, OnDestroy {
+export class NewChannelComponent implements OnInit {
 
-  fileUpload!: Subscription;
   channel!: Channel;
 
   constructor(private fileUploadService: FileUploadService) { }
-  
-  ngOnDestroy(): void {
-    this.fileUpload.unsubscribe();
-  }
 
   ngOnInit(): void {
   }
@@ -29,8 +23,7 @@ export class NewChannelComponent implements OnInit, OnDestroy {
       if(file) {
         const formData = new FormData();
         formData.append("channel", file);
-        this.fileUpload = this.fileUploadService.upload(formData).subscribe(channel => this.channel = channel);
-
+        this.fileUploadService.uploadCBP(formData).subscribe(channel => this.channel = channel);
       }
     }
   }

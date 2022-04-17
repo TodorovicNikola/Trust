@@ -86,6 +86,14 @@
             </tr>
         </tbody>
     </table>
+    <table *ngIf="organization.status == 'CA_READY'">
+        <tbody>
+            <tr><td><strong>Cryptomaterial generator</strong> Please attach the ca-cert.pem file:</td></tr>
+            <tr>
+                <input type="file" class="file-upload" (change)="uploadPEM($event)">
+            </tr>
+        </tbody>
+    </table>
 </div>
 
 <hr>

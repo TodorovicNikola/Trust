@@ -10,8 +10,12 @@ export class FileUploadService {
 
   constructor(private http: HttpClient) { }
 
-  upload(formData: FormData): Observable<Channel> {
+  uploadCBP(formData: FormData): Observable<Channel> {
     return this.http.post<Channel>("/channel", formData);
+  }
+
+  uploadPEM(orgId: String, formData: FormData): Observable<any> {
+    return this.http.post("/organization/" + orgId + "/crypto", formData, {responseType: 'arraybuffer'});
   }
 
 }

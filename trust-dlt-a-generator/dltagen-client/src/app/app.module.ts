@@ -10,6 +10,8 @@ import { ApiInterceptor } from './config/ApiInterceptor';
 import { EditChannelComponent } from './channel/component/edit-channel/edit-channel.component';
 import { ViewChannelComponent } from './channel/component/view-channel/view-channel.component';
 import { EditOrganizationComponent } from './organization/component/edit-organization/edit-organization.component';
+import { ListChannelComponent } from './channel/component/list-channel/list-channel.component';
+import { PageViewChannelComponent } from './channel/component/page-view-channel/page-view-channel.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { EditOrganizationComponent } from './organization/component/edit-organiz
     NewChannelComponent,
     EditChannelComponent,
     ViewChannelComponent,
-    EditOrganizationComponent
+    EditOrganizationComponent,
+    ListChannelComponent,
+    PageViewChannelComponent
   ],
   imports: [
     AppRoutingModule,

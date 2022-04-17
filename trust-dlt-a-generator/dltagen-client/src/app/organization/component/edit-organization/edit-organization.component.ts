@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CertificateAuthority } from 'src/app/channel/domain/CertificateAuthority';
 import { Organization } from 'src/app/channel/domain/Organization';
+import { FileUploadService } from 'src/app/channel/service/file-upload.service';
 import { OrganizationService } from '../../service/organization.service';
 
 @Component({
@@ -21,7 +22,7 @@ export class EditOrganizationComponent implements OnInit {
     adminPassword: '',
   }
 
-  constructor(private organizationService: OrganizationService) { }
+  constructor(private organizationService: OrganizationService, private fileUploadService: FileUploadService) { }
 
   ngOnInit(): void {
   }
@@ -52,6 +53,25 @@ export class EditOrganizationComponent implements OnInit {
           // start download
           a.click();
     })
+  }
+
+  uploadPEM(event: Event) {
+    const files:FileList|null = (event.target as HTMLInputElement).files;
+    if(files && files.length > 0) {
+      const file:File|null = files.item(0);
+      if(file) {
+        const formData = new FormData();
+        formData.append("pem", file);
+        this.fileUploadService.uploadPEM(this.organization.id, formData).subscribe(zip => {
+          let blob = new Blob([zip], {type: 'application/zip'});
+          var a = document.createElement("a");
+          a.href = window.URL.createObjectURL(blob);
+          a.download = "crypto.zip";
+          // start download
+          a.click();
+        });
+      }
+    }
   }
 
 }
