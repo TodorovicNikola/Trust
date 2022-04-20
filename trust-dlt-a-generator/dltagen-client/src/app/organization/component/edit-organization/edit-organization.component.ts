@@ -55,6 +55,17 @@ export class EditOrganizationComponent implements OnInit {
     })
   }
 
+  getConfig() {
+    this.organizationService.getConfig(this.organization.id).subscribe(config => {
+      let blob = new Blob([config], {type: 'application/x-yaml'});
+      var a = document.createElement("a");
+      a.href = window.URL.createObjectURL(blob);
+      a.download = this.organization.name + ".yaml";
+          // start download
+          a.click();
+    })
+  }
+
   uploadPEM(event: Event) {
     const files:FileList|null = (event.target as HTMLInputElement).files;
     if(files && files.length > 0) {
@@ -69,6 +80,7 @@ export class EditOrganizationComponent implements OnInit {
           a.download = "crypto.zip";
           // start download
           a.click();
+          this.organization.status = "UP";
         });
       }
     }

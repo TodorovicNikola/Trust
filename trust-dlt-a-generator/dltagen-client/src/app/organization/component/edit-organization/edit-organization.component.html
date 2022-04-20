@@ -25,6 +25,10 @@
                 <td><label>status:</label></td>
                 <td>{{organization.status}}</td>
             </tr>
+            <tr *ngIf="organization.status == 'UP'">
+                <td></td>
+                <td><button (click)="getConfig()">Get config</button></td>
+            </tr>
         </tbody>
     </table>
 
@@ -82,7 +86,7 @@
             </tr>
             <tr>
                 <td></td>
-                <td><button (click)="getCAConfig()">Get config</button></td>
+                <td><button (click)="getCAConfig()">Get CA config</button></td>
             </tr>
         </tbody>
     </table>

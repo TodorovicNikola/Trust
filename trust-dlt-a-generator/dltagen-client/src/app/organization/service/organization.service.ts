@@ -18,4 +18,8 @@ export class OrganizationService {
   getCAConfig(orgId: String): Observable<any> {
     return this.http.get("/organization/" + orgId + "/ca-config", {responseType: "text"});
   }
+
+  getConfig(orgId: String): Observable<any> {
+    return this.http.get("/organization/" + orgId + "/config", {responseType: "text"});
+  }
 }
