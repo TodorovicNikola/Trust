@@ -12,6 +12,7 @@ public class Organization {
     private String name;
     private String host;
     private String port;
+    private String opPort;
     private String role;
     private String mspId;
     @OneToOne(cascade = CascadeType.ALL)
@@ -24,10 +25,11 @@ public class Organization {
     private CertificateAuthority certificateAuthority;
     private OrganizationStatus status;
 
-    public Organization() {
+    protected Organization() {
         this.admin = new Client("admin", "adminpw");
         this.peer = new Client("peer0", "peer0pw");
         this.user = new Client("user1", "user1pw");
+        this.opPort = "9999";
     }
 
     public Organization(String id, String name, String host, String port, String role) {
@@ -37,6 +39,7 @@ public class Organization {
         this.role = role;
         this.host = host;
         this.port = port;
+        this.mspId = name + "MSP";
     }
 
     public Organization(com.trust40.multi_pro_lan.parser.model.Organization organization) {
@@ -65,6 +68,10 @@ public class Organization {
 
     public Client getUser() {
         return user;
+    }
+
+    public String getOpPort() {
+        return opPort;
     }
 
     public CertificateAuthority getCertificateAuthority() {

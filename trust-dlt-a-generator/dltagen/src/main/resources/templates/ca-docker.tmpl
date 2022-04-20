@@ -10,8 +10,8 @@ services:
       - FABRIC_CA_SERVER_PORT=${ca.port}
       - FABRIC_CA_SERVER_OPERATIONS_LISTENADDRESS=0.0.0.0:${ca.opPort}
     ports:
-      - "${ca.port}:7054"
-      - "${ca.opPort}:17054"
+      - "${ca.port}:${ca.port}"
+      - "${ca.opPort}:${ca.opPort}"
     command: sh -c 'fabric-ca-server start -b ${ca.adminName}:${ca.adminPassword} -d'
     volumes:
       - ../organizations/fabric-ca/${orgName}:/etc/hyperledger/fabric-ca-server

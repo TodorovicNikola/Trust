@@ -1,0 +1,35 @@
+---
+name: network-${organization.name}
+version: 1.0.0
+client:
+  organization: ${organization.name}
+  connection:
+    timeout:
+      peer:
+        endorser: '300'
+organizations:
+  ${organization.name}:
+    mspid: ${organization.mspId}
+    peers:
+    - ${organization.peer.name}.${organization.name}
+    certificateAuthorities:
+    - ca.${organization.name}
+peers:
+  ${organization.peer.name}.${organization.name}:
+    url: grpcs://${organization.host}:${organization.port}
+    tlsCACerts:
+      pem: |
+${PEERPEM}
+    grpcOptions:
+      ssl-target-name-override: ${organization.peer.name}.${organization.name}
+      hostnameOverride: ${organization.peer.name}.${organization.name}
+certificateAuthorities:
+  ca.${organization.name}:
+    url: https://${organization.certificateAuthority.host}:${organization.certificateAuthority.port}
+    caName: ${organization.certificateAuthority.name}
+    tlsCACerts:
+      pem: 
+        - |
+${CAPEM}
+    httpOptions:
+      verify: false

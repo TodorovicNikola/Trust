@@ -92,4 +92,8 @@ public class FileService {
         }
     }
 
+    public boolean deleteDir(String ...directories) {
+        return fsUtil.delete(directories);
+    }
+
 }

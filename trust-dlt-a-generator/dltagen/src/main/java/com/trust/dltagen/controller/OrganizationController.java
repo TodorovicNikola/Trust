@@ -37,17 +37,17 @@ public class OrganizationController {
     }
 
     @GetMapping(value = "{id}/ca-config", produces = "application/x-yaml")
-    public ResponseEntity<InputStreamResource> caConfig(@PathVariable String id) throws TemplateException, IOException {
+    public ResponseEntity<InputStreamResource> getCAConfig(@PathVariable String id) throws TemplateException, IOException {
         byte[] bytes = service.getCAConfig(id);
 
         InputStreamResource body = new InputStreamResource(new ByteArrayInputStream(bytes));
 
         return ResponseEntity.ok().contentType(MediaType.parseMediaType("application/x-yaml"))
-                .header("Content-Disposition", "attachment; filename=config.yaml")
+                .header("Content-Disposition", "attachment; filename=caconfig.yaml")
                 .body(body);
     }
 
-    @PostMapping("{id}/crypto")
+    @PostMapping(value = "{id}/crypto", produces = "application/zip")
     public ResponseEntity<InputStreamResource> generateCryptomaterial(@PathVariable String id, @RequestParam("pem")MultipartFile pem) throws TemplateException, IOException {
         byte[] cryptomaterial = service.generateCryptomaterial(id, pem);
 
@@ -55,6 +55,16 @@ public class OrganizationController {
 
         return ResponseEntity.ok().contentType(MediaType.parseMediaType("application/zip"))
                 .header("Content-Disposition", "attachment; filename=crypto.zip")
+                .body(body);
+    }
+
+    @GetMapping(value = "{id}/config", produces = "application/x-yaml")
+    public ResponseEntity<InputStreamResource> getConfig(@PathVariable String id) throws TemplateException, IOException {
+        byte[] bytes = service.getConfig(id);
+        InputStreamResource body = new InputStreamResource(new ByteArrayInputStream(bytes));
+
+        return ResponseEntity.ok().contentType(MediaType.parseMediaType("application/x-yaml"))
+                .header("Content-Disposition", "attachment; filename=config.yaml")
                 .body(body);
     }
 }

@@ -3,6 +3,7 @@ package com.trust.dltagen.service;
 import com.trust.dltagen.dto.CertificateAuthorityDTO;
 import com.trust.dltagen.model.CertificateAuthority;
 import com.trust.dltagen.model.Organization;
+import com.trust.dltagen.model.OrganizationStatus;
 import com.trust.dltagen.repository.OrganizationRepository;
 import freemarker.template.TemplateException;
 import org.springframework.stereotype.Service;
@@ -55,14 +56,33 @@ public class OrganizationService {
         Organization found = repository.getById(organizationId);
         String pemFilePath = fileService.store(found.getName()+".pem", pem, "pem");
 
+        fileService.deleteDir("organizations", "peerOrganizations", found.getName());
+
         String path = fileService.getRootDir() + "/organizations/peerOrganizations/" + found.getName();
         String caClientHome = (new File(path)).getAbsolutePath();
         String peerHome = caClientHome + "/peers/" + found.getPeer().getName() + "." + found.getName();
 
         byte[] enrollmentScript = templateService.getCAEnrollmentScript(found, (new File(pemFilePath)).getAbsolutePath(), caClientHome, peerHome);
-        String enrollmentScriptPath = fileService.store(found.getCertificateAuthority().getName() + "enroll.sh", enrollmentScript, "scripts");
+        String enrollmentScriptPath = fileService.store(found.getCertificateAuthority().getName() + "-enroll.sh", enrollmentScript, "scripts");
 
         scriptExecutionService.execute(enrollmentScriptPath);
+
+        byte[] ccpJson = templateService.getCCPjson(found);
+        fileService.store("connection-" + found.getName()+".json", ccpJson, "organizations", "peerOrganizations", found.getName());
+        byte[] ccpYaml = templateService.getCCPyaml(found);
+        fileService.store("connection-" + found.getName()+".yaml", ccpYaml, "organizations", "peerOrganizations", found.getName());
+
+        byte[] peercfg = templateService.getPeercfg(found);
+        fileService.store("core.yaml", peercfg, "organizations", "peerOrganizations", found.getName(), "peers", found.getPeer().getName() +"."+found.getName(), "peercfg");
+
+        found.setStatus(OrganizationStatus.UP);
+        repository.save(found);
+
         return fileService.zipDir("organizations/peerOrganizations/" + found.getName());
+    }
+
+    public byte[] getConfig(String id) throws TemplateException, IOException {
+        Organization found = repository.getById(id);
+        return templateService.getConfig(found);
     }
 }
