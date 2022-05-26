@@ -53,6 +53,7 @@ public class ProcessStepItemProvider extends ProcessElementItemProvider {
 			addDescriptionPropertyDescriptor(object);
 			addAcceptanceCriterionPropertyDescriptor(object);
 			addCompletionCriterionPropertyDescriptor(object);
+			addRelatedInterfaceProcessPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -163,6 +164,28 @@ public class ProcessStepItemProvider extends ProcessElementItemProvider {
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Related Interface Process feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addRelatedInterfaceProcessPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ProcessStep_relatedInterfaceProcess_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ProcessStep_relatedInterfaceProcess_feature", "_UI_ProcessStep_type"),
+				 Process_modelingPackage.Literals.PROCESS_STEP__RELATED_INTERFACE_PROCESS,
+				 true,
+				 false,
+				 true,
+				 null,
 				 null,
 				 null));
 	}

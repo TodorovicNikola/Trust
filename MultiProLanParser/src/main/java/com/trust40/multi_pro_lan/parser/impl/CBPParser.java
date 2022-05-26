@@ -111,6 +111,7 @@ public class CBPParser extends AbstractParser {
         Map<String, String> elementTypeMap = new HashMap<>();
         Map<String, ContractualObligation> contractualObligationMap = new HashMap<>();
         Map<String, List<Product>> inputProductsMap = new HashMap<>();
+        Map<String, String> relatedIPIdMap = new HashMap<>();
 
         for (String id : relevantElementKeySet) {
             elementUniqueNameMap.put(id, relevantElements.get(id).getUniqueName());
@@ -120,8 +121,12 @@ public class CBPParser extends AbstractParser {
 
 
             if (relevantElements.get(id) instanceof ProcessStep) {
-                contractualObligationMap.put(id, ((ProcessStep) relevantElements.get(id)).getContractualObligation());
-                inputProductsMap.put(id, ((ProcessStep) relevantElements.get(id)).getInputProducts());
+                ProcessStep processStep = (ProcessStep) relevantElements.get(id);
+
+                contractualObligationMap.put(id, processStep.getContractualObligation());
+                inputProductsMap.put(id, processStep.getInputProducts());
+                relatedIPIdMap.put(id, processStep.getRelatedInterfaceProcessId());
+
             }
 
 
@@ -138,6 +143,7 @@ public class CBPParser extends AbstractParser {
         valueMap.put("elementTypeMap", elementTypeMap);
         valueMap.put("contractualObligationMap", contractualObligationMap);
         valueMap.put("inputProductsMap", inputProductsMap);
+        valueMap.put("relatedIPIdMap", relatedIPIdMap);
 
         return valueMap;
     }

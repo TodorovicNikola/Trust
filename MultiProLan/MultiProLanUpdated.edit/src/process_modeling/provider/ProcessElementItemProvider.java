@@ -52,6 +52,8 @@ public class ProcessElementItemProvider extends IDNamedElementItemProvider {
 			addOutRelationshipsPropertyDescriptor(object);
 			addIsErrorGroupPropertyDescriptor(object);
 			addStatusPropertyDescriptor(object);
+			addObligationsFulfilledPropertyDescriptor(object);
+			addRelatedDltContentPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -211,6 +213,50 @@ public class ProcessElementItemProvider extends IDNamedElementItemProvider {
 	}
 
 	/**
+	 * This adds a property descriptor for the Obligations Fulfilled feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addObligationsFulfilledPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ProcessElement_obligationsFulfilled_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ProcessElement_obligationsFulfilled_feature", "_UI_ProcessElement_type"),
+				 Process_modelingPackage.Literals.PROCESS_ELEMENT__OBLIGATIONS_FULFILLED,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Related Dlt Content feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addRelatedDltContentPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ProcessElement_relatedDltContent_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ProcessElement_relatedDltContent_feature", "_UI_ProcessElement_type"),
+				 Process_modelingPackage.Literals.PROCESS_ELEMENT__RELATED_DLT_CONTENT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -242,6 +288,8 @@ public class ProcessElementItemProvider extends IDNamedElementItemProvider {
 			case Process_modelingPackage.PROCESS_ELEMENT__LOG_END_TIME:
 			case Process_modelingPackage.PROCESS_ELEMENT__IS_ERROR_GROUP:
 			case Process_modelingPackage.PROCESS_ELEMENT__STATUS:
+			case Process_modelingPackage.PROCESS_ELEMENT__OBLIGATIONS_FULFILLED:
+			case Process_modelingPackage.PROCESS_ELEMENT__RELATED_DLT_CONTENT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

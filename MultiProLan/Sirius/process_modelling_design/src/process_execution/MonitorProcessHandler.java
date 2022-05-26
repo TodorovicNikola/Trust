@@ -1,4 +1,4 @@
-package web_socket.process_execution;
+package process_execution;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -18,7 +18,7 @@ import org.eclipse.sirius.viewpoint.DSemanticDecorator;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.internal.Workbench;
 
-import web_socket.ProcessMonitoring;
+import utils.ProcessMonitoring;
 
 
 public class MonitorProcessHandler extends AbstractHandler {
@@ -49,13 +49,13 @@ public class MonitorProcessHandler extends AbstractHandler {
 				}
 				
 				System.out.println("Putanja: " + path);
-				ProcessMonitoring processMonitoring = new ProcessMonitoring(path, "1234567890");
-				try {
-					processMonitoring.changeProcessElementColor();
-				} catch (URISyntaxException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+//				ProcessMonitoring processMonitoring = new ProcessMonitoring(path, "1234567890");
+//				try {
+//					processMonitoring.changeProcessElementColor();
+//				} catch (URISyntaxException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
 				}
 			}
 		

@@ -1,7 +1,7 @@
 package com.trust40.multi_pro_lan;
 
 import com.trust40.multi_pro_lan.generator.hyperledger.golang.HyperledgerGolangGenerator;
-import com.trust40.multi_pro_lan.parser.impl.CBPParser;
+import com.trust40.multi_pro_lan.parser.impl.IPParser;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -12,23 +12,17 @@ import java.util.Map;
 public class SCGeneratorApplication {
     public static void main(String[] args) {
         try {
-//            MASLParser maslParser = new MASLParser();
-//
-//            Map<String, Object> valueMap = maslParser.generateValueMapForModel("src/main/resources/source/MASL-PPM.process_modeling");
-//            System.out.println(valueMap);
-//            HyperledgerGolangGenerator.generate(valueMap);
+            IPParser ipParser = new IPParser();
 
-            CBPParser cbpParser = new CBPParser();
-            Map<String, Object> valueMap = cbpParser.generateValueMapForModel("src/main/resources/source/CBP.process_modeling");
-            HyperledgerGolangGenerator.generateForCBP(valueMap);
+            Map<String, Object> valueMap = ipParser.generateValueMapForModel("src/main/resources/source/MASL-PPM.process_modeling");
+            System.out.println(valueMap);
+            HyperledgerGolangGenerator.generateForIP(valueMap);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (XPathExpressionException e) {
+//            CBPParser cbpParser = new CBPParser();
+//            Map<String, Object> valueMap = cbpParser.generateValueMapForModel("src/main/resources/source/CBP_NEW.process_modeling");
+//            HyperledgerGolangGenerator.generateForCBP(valueMap);
+
+        } catch (IOException | SAXException | ParserConfigurationException | XPathExpressionException e) {
             e.printStackTrace();
         }
     }

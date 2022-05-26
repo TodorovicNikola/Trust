@@ -24,6 +24,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link process_modeling.ProcessStep#getCompletionCriterion <em>Completion Criterion</em>}</li>
  *   <li>{@link process_modeling.ProcessStep#getErrors <em>Errors</em>}</li>
  *   <li>{@link process_modeling.ProcessStep#getContractualObligation <em>Contractual Obligation</em>}</li>
+ *   <li>{@link process_modeling.ProcessStep#getRelatedInterfaceProcess <em>Related Interface Process</em>}</li>
  * </ul>
  *
  * @see process_modeling.Process_modelingPackage#getProcessStep()
@@ -251,5 +252,27 @@ public interface ProcessStep extends ProcessElement {
 	 * @generated
 	 */
 	void setContractualObligation(ContractualObligation value);
+
+	/**
+	 * Returns the value of the '<em><b>Related Interface Process</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Related Interface Process</em>' reference.
+	 * @see #setRelatedInterfaceProcess(process_modeling.Process)
+	 * @see process_modeling.Process_modelingPackage#getProcessStep_RelatedInterfaceProcess()
+	 * @model
+	 * @generated
+	 */
+	process_modeling.Process getRelatedInterfaceProcess();
+
+	/**
+	 * Sets the value of the '{@link process_modeling.ProcessStep#getRelatedInterfaceProcess <em>Related Interface Process</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Related Interface Process</em>' reference.
+	 * @see #getRelatedInterfaceProcess()
+	 * @generated
+	 */
+	void setRelatedInterfaceProcess(process_modeling.Process value);
 
 } // ProcessStep

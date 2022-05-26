@@ -24,6 +24,7 @@ import process_modeling.EErrorType;
 import process_modeling.EGateType;
 import process_modeling.EOrganizationRole;
 import process_modeling.EPersistenceType;
+import process_modeling.EProcessElementObligationsFulfilled;
 import process_modeling.EProcessElementStatus;
 import process_modeling.EProcessParameterType;
 import process_modeling.EProcessStepNotation;
@@ -192,6 +193,8 @@ public class Process_modelingValidator extends EObjectValidator {
 				return validateEPersistenceType((EPersistenceType)value, diagnostics, context);
 			case Process_modelingPackage.EORGANIZATION_ROLE:
 				return validateEOrganizationRole((EOrganizationRole)value, diagnostics, context);
+			case Process_modelingPackage.EPROCESS_ELEMENT_OBLIGATIONS_FULFILLED:
+				return validateEProcessElementObligationsFulfilled((EProcessElementObligationsFulfilled)value, diagnostics, context);
 			default:
 				return true;
 		}
@@ -923,6 +926,15 @@ public class Process_modelingValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateEOrganizationRole(EOrganizationRole eOrganizationRole, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateEProcessElementObligationsFulfilled(EProcessElementObligationsFulfilled eProcessElementObligationsFulfilled, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
 	}
 

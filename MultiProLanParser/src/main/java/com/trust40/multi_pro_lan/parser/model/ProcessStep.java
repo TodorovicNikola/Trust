@@ -10,6 +10,7 @@ public class ProcessStep extends ProcessElement {
     protected ContractualObligation contractualObligation;
     protected List<Product> inputProducts = new ArrayList<>();
     protected Organization organization;
+    protected String relatedInterfaceProcessId;
 
     public ProcessStep(Element processStepElement) {
         super(processStepElement, "REGULAR");
@@ -30,10 +31,10 @@ public class ProcessStep extends ProcessElement {
         }
     }
 
-    public ProcessStep(Element processStepElement, Element swimlaneElement) {
+    public ProcessStep(Element processStepElement, Element organizationElement) {
         super(processStepElement, "REGULAR");
 
-        organization = new Organization(swimlaneElement);
+        organization = new Organization(organizationElement);
 
         org.w3c.dom.Element capabilityElement = (org.w3c.dom.Element) processStepElement.getElementsByTagName("capability").item(0);
         if (capabilityElement != null) {
@@ -46,6 +47,13 @@ public class ProcessStep extends ProcessElement {
             contractualObligation = new ContractualObligation(contractualObligationElement);
 
         }
+
+        org.w3c.dom.Element relatedInterfaceProcessElement = (org.w3c.dom.Element) processStepElement.getElementsByTagName("relatedInterfaceProcess").item(0);
+        if (relatedInterfaceProcessElement != null) {
+            relatedInterfaceProcessId = relatedInterfaceProcessElement.getAttribute("href").split("\\.")[0];
+
+        }
+
     }
 
     public Capability getCapability() {
@@ -64,7 +72,11 @@ public class ProcessStep extends ProcessElement {
         return organization;
     }
 
+    public String getRelatedInterfaceProcessId() {
+        return relatedInterfaceProcessId;
+    }
+
     public String toString() {
-        return String.format("ProcessStep[id=%s, name=%s, capability=%s, contractualObligation=%s, inputProducts=%s, organization=%s]", id, name, capability, contractualObligation, inputProducts, organization);
+        return String.format("ProcessStep[id=%s, name=%s, capability=%s, contractualObligation=%s, inputProducts=%s, organization=%s, relatedInterfaceProcessId=%s]", id, name, capability, contractualObligation, inputProducts, organization, relatedInterfaceProcessId);
     }
 }

@@ -65,7 +65,8 @@ type ActionExecutionDto struct {
 	ActionArgs map[string]interface{} `json:"ActionArgs"`
 }
 
-func (s *SmartContract) ExecuteActionOnFlow(ctx contractapi.TransactionContextInterface, actionExecutionDto ActionExecutionDto) (*flow.Execution, error) {
+
+func (s *SmartContract) GetFlowStatus(ctx contractapi.TransactionContextInterface, actionExecutionDto ActionExecutionDto) (*flow.Execution, error) {
 	FlowExecutionJSON, err := ctx.GetStub().GetState(actionExecutionDto.ID)
 	if err != nil {
 		return nil, fmt.Errorf("failed to read from world State: %v", err)
@@ -80,8 +81,29 @@ func (s *SmartContract) ExecuteActionOnFlow(ctx contractapi.TransactionContextIn
 		return nil, err
 	}
 
-	err = flowExecution.Execute(actionExecutionDto.Action, actionExecutionDto.ActionArgs)
+	return &flowExecution, nil
+}
+
+
+func (s *SmartContract) ExecuteActionOnFlow(ctx contractapi.TransactionContextInterface, actionExecutionDto ActionExecutionDto) (*flow.Execution, error) {
+	var retVal = true
+
+	FlowExecutionJSON, err := ctx.GetStub().GetState(actionExecutionDto.ID)
 	if err != nil {
+		return nil, fmt.Errorf("failed to read from world State: %v", err)
+	}
+	if FlowExecutionJSON == nil {
+		return nil, fmt.Errorf("the flow execution with id %s does not exist", actionExecutionDto.ID)
+	}
+
+	var flowExecution flow.Execution
+	err = json.Unmarshal(FlowExecutionJSON, &flowExecution)
+	if err != nil {
+		return nil, err
+	}
+
+	retVal, err = flowExecution.Execute(actionExecutionDto.Action, actionExecutionDto.ActionArgs, ctx)
+	if err != nil || retVal == false{
 		return nil, err
 	}
 
@@ -98,27 +120,23 @@ func (s *SmartContract) ExecuteActionOnFlow(ctx contractapi.TransactionContextIn
 	return &flowExecution, nil
 }
 
-type CountDto struct {
-	CBP_ID string `json:"CBP_ID"`
-	Count  int    `json:Count`
-}
 
 // ReadFlowExecutionState returns the current flow execution state stored in the world State with given id.
-func (s *SmartContract) ReadIPFlowCount(ctx contractapi.TransactionContextInterface, id string) (*CountDto, error) {
+// func (s *SmartContract) ReadIPFlowCount(ctx contractapi.TransactionContextInterface, id string) (*CountDto, error) {
 
-	params := []string{"GetSuccessfulFlowExecutionCount", "cbp_fe1"}
-	queryArgs := make([][]byte, len(params))
-	for i, arg := range params {
-		queryArgs[i] = []byte(arg)
-	}
+// 	params := []string{"GetSuccessfulFlowExecutionCount", "cbp_fe1"}
+// 	queryArgs := make([][]byte, len(params))
+// 	for i, arg := range params {
+// 		queryArgs[i] = []byte(arg)
+// 	}
 
-	response := ctx.GetStub().InvokeChaincode("ip-cc", queryArgs, "mychannel")
+// 	response := ctx.GetStub().InvokeChaincode("ip-cc", queryArgs, "mychannel")  // zbog ovoga ti treba ID IP-a, da znas koji CC treba da se invokuje...
 
-	var countDto CountDto
-	err := json.Unmarshal(response.Payload, &countDto)
-	if err != nil {
-		return nil, err
-	}
+// 	var countDto CountDto
+// 	err := json.Unmarshal(response.Payload, &countDto)
+// 	if err != nil {
+// 		return nil, err
+// 	}
 
-	return &countDto, nil
-}
+// 	return &countDto, nil
+// }

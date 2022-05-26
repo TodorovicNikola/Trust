@@ -1,6 +1,11 @@
 package flow
 
-import "fmt"
+import (
+	"fmt"
+	"encoding/json"
+
+	"github.com/hyperledger/fabric-contract-api-go/contractapi"
+)
 
 type Execution struct {
 	ID    string
@@ -16,34 +21,39 @@ func NewFlowExecution(ID string) Execution {
 	return flowExecution
 }
 
-func (fe *Execution) Execute(action string, actionArgsMap map[string]interface{}) error {
-	var retVal bool
+func (fe *Execution) Execute(action string, actionArgsMap map[string]interface{}, ctx contractapi.TransactionContextInterface) (bool, error) {
+	var retVal = true
+	var err error
 
 	switch action {
 <#list elementIds as elementId>
     <#if elementTypeMap[elementId]?lower_case?contains("processstep")>
      case "${elementUniqueNameMap[elementId]}":
-         retVal = fe.${elementUniqueNameMap[elementId]}Func(actionArgsMap)
+         retVal, err = fe.${elementUniqueNameMap[elementId]}Func(actionArgsMap, ctx)
     </#if>
 </#list>
     default:
-    	return fmt.Errorf("Invalid Action Execution Attempted! No such action as: %s ", action)
+    	return false, fmt.Errorf("Invalid Action Execution Attempted! No such action as: %s ", action)
     }
 
-	if !retVal {
-		return fmt.Errorf("Invalid Action Execution Attempted! State not adequate for action! State: %+v ", fe)
+	if err != nil {
+		return false, err
 	}
 
-	return nil
+	if !retVal {
+		return false, fmt.Errorf("Invalid Action Execution Attempted! State not adequate for action! State: %+v ", fe)
+	}
+
+	return true, nil
 }
 
 <#list elementIds as elementId>
 
     <#if elementTypeMap[elementId]?lower_case?contains("processstep")>
 
-func (fe *Execution) ${elementUniqueNameMap[elementId]}Func(actionArgsMap map[string]interface{}) bool {
+func (fe *Execution) ${elementUniqueNameMap[elementId]}Func(actionArgsMap map[string]interface{}, ctx contractapi.TransactionContextInterface) (bool, error) {
 	if !fe.State.${elementUniqueNameMap[elementId]}Active {
-		return false
+		return false, nil
 	}
 
 	// previous elements <- false
@@ -62,20 +72,52 @@ func (fe *Execution) ${elementUniqueNameMap[elementId]}Func(actionArgsMap map[st
         <#else>
 	fe.State.TerminationActivated = true
         </#if>
-        <#if contractualObligationMap[elementId]?has_content && contractualObligationMap[elementId].constraints?has_content> <#-- rukovanje capability constraints-ima -->
-
+        <#if contractualObligationMap[elementId]?has_content && contractualObligationMap[elementId].constraints?has_content> <#-- rukovanje contractual constraints-ima -->
+    fe.State.${elementUniqueNameMap[elementId]}Var.ElementExecutionCompleted = true
+    fe.State.${elementUniqueNameMap[elementId]}Var.ElementConstraintsFulfilled = true
             <#list contractualObligationMap[elementId].constraints as constraint>
+                <#if constraint.physicalDimension == 'C_Pieces' && relatedIPIdMap[elementId]?has_content>
+
+    params := []string{"GetSuccessfulFlowExecutionCount", fe.ID}
+    queryArgs := make([][]byte, len(params))
+    for i, arg := range params {
+        queryArgs[i] = []byte(arg)
+    }
+
+    response := ctx.GetStub().InvokeChaincode("${relatedIPIdMap[elementId]}", queryArgs, "mychannel")  // zbog ovoga ti treba ID IP-a, da znas koji CC treba da se invokuje...
+
+    var countDto CountDto
+    err := json.Unmarshal(response.Payload, &countDto)
+    if err != nil {
+        return false, err
+    }
+
+    if countDto.Count < ${constraint.value} {
+        fe.State.${elementUniqueNameMap[elementId]}Var.${constraint.physicalDimension}Fulfilled = false
+        fe.State.ConstraintsFulfilled = false
+        fe.State.${elementUniqueNameMap[elementId]}Var.ElementConstraintsFulfilled = false
+    } else {
+        fe.State.${elementUniqueNameMap[elementId]}Var.${constraint.physicalDimension}Fulfilled = true
+    }
+    fe.State.${elementUniqueNameMap[elementId]}Var.${constraint.physicalDimension} = countDto.Count
+
+                <#else>
     fe.State.${elementUniqueNameMap[elementId]}Var.${constraint.physicalDimension} = actionArgsMap["${constraint.physicalDimension}"].(float64)
     if actionArgsMap["${constraint.physicalDimension}"].(float64) ${constraint.relationalOperator} ${constraint.value} {
         fe.State.${elementUniqueNameMap[elementId]}Var.${constraint.physicalDimension}Fulfilled = true
     } else {
         fe.State.${elementUniqueNameMap[elementId]}Var.${constraint.physicalDimension}Fulfilled = false
         fe.State.ConstraintsFulfilled = false
+        fe.State.${elementUniqueNameMap[elementId]}Var.ElementConstraintsFulfilled = false
+
     }
+    fe.State.${elementUniqueNameMap[elementId]}Var.${constraint.physicalDimension} = actionArgsMap["${constraint.physicalDimension}"].(float64)
+
+                </#if>
             </#list>
         </#if>
 
-	return true
+	return true, nil
 
 }
     <#elseif elementTypeMap[elementId]?lower_case?contains("gate")>

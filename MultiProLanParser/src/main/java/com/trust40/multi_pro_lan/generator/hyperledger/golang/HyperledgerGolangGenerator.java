@@ -14,7 +14,7 @@ import java.util.Map;
 import static com.trust40.multi_pro_lan.generator.util.PathFormats.PATH_FORMAT_FLOW_EXECUTION;
 
 public class HyperledgerGolangGenerator {
-    public static void generateForMASL(Map<String, Object> valueMap) {
+    public static void generateForIP(Map<String, Object> valueMap) {
         String pathFlowExecutionState = String.format(PATH_FORMAT_FLOW_EXECUTION, "masl", "flow_execution_state");
         generateForTemplate(valueMap, pathFlowExecutionState, Templates.MASL_PPM_FLOW_EXECUTION_STATE_FTL);
 

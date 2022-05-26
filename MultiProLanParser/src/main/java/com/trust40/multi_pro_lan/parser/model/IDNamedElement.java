@@ -9,6 +9,7 @@ public abstract class IDNamedElement {
     protected String id;
     protected String name;
     protected String type;
+    protected Boolean isTraced;
 
     private Map<String, IDNamedElement> previousElements = new LinkedHashMap<>();
     private Map<String, IDNamedElement> followingElements = new LinkedHashMap<>();
@@ -17,12 +18,14 @@ public abstract class IDNamedElement {
         id = namedElement.getAttribute("id");
         name = namedElement.getAttribute("name");
         type = namedElement.hasAttribute("type") ? namedElement.getAttribute("type") : "";
+        isTraced = Boolean.valueOf(namedElement.hasAttribute("isTraced") ? namedElement.getAttribute("isTraced") : "false");
     }
 
     protected IDNamedElement(Element namedElement, String defaultTypeForSubclass) {
         id = namedElement.getAttribute("id");
         name = namedElement.getAttribute("name");
         type = namedElement.hasAttribute("type") ? namedElement.getAttribute("type") : namedElement.hasAttribute("role") ? namedElement.getAttribute("role") : defaultTypeForSubclass;
+        isTraced = Boolean.valueOf(namedElement.hasAttribute("isTraced") ? namedElement.getAttribute("isTraced") : "false");
 
     }
 
@@ -37,6 +40,8 @@ public abstract class IDNamedElement {
     public String getType() {
         return type;
     }
+
+    public Boolean isTraced() { return isTraced; }
 
     public String getUniqueName() {
         String transformedName = name.replace('-', '_').replace(" ", "").replace("(", "_").replace(")", "_");

@@ -109,6 +109,8 @@
         eType="#//Error" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="contractualObligation"
         eType="#//ContractualObligation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relatedInterfaceProcess"
+        eType="#//Process"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Relationship" eSuperTypes="#//IDNamedElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
@@ -163,6 +165,9 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" lowerBound="1"
         eType="#//EProcessElementStatus"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="obligationsFulfilled" eType="#//EProcessElementObligationsFulfilled"
+        defaultValueLiteral="TRUE"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="relatedDltContent" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Gate" eSuperTypes="#//ProcessElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//EGateType"/>
@@ -242,6 +247,7 @@
     <eLiterals name="ACTIVE" value="1"/>
     <eLiterals name="ERROR" value="2"/>
     <eLiterals name="NONE" value="3"/>
+    <eLiterals name="COMPLETED" value="4"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SubProcess" eSuperTypes="#//ProcessElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="process" lowerBound="1"
@@ -308,5 +314,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="ContractualObligation" eSuperTypes="#//Persistable #//IDNamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" upperBound="-1"
         eType="#//Constraint" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="EProcessElementObligationsFulfilled">
+    <eLiterals name="TRUE"/>
+    <eLiterals name="FALSE" value="1"/>
   </eClassifiers>
 </ecore:EPackage>

@@ -1,4 +1,4 @@
-package web_socket.process_planning;
+package process_planning;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;

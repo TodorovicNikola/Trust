@@ -56,7 +56,15 @@ public enum EProcessElementStatus implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	NONE(3, "NONE", "NONE");
+	NONE(3, "NONE", "NONE"), /**
+	 * The '<em><b>COMPLETED</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #COMPLETED_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	COMPLETED(4, "COMPLETED", "COMPLETED");
 
 	/**
 	 * The '<em><b>INACTIVE</b></em>' literal value.
@@ -103,6 +111,17 @@ public enum EProcessElementStatus implements Enumerator {
 	public static final int NONE_VALUE = 3;
 
 	/**
+	 * The '<em><b>COMPLETED</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #COMPLETED
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int COMPLETED_VALUE = 4;
+
+	/**
 	 * An array of all the '<em><b>EProcess Element Status</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -114,6 +133,7 @@ public enum EProcessElementStatus implements Enumerator {
 			ACTIVE,
 			ERROR,
 			NONE,
+			COMPLETED,
 		};
 
 	/**
@@ -174,6 +194,7 @@ public enum EProcessElementStatus implements Enumerator {
 			case ACTIVE_VALUE: return ACTIVE;
 			case ERROR_VALUE: return ERROR;
 			case NONE_VALUE: return NONE;
+			case COMPLETED_VALUE: return COMPLETED;
 		}
 		return null;
 	}

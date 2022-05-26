@@ -16,7 +16,7 @@ import javax.xml.xpath.XPathFactory;
 import java.io.IOException;
 import java.util.*;
 
-public class MASLParser extends AbstractParser {
+public class IPParser extends AbstractParser {
 
 
     public Map<String, Object> generateValueMapForModel(String path) throws IOException, SAXException, ParserConfigurationException, XPathExpressionException {
@@ -110,7 +110,14 @@ public class MASLParser extends AbstractParser {
         for (String key : selectedElements.keySet()) {
             IDNamedElement element = selectedElements.get(key);
             if (!(element instanceof Gate && ((element.getType().equalsIgnoreCase("DECISION")) || (((Gate) element).getType().equalsIgnoreCase("DECISION") && ((Gate) element).getOutgoingRelationship().size() > 1)))) {  //flowElement instanceof Task || flowElement instanceof SequenceFlow || (flowElement instanceof ParallelGateway && ((ParallelGateway) flowElement).getIncoming().size() > 1)) {
-                relevantElements.put(key, selectedElements.get(key)); // uvek je u pitanju processElement, zato moze parsiranje
+                if(element instanceof ProcessStep) {
+                    if(element.isTraced())
+                        relevantElements.put(key, selectedElements.get(key)); // uvek je u pitanju processElement, zato moze parsiranje
+                }
+                else {
+                    relevantElements.put(key, selectedElements.get(key)); // uvek je u pitanju processElement, zato moze parsiranje
+
+                }
             }
         }
 

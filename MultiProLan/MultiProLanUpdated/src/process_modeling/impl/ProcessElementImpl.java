@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import process_modeling.EProcessElementObligationsFulfilled;
 import process_modeling.EProcessElementStatus;
 import process_modeling.ProcessElement;
 import process_modeling.Process_modelingPackage;
@@ -38,6 +39,8 @@ import process_modeling.Traceable;
  *   <li>{@link process_modeling.impl.ProcessElementImpl#getOutRelationships <em>Out Relationships</em>}</li>
  *   <li>{@link process_modeling.impl.ProcessElementImpl#isIsErrorGroup <em>Is Error Group</em>}</li>
  *   <li>{@link process_modeling.impl.ProcessElementImpl#getStatus <em>Status</em>}</li>
+ *   <li>{@link process_modeling.impl.ProcessElementImpl#getObligationsFulfilled <em>Obligations Fulfilled</em>}</li>
+ *   <li>{@link process_modeling.impl.ProcessElementImpl#getRelatedDltContent <em>Related Dlt Content</em>}</li>
  * </ul>
  *
  * @generated
@@ -162,6 +165,46 @@ public abstract class ProcessElementImpl extends IDNamedElementImpl implements P
 	 * @ordered
 	 */
 	protected EProcessElementStatus status = STATUS_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getObligationsFulfilled() <em>Obligations Fulfilled</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getObligationsFulfilled()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final EProcessElementObligationsFulfilled OBLIGATIONS_FULFILLED_EDEFAULT = EProcessElementObligationsFulfilled.TRUE;
+
+	/**
+	 * The cached value of the '{@link #getObligationsFulfilled() <em>Obligations Fulfilled</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getObligationsFulfilled()
+	 * @generated
+	 * @ordered
+	 */
+	protected EProcessElementObligationsFulfilled obligationsFulfilled = OBLIGATIONS_FULFILLED_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getRelatedDltContent() <em>Related Dlt Content</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRelatedDltContent()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String RELATED_DLT_CONTENT_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getRelatedDltContent() <em>Related Dlt Content</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRelatedDltContent()
+	 * @generated
+	 * @ordered
+	 */
+	protected String relatedDltContent = RELATED_DLT_CONTENT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -328,6 +371,52 @@ public abstract class ProcessElementImpl extends IDNamedElementImpl implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public EProcessElementObligationsFulfilled getObligationsFulfilled() {
+		return obligationsFulfilled;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setObligationsFulfilled(EProcessElementObligationsFulfilled newObligationsFulfilled) {
+		EProcessElementObligationsFulfilled oldObligationsFulfilled = obligationsFulfilled;
+		obligationsFulfilled = newObligationsFulfilled == null ? OBLIGATIONS_FULFILLED_EDEFAULT : newObligationsFulfilled;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Process_modelingPackage.PROCESS_ELEMENT__OBLIGATIONS_FULFILLED, oldObligationsFulfilled, obligationsFulfilled));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getRelatedDltContent() {
+		return relatedDltContent;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setRelatedDltContent(String newRelatedDltContent) {
+		String oldRelatedDltContent = relatedDltContent;
+		relatedDltContent = newRelatedDltContent;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Process_modelingPackage.PROCESS_ELEMENT__RELATED_DLT_CONTENT, oldRelatedDltContent, relatedDltContent));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -378,6 +467,10 @@ public abstract class ProcessElementImpl extends IDNamedElementImpl implements P
 				return isIsErrorGroup();
 			case Process_modelingPackage.PROCESS_ELEMENT__STATUS:
 				return getStatus();
+			case Process_modelingPackage.PROCESS_ELEMENT__OBLIGATIONS_FULFILLED:
+				return getObligationsFulfilled();
+			case Process_modelingPackage.PROCESS_ELEMENT__RELATED_DLT_CONTENT:
+				return getRelatedDltContent();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -414,6 +507,12 @@ public abstract class ProcessElementImpl extends IDNamedElementImpl implements P
 			case Process_modelingPackage.PROCESS_ELEMENT__STATUS:
 				setStatus((EProcessElementStatus)newValue);
 				return;
+			case Process_modelingPackage.PROCESS_ELEMENT__OBLIGATIONS_FULFILLED:
+				setObligationsFulfilled((EProcessElementObligationsFulfilled)newValue);
+				return;
+			case Process_modelingPackage.PROCESS_ELEMENT__RELATED_DLT_CONTENT:
+				setRelatedDltContent((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -447,6 +546,12 @@ public abstract class ProcessElementImpl extends IDNamedElementImpl implements P
 			case Process_modelingPackage.PROCESS_ELEMENT__STATUS:
 				setStatus(STATUS_EDEFAULT);
 				return;
+			case Process_modelingPackage.PROCESS_ELEMENT__OBLIGATIONS_FULFILLED:
+				setObligationsFulfilled(OBLIGATIONS_FULFILLED_EDEFAULT);
+				return;
+			case Process_modelingPackage.PROCESS_ELEMENT__RELATED_DLT_CONTENT:
+				setRelatedDltContent(RELATED_DLT_CONTENT_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -473,6 +578,10 @@ public abstract class ProcessElementImpl extends IDNamedElementImpl implements P
 				return isErrorGroup != IS_ERROR_GROUP_EDEFAULT;
 			case Process_modelingPackage.PROCESS_ELEMENT__STATUS:
 				return status != STATUS_EDEFAULT;
+			case Process_modelingPackage.PROCESS_ELEMENT__OBLIGATIONS_FULFILLED:
+				return obligationsFulfilled != OBLIGATIONS_FULFILLED_EDEFAULT;
+			case Process_modelingPackage.PROCESS_ELEMENT__RELATED_DLT_CONTENT:
+				return RELATED_DLT_CONTENT_EDEFAULT == null ? relatedDltContent != null : !RELATED_DLT_CONTENT_EDEFAULT.equals(relatedDltContent);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -533,6 +642,10 @@ public abstract class ProcessElementImpl extends IDNamedElementImpl implements P
 		result.append(isErrorGroup);
 		result.append(", status: ");
 		result.append(status);
+		result.append(", obligationsFulfilled: ");
+		result.append(obligationsFulfilled);
+		result.append(", relatedDltContent: ");
+		result.append(relatedDltContent);
 		result.append(')');
 		return result.toString();
 	}

@@ -138,12 +138,14 @@ type CountDto struct {
 }
 
 func (s *SmartContract) ExecuteActionOnFlow(ctx contractapi.TransactionContextInterface, actionExecutionDto ActionExecutionDto) (*flow.Execution, error) {
-	colorNameIndexKey, err := ctx.GetStub().CreateCompositeKey(indexName, []string{actionExecutionDto.CBP_ID, actionExecutionDto.IP_ID})
+	var retVal = true
+	
+	ipFlowCompositeKey, err := ctx.GetStub().CreateCompositeKey(indexName, []string{actionExecutionDto.CBP_ID, actionExecutionDto.IP_ID})
 	if err != nil {
 		return nil, fmt.Errorf("failed to create composite key: %v", err)
 	}
 
-	FlowExecutionJSON, err := ctx.GetStub().GetState(colorNameIndexKey)
+	FlowExecutionJSON, err := ctx.GetStub().GetState(ipFlowCompositeKey)
 	if err != nil {
 		return nil, fmt.Errorf("failed to read from world State: %v", err)
 	}
@@ -157,8 +159,8 @@ func (s *SmartContract) ExecuteActionOnFlow(ctx contractapi.TransactionContextIn
 		return nil, err
 	}
 
-	err = flowExecution.Execute(actionExecutionDto.Action, actionExecutionDto.ActionArgs)
-	if err != nil {
+	retVal, err = flowExecution.Execute(actionExecutionDto.Action, actionExecutionDto.ActionArgs)
+	if err != nil || retVal == false{
 		return nil, err
 	}
 
@@ -167,9 +169,32 @@ func (s *SmartContract) ExecuteActionOnFlow(ctx contractapi.TransactionContextIn
 		return nil, err
 	}
 
-	err = ctx.GetStub().PutState(colorNameIndexKey, flowExecutionJSON)
+	err = ctx.GetStub().PutState(ipFlowCompositeKey, flowExecutionJSON)
 	if err != nil {
 		return nil, fmt.Errorf("failed to put to world State. %v", err)
+	}
+
+	return &flowExecution, nil
+}
+
+func (s *SmartContract) GetFlowStatus(ctx contractapi.TransactionContextInterface, actionExecutionDto ActionExecutionDto) (*flow.Execution, error) {
+	ipFlowCompositeKey, err := ctx.GetStub().CreateCompositeKey(indexName, []string{actionExecutionDto.CBP_ID, actionExecutionDto.IP_ID})
+	if err != nil {
+		return nil, fmt.Errorf("failed to create composite key: %v", err)
+	}
+
+	FlowExecutionJSON, err := ctx.GetStub().GetState(ipFlowCompositeKey)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read from world State: %v", err)
+	}
+	if FlowExecutionJSON == nil {
+		return nil, fmt.Errorf("the flow execution with id %s-%s does not exist", actionExecutionDto.CBP_ID, actionExecutionDto.IP_ID)
+	}
+
+	var flowExecution flow.Execution
+	err = json.Unmarshal(FlowExecutionJSON, &flowExecution)
+	if err != nil {
+		return nil, err
 	}
 
 	return &flowExecution, nil

@@ -63,7 +63,8 @@ public abstract class AbstractParser {
 
     protected void selectFollowingElements(ProcessElement processElement, Map<String, IDNamedElement> followingElements) {
         for (Relationship relationship : processElement.getOutgoingRelationship()) {
-            if (relationship.getTarget() instanceof ProcessStep) {
+            // Doprinos - samo traced elemente dodajem
+            if (relationship.getTarget() instanceof ProcessStep && relationship.getTarget().isTraced()) {
                 ProcessElement followingProcessElement = relationship.getTarget();
                 followingElements.put(followingProcessElement.getId(), selectElement(followingProcessElement));
 
@@ -80,7 +81,7 @@ public abstract class AbstractParser {
     protected void selectPreviousElements(ProcessElement processElement, Map<String, IDNamedElement> previousElements) {
         previousElements.put(processElement.getId(), processElement);
 
-        if (processElement instanceof ProcessStep) {
+        if (processElement instanceof ProcessStep && processElement.isTraced()) {
             for (Relationship relationship : (processElement.getIncomingRelationship())) {
                 ProcessElement sourceNode = relationship.getSource(); // node, a ne element, jer ne moze biti relationship u pitanju
 
@@ -118,7 +119,7 @@ public abstract class AbstractParser {
     }
 
     protected IDNamedElement selectElement(IDNamedElement processElement) {
-        if (selectedElements.containsKey(processElement.getId())) {
+        if (selectedElements.containsKey(processElement.getId()) || !processElement.isTraced()) {
             return processElement;
         }
 
