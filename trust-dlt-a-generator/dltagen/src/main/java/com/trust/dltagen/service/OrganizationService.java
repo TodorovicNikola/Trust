@@ -8,7 +8,6 @@ import com.trust.dltagen.repository.OrganizationRepository;
 import freemarker.template.TemplateException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import java.io.File;
 import java.io.IOException;
 
 @Service
@@ -18,14 +17,14 @@ public class OrganizationService {
     private final FileService fileService;
     private final CertificateAuthorityService caService;
     private final TemplateService templateService;
-    private final ScriptExecutionService scriptExecutionService;
+    private final CryptoService cryptoService;
 
-    public OrganizationService(OrganizationRepository repository, CertificateAuthorityService caService, TemplateService templateService, FileService fileService, ScriptExecutionService scriptExecutionService) {
+    public OrganizationService(OrganizationRepository repository, CertificateAuthorityService caService, TemplateService templateService, FileService fileService, CryptoService cryptoService) {
         this.repository = repository;
         this.caService = caService;
         this.templateService = templateService;
         this.fileService = fileService;
-        this.scriptExecutionService = scriptExecutionService;
+        this.cryptoService = cryptoService;
     }
 
     public boolean existsById(String id) {
@@ -52,7 +51,7 @@ public class OrganizationService {
         return templateService.getCAConfig(found.getName(), found.getCertificateAuthority());
     }
 
-    public byte[] generateCryptomaterial(String organizationId, MultipartFile pem) throws TemplateException, IOException {
+    /*public byte[] generateCryptomaterial(String organizationId, MultipartFile pem) throws TemplateException, IOException {
         Organization found = repository.getById(organizationId);
         String pemFilePath = fileService.store(found.getName()+".pem", pem, "pem");
 
@@ -79,7 +78,18 @@ public class OrganizationService {
         repository.save(found);
 
         return fileService.zipDir("organizations/peerOrganizations/" + found.getName());
+    }*/
+
+    public byte[] generateCryptomaterial(String organizationId, MultipartFile pem) throws TemplateException, IOException {
+        Organization found = repository.getById(organizationId);
+        cryptoService.generateOrganizationCryptomaterial(found, pem);
+
+        found.setStatus(OrganizationStatus.UP);
+        repository.save(found);
+
+        return fileService.zipDir("organizations/peerOrganizations/" + found.getName());
     }
+
 
     public byte[] getConfig(String id) throws TemplateException, IOException {
         Organization found = repository.getById(id);

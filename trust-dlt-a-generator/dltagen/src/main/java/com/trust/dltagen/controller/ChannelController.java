@@ -3,6 +3,10 @@ package com.trust.dltagen.controller;
 import com.trust.dltagen.dto.ChannelProcessDTO;
 import com.trust.dltagen.model.Channel;
 import com.trust.dltagen.service.ChannelService;
+import freemarker.template.TemplateException;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +33,17 @@ public class ChannelController {
     @PostMapping("")
     public ChannelProcessDTO processChannel(@RequestParam("channel") MultipartFile file) {
         return service.process(file);
+    }
+
+    @GetMapping("{id}/artifacts")
+    public ResponseEntity<InputStreamResource> getArtifacts(@PathVariable String id) throws TemplateException, IOException {
+        byte[] bytes = service.getArtifacts(id);
+
+        InputStreamResource body = new InputStreamResource(new ByteArrayInputStream(bytes));
+
+        return ResponseEntity.ok().contentType(MediaType.parseMediaType("application/zip"))
+                .header("Content-Disposition", "attachment; filename=artifacts.zip")
+                .body(body);
     }
 
     @GetMapping()

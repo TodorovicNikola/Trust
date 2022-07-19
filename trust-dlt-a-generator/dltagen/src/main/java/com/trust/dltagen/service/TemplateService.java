@@ -2,6 +2,7 @@ package com.trust.dltagen.service;
 
 import com.trust.dltagen.model.CcpType;
 import com.trust.dltagen.model.CertificateAuthority;
+import com.trust.dltagen.model.Channel;
 import com.trust.dltagen.model.Organization;
 import com.trust.dltagen.utils.FilesystemUtil;
 import com.trust.dltagen.utils.TemplateUtil;
@@ -26,7 +27,14 @@ public class TemplateService {
     }
 
     public byte[] getCAEnrollmentScript(Organization organization, String pemFilePath, String caClientHome, String peerHome) throws IOException, TemplateException {
-        Template tmpl = TemplateUtil.getTemplate("ca-enroll.tmpl");
+        return getCAEnrollmentScript("ca-enroll.tmpl", organization, pemFilePath, caClientHome, peerHome);
+    }
+    public byte[] getOrdererCAEnrollmentScript(Organization organization, String pemFilePath, String caClientHome, String peerHome) throws TemplateException, IOException {
+        return getCAEnrollmentScript("orderer-ca-enroll.tmpl", organization, pemFilePath, caClientHome, peerHome);
+    }
+
+    private byte[] getCAEnrollmentScript(String template, Organization organization, String pemFilePath, String caClientHome, String peerHome) throws IOException, TemplateException {
+        Template tmpl = TemplateUtil.getTemplate(template);
         Map<String, Object> input = new HashMap<>();
         input.put("organization", organization);
         input.put("FABRIC_CA_CLIENT_HOME", caClientHome);
@@ -98,6 +106,35 @@ public class TemplateService {
         Template tmpl = TemplateUtil.getTemplate("org-docker.tmpl");
         Map<String, Object> input = new HashMap<>();
         input.put("organization", organization);
+
+        return getTemplateData(tmpl, input);
+    }
+
+    public byte[] getOrdererConfig(Organization organization) throws IOException, TemplateException {
+        Template tmpl = TemplateUtil.getTemplate("orderer-docker.tmpl");
+        Map<String, Object> input = new HashMap<>();
+        input.put("organization", organization);
+
+        return getTemplateData(tmpl, input);
+    }
+
+    public byte[] getConfigtx(Channel channel, Organization orderer) throws IOException, TemplateException {
+        Template tmpl = TemplateUtil.getTemplate("configtx.tmpl");
+
+        Map<String, Object> input = new HashMap<>();
+        input.put("channel", channel);
+        input.put("orderer", orderer);
+
+        return getTemplateData(tmpl, input);
+    }
+
+    public byte[] getChannelArtifactScript(Channel channel, Organization orderer) throws IOException, TemplateException {
+        Template tmpl = TemplateUtil.getTemplate("createChannel.tmpl");
+
+        Map<String, Object> input = new HashMap<>();
+        input.put("channel", channel);
+        input.put("orderer", orderer);
+        input.put("organization", channel.getOrganizations().get(0));
 
         return getTemplateData(tmpl, input);
     }

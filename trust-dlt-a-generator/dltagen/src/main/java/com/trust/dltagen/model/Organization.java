@@ -10,6 +10,8 @@ public class Organization {
     @Id
     private String id;
     private String name;
+
+    private String fullName;
     private String host;
     private String port;
     private String opPort;
@@ -35,11 +37,12 @@ public class Organization {
     public Organization(String id, String name, String host, String port, String role) {
         this();
         this.id = id;
-        this.name = name;
+        this.fullName = name;
+        this.name = name.toLowerCase().replace(' ', '-');
         this.role = role;
         this.host = host;
         this.port = port;
-        this.mspId = name + "MSP";
+        this.mspId = this.name + "MSP";
     }
 
     public Organization(com.trust40.multi_pro_lan.parser.model.Organization organization) {

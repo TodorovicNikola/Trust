@@ -1,0 +1,175 @@
+#available:
+#  orderer
+#  channel
+
+#TODO: endorsement policy
+
+Organizations:
+
+  - &OrdererOrg
+    Name: OrdererOrg
+
+    # ID to load the MSP definition as
+    ID: ${orderer.mspId}
+
+    # MSPDir is the filesystem path which contains the MSP configuration
+    MSPDir: ../organizations/ordererOrganizations/${orderer.name}/msp
+
+    Policies:
+      Readers:
+        Type: Signature
+        Rule: "OR('${orderer.mspId}.member')"
+      Writers:
+        Type: Signature
+        Rule: "OR('${orderer.mspId}.member')"
+      Admins:
+        Type: Signature
+        Rule: "OR('${orderer.mspId}.admin')"
+
+    OrdererEndpoints:
+      - ${orderer.peer.name}.${orderer.name}:${orderer.port}
+
+<#list channel.organizations as organization>
+  - &${organization.name}
+    Name: ${organization.mspId}
+    ID: ${organization.mspId}
+
+    MSPDir: ../organizations/peerOrganizations/${organization.name}/msp
+
+    Policies:
+      Readers:
+        Type: Signature
+        Rule: "OR('${organization.mspId}.admin', '${organization.mspId}.peer', '${organization.mspId}.client')"
+      Writers:
+        Type: Signature
+        Rule: "OR('${organization.mspId}.admin', '${organization.mspId}.client')"
+      Admins:
+        Type: Signature
+        Rule: "OR('${organization.mspId}.admin')"
+      Endorsement:
+        Type: Signature
+        Rule: "OR('${organization.mspId}.peer')"
+</#list>
+
+Capabilities:
+  Channel: &ChannelCapabilities
+    V2_0: true
+
+  Orderer: &OrdererCapabilities
+    V2_0: true
+
+  Application: &ApplicationCapabilities
+    V2_0: true
+
+Application: &ApplicationDefaults
+
+  Organizations:
+
+  Policies:
+    Readers:
+      Type: ImplicitMeta
+      Rule: "ANY Readers"
+    Writers:
+      Type: ImplicitMeta
+      Rule: "ANY Writers"
+    Admins:
+      Type: ImplicitMeta
+      Rule: "MAJORITY Admins"
+    LifecycleEndorsement:
+      Type: ImplicitMeta
+      Rule: "MAJORITY Endorsement"
+    Endorsement:
+      Type: ImplicitMeta
+      Rule: "MAJORITY Endorsement"
+
+  Capabilities:
+    <<: *ApplicationCapabilities
+
+Orderer: &OrdererDefaults
+
+  OrdererType: etcdraft
+
+  Addresses:
+    - ${orderer.peer.name}.${orderer.name}:${orderer.port}
+
+  EtcdRaft:
+    Consenters:
+      - Host: ${orderer.peer.name}.${orderer.name}
+        Port: ${orderer.port}
+        ClientTLSCert: ../organizations/ordererOrganizations/${orderer.name}/orderers/${orderer.peer.name}.${orderer.name}/tls/server.crt
+        ServerTLSCert: ../organizations/ordererOrganizations/${orderer.name}/orderers/${orderer.peer.name}.${orderer.name}/tls/server.crt
+
+  # Batch Timeout: The amount of time to wait before creating a batch
+  BatchTimeout: 2s
+
+  # Batch Size: Controls the number of messages batched into a block
+  BatchSize:
+
+    # Max Message Count: The maximum number of messages to permit in a batch
+    MaxMessageCount: 10
+
+    # Absolute Max Bytes: The absolute maximum number of bytes allowed for
+    # the serialized messages in a batch.
+    AbsoluteMaxBytes: 99 MB
+
+    # Preferred Max Bytes: The preferred maximum number of bytes allowed for
+    # the serialized messages in a batch. A message larger than the preferred
+    # max bytes will result in a batch larger than preferred max bytes.
+    PreferredMaxBytes: 512 KB
+
+  # Organizations is the list of orgs which are defined as participants on
+  # the orderer side of the network
+  Organizations:
+
+  Policies:
+    Readers:
+      Type: ImplicitMeta
+      Rule: "ANY Readers"
+    Writers:
+      Type: ImplicitMeta
+      Rule: "ANY Writers"
+    Admins:
+      Type: ImplicitMeta
+      Rule: "MAJORITY Admins"
+    # BlockValidation specifies what signatures must be included in the block
+    # from the orderer for the peer to validate it.
+    BlockValidation:
+      Type: ImplicitMeta
+      Rule: "ANY Writers"
+
+
+Channel: &ChannelDefaults
+
+  Policies:
+    # Who may invoke the 'Deliver' API
+    Readers:
+      Type: ImplicitMeta
+      Rule: "ANY Readers"
+    # Who may invoke the 'Broadcast' API
+    Writers:
+      Type: ImplicitMeta
+      Rule: "ANY Writers"
+    # By default, who may modify elements at this config level
+    Admins:
+      Type: ImplicitMeta
+      Rule: "MAJORITY Admins"
+
+  Capabilities:
+    <<: *ChannelCapabilities
+
+Profiles:
+
+  GeneratedGenesis:
+    <<: *ChannelDefaults
+    Orderer:
+      <<: *OrdererDefaults
+      Organizations:
+        - *OrdererOrg
+      Capabilities: *OrdererCapabilities
+    Application:
+      <<: *ApplicationDefaults
+      Organizations:
+<#list channel.organizations as organization>
+        - *${organization.name}
+</#list>
+      Capabilities: *ApplicationCapabilities

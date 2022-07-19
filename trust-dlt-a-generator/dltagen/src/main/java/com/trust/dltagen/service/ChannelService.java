@@ -8,11 +8,13 @@ import com.trust.dltagen.model.OrganizationStatus;
 import com.trust.dltagen.repository.ChannelRepository;
 import com.trust40.multi_pro_lan.parser.impl.CBPParser;
 import com.trust40.multi_pro_lan.parser.model.VirtualOrganization;
+import freemarker.template.TemplateException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,12 +24,18 @@ public class ChannelService {
 
     private final ChannelRepository repository;
     private final OrganizationService organizationService;
+
+    private final OrdererService ordererService;
     private final FileService fileService;
 
-    public ChannelService(ChannelRepository repository, OrganizationService organizationService, FileService multipartFileService) {
+    private final TemplateService templateService;
+
+    public ChannelService(ChannelRepository repository, OrganizationService organizationService, FileService multipartFileService, TemplateService templateService, OrdererService ordererService) {
         this.repository = repository;
         this.organizationService = organizationService;
         this.fileService = multipartFileService;
+        this.templateService = templateService;
+        this.ordererService = ordererService;
     }
 
     public ChannelProcessDTO process(MultipartFile multipartFile) {
@@ -94,4 +102,25 @@ public class ChannelService {
         return repository.findAll();
     }
 
+    public byte[] getArtifacts(String id) throws TemplateException, IOException {
+        Channel channel = repository.getById(id);
+        if(!channel.getOrganizations().stream().allMatch(organization -> organization.getStatus() == OrganizationStatus.UP)) {
+            //TODO: throw error
+            return null;
+        }
+
+        Organization orderer = ordererService.getOrderer();
+
+        byte[] configtx = templateService.getConfigtx(channel, orderer);
+        fileService.store("configtx.yaml", configtx, "channels", id, "config");
+        byte[] artifactScript = templateService.getChannelArtifactScript(channel, orderer);
+        fileService.store("createChannel.sh", artifactScript, "channels", id);
+
+        byte[] zip = fileService.zipDir("channels" + File.separator + id);
+
+        channel.setStatus(ChannelStatus.CREATED);
+        repository.save(channel);
+
+        return zip;
+    }
 }
