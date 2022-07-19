@@ -18,4 +18,8 @@ export class FileUploadService {
     return this.http.post("/organization/" + orgId + "/crypto", formData, {responseType: 'arraybuffer'});
   }
 
+  uploadPEMOrderer(formData: FormData): Observable<any> {
+    return this.http.post("/orderer/crypto", formData, {responseType: 'arraybuffer'});
+  }
+
 }

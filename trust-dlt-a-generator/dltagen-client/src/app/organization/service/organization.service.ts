@@ -22,4 +22,8 @@ export class OrganizationService {
   getConfig(orgId: String): Observable<any> {
     return this.http.get("/organization/" + orgId + "/config", {responseType: "text"});
   }
+
+  getOrdererConfig(orgId: String): Observable<any> {
+    return this.http.get("/orderer/" + orgId + "/config", {responseType: "text"});
+  }
 }

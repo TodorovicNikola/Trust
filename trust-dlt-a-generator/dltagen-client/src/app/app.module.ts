@@ -12,6 +12,7 @@ import { ViewChannelComponent } from './channel/component/view-channel/view-chan
 import { EditOrganizationComponent } from './organization/component/edit-organization/edit-organization.component';
 import { ListChannelComponent } from './channel/component/list-channel/list-channel.component';
 import { PageViewChannelComponent } from './channel/component/page-view-channel/page-view-channel.component';
+import { ListOrdererComponent } from './organization/component/list-orderer/list-orderer.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { PageViewChannelComponent } from './channel/component/page-view-channel/
     ViewChannelComponent,
     EditOrganizationComponent,
     ListChannelComponent,
-    PageViewChannelComponent
+    PageViewChannelComponent,
+    ListOrdererComponent
   ],
   imports: [
     AppRoutingModule,

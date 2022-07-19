@@ -17,4 +17,8 @@ export class ChannelService {
   getById(id: String): Observable<Channel> {
     return this.http.get<Channel>("/channel/" + id);
   }
+
+  getArtifacts(channel: Channel): Observable<any> {
+    return this.http.get("/channel/" + channel.id + "/artifacts", {responseType: 'arraybuffer'}); 
+  }
 }

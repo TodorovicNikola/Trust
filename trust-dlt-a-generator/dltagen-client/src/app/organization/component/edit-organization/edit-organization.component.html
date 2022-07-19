@@ -27,7 +27,8 @@
             </tr>
             <tr *ngIf="organization.status == 'UP'">
                 <td></td>
-                <td><button (click)="getConfig()">Get config</button></td>
+                <td *ngIf="!orderer"><button (click)="getConfig()">Get config</button></td>
+                <td *ngIf="orderer"><button (click)="getOrdererConfig()">Get config</button></td>
             </tr>
         </tbody>
     </table>

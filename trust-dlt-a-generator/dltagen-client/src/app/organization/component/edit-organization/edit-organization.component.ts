@@ -12,6 +12,7 @@ import { OrganizationService } from '../../service/organization.service';
 export class EditOrganizationComponent implements OnInit {
 
   @Input() organization!: Organization;
+  @Input() orderer?: boolean;
 
   ca: CertificateAuthority = {
     name: '',
@@ -45,25 +46,18 @@ export class EditOrganizationComponent implements OnInit {
   }
 
   getCAConfig() {
-    this.organizationService.getCAConfig(this.organization.id).subscribe(config => {
-      let blob = new Blob([config], {type: 'application/x-yaml'});
-      var a = document.createElement("a");
-      a.href = window.URL.createObjectURL(blob);
-      a.download = this.organization.ca?.name + ".yaml";
-          // start download
-          a.click();
-    })
+    this.organizationService.getCAConfig(this.organization.id).subscribe(config => 
+      this.downloadFile(config, "application/x-yaml", this.organization.ca?.name + ".yaml"));
   }
 
   getConfig() {
-    this.organizationService.getConfig(this.organization.id).subscribe(config => {
-      let blob = new Blob([config], {type: 'application/x-yaml'});
-      var a = document.createElement("a");
-      a.href = window.URL.createObjectURL(blob);
-      a.download = this.organization.name + ".yaml";
-          // start download
-          a.click();
-    })
+    this.organizationService.getConfig(this.organization.id).subscribe(config => 
+      this.downloadFile(config, "application/x-yaml", this.organization.name + ".yaml"));
+  }
+
+  getOrdererConfig() {
+    this.organizationService.getOrdererConfig(this.organization.id).subscribe(config =>
+      this.downloadFile(config, "application/x-yaml", "orderer.yaml"));
   }
 
   uploadPEM(event: Event) {
@@ -73,17 +67,28 @@ export class EditOrganizationComponent implements OnInit {
       if(file) {
         const formData = new FormData();
         formData.append("pem", file);
-        this.fileUploadService.uploadPEM(this.organization.id, formData).subscribe(zip => {
-          let blob = new Blob([zip], {type: 'application/zip'});
-          var a = document.createElement("a");
-          a.href = window.URL.createObjectURL(blob);
-          a.download = "crypto.zip";
-          // start download
-          a.click();
-          this.organization.status = "UP";
-        });
+        if(this.orderer) {
+          this.fileUploadService.uploadPEMOrderer(formData).subscribe(zip => {
+            this.downloadFile(zip, "application/zip", "crypto.zip")
+            this.organization.status = "UP";
+          });
+        } else {
+          this.fileUploadService.uploadPEM(this.organization.id, formData).subscribe(zip => {
+            this.downloadFile(zip, "application/zip", "crypto.zip")
+            this.organization.status = "UP";
+          });
+        }
       }
     }
+  }
+
+  downloadFile(config: any, mimeType: string, filename: string) {
+    let blob = new Blob([config], {type: mimeType});
+      var a = document.createElement("a");
+      a.href = window.URL.createObjectURL(blob);
+      a.download = filename;
+          // start download
+          a.click();
   }
 
 }
