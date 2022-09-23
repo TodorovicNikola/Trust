@@ -15,9 +15,9 @@ import javax.persistence.*;
 @Table(name = "signature")
 public class Signature {
 
-    public Signature(OrgInVirtOrg orgInVirtOrg, SignedDocument signedDocument, String encodedSignature) {
+    public Signature(OrgInVirtOrg orgInVirtOrg, SubmittedDocument submittedDocument, String encodedSignature) {
         this.orgInVirtOrg = orgInVirtOrg;
-        this.signedDocument = signedDocument;
+        this.submittedDocument = submittedDocument;
         this.encodedSignature = encodedSignature;
     }
 
@@ -32,7 +32,7 @@ public class Signature {
 
     @ManyToOne
     @JoinColumn(name = "signed_document_id")
-    private SignedDocument signedDocument;
+    private SubmittedDocument submittedDocument;
 
     @Lob
     @Column(name = "encoded_signature")
