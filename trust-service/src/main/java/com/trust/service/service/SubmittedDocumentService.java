@@ -45,23 +45,27 @@ public class SubmittedDocumentService {
 		String decodedContent = new String(decodedBytes);
 		Document document = XMLUtils.getDocumentFromXML(decodedContent);
 
-		removeElementsPrivateToOrg(document);
+		assert document != null;
+		removeElementsPrivateToOrg(document.getDocumentElement());
 
 		String contentSafeForSharing = XMLUtils.getXMLFromDocument(document);
 		return Base64.getEncoder().encodeToString(contentSafeForSharing.getBytes());
 	}
 
-	private static void removeElementsPrivateToOrg(Document document) {
-		NodeList nodeList = document.getElementsByTagName("elements");
+	private static void removeElementsPrivateToOrg(Element element) {
+		NodeList nodeList = element.getChildNodes();
 		for (int i = 0; i < nodeList.getLength(); i++) {
-			Element element = (Element) nodeList.item(i);
-			Element parent = (Element) element.getParentNode();
-			// These elements are on CBP layer, we don't touch those
-			if (parent.getTagName().equals("organizations"))
-				continue;
-			// Element's without this attribute should be removed
-			if (!element.hasAttribute("exposeToCollaboratingParties"))
-				element.getParentNode().removeChild(element);
+			if (nodeList.item(i) instanceof Element) {
+				Element child = (Element) nodeList.item(i);
+				// These elements are on CBP layer, we don't touch those
+				if (element.getTagName().equals("organizations"))
+					continue;
+				// Elements without this attribute should be removed
+				if (child.hasAttribute("exposeToCollaboratingParties"))
+					removeElementsPrivateToOrg(child);
+				else
+					element.removeChild(child);
+			}
 		}
 	}
 
