@@ -1,5 +1,6 @@
 package com.trust.service.service;
 
+import com.trust.service.exception.SubmittedDocumentNotExistException;
 import com.trust.service.model.Signature;
 import com.trust.service.repository.SignatureRepository;
 import com.trust.service.util.XMLUtils;
@@ -32,10 +33,10 @@ public class SigningService {
     }
 
     @Transactional
-    public void save(String apiKey, SignedDocumentDto signedDocumentDto) throws XMLSignatureException {
+    public void save(String apiKey, SignedDocumentDto signedDocumentDto) throws XMLSignatureException, SubmittedDocumentNotExistException {
         OrgInVirtOrg orgInVirtOrg = orgInVirtOrgService.findByApiKey(apiKey);
         SubmittedDocument submittedDocument = submittedDocumentService
-                .findByOrgInVirtOrgAndName(orgInVirtOrg, signedDocumentDto.getName());
+                .findByName(signedDocumentDto.getName());
 
         List<Signature> signatures = signatureRepository.findAllBySubmittedDocument(submittedDocument);
         if (signatures.stream().anyMatch(signature -> signature.getOrgInVirtOrg() == orgInVirtOrg)) {

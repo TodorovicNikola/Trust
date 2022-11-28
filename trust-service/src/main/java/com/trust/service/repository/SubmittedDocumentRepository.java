@@ -10,5 +10,6 @@ import com.trust.service.model.SubmittedDocument;
 
 @Repository
 public interface SubmittedDocumentRepository extends JpaRepository<SubmittedDocument, Long> {
-	Optional<SubmittedDocument> findByOrgInVirtOrgAndName(OrgInVirtOrg orgInVirtOrg, String name);
+
+    Optional<SubmittedDocument> findByName(String name);
 }

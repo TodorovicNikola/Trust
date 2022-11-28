@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import com.trust.service.exception.SubmittedDocumentNotExistException;
 import com.trust.service.util.XMLUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -65,12 +66,12 @@ public class SubmittedDocumentService {
 	}
 
 	@Transactional
-	public SubmittedDocument findByOrgInVirtOrgAndName(OrgInVirtOrg orgInVirtOrg, String name) {
+	public SubmittedDocument findByName(String name) throws SubmittedDocumentNotExistException {
 		Optional<SubmittedDocument> submittedDocumentOptional = submittedDocumentRepository
-				.findByOrgInVirtOrgAndName(orgInVirtOrg, name);
+				.findByName(name);
 		if (submittedDocumentOptional.isEmpty()) {
-			throw new EntityNotExistsException(
-					"Entity with provided organizationId and virtualOrganizationId and name does not exist");
+			throw new SubmittedDocumentNotExistException(
+					"Submitted document with provided name does not exist");
 		}
 
 		return submittedDocumentOptional.get();
