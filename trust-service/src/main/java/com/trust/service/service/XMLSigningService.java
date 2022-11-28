@@ -2,6 +2,9 @@ package com.trust.service.service;
 
 import com.trust.service.util.SecurityUtils;
 import com.trust.service.util.XMLUtils;
+import org.apache.xml.security.keys.KeyInfo;
+import org.apache.xml.security.keys.keyresolver.implementations.RSAKeyValueResolver;
+import org.apache.xml.security.keys.keyresolver.implementations.X509CertificateResolver;
 import org.apache.xml.security.signature.XMLSignature;
 import org.apache.xml.security.transforms.Transforms;
 import org.apache.xml.security.utils.Constants;
@@ -9,7 +12,9 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
+import javax.print.Doc;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -80,6 +85,9 @@ public class XMLSigningService {
             sig.addKeyInfo(certificate.getPublicKey());
             sig.addKeyInfo((X509Certificate) certificate);
 
+            Element rootEl = doc.getDocumentElement();
+            rootEl.appendChild(sig.getElement());
+
             sig.sign(key);
 
             return sig.getElement();
@@ -88,6 +96,51 @@ public class XMLSigningService {
             return null;
         }
     }
+
+
+    public Document combineDocumentAndSignature(Document document, Document signatureDocument) {
+        Element signature = signatureDocument.getDocumentElement();
+        Element documentElement = document.getDocumentElement();
+        document.adoptNode(signature);
+        documentElement.appendChild(signature);
+
+        return document;
+    }
+
+   public boolean verifySignature(Document signatureDoc) {
+       try {
+           NodeList signatures = signatureDoc.getElementsByTagNameNS("http://www.w3.org/2000/09/xmldsig#", "Signature");
+           Element signatureEl = (Element) signatures.item(0);
+
+           XMLSignature signature = new XMLSignature(signatureEl, null);
+
+           KeyInfo keyInfo = signature.getKeyInfo();
+
+           if (keyInfo == null) {
+               return false;
+           }
+
+           //registruju se resolver-i za javni kljuc i sertifikat
+           keyInfo.registerInternalKeyResolver(new RSAKeyValueResolver());
+           keyInfo.registerInternalKeyResolver(new X509CertificateResolver());
+
+           if (!keyInfo.containsX509Data() || !keyInfo.itemX509Data(0).containsCertificate()) {
+               return false;
+           }
+
+           Certificate cert = keyInfo.itemX509Data(0).itemCertificate(0).getX509Certificate();
+
+           if (cert == null) {
+               return false;
+           }
+
+           return signature.checkSignatureValue((X509Certificate) cert);
+
+       } catch (Exception e) {
+           e.printStackTrace();
+           return false;
+       }
+   }
 
     private PrivateKey readPrivateKey() {
         try (Reader reader = Files.newBufferedReader(Path.of(privateKeyOrg1Usr1), StandardCharsets.UTF_8)) {

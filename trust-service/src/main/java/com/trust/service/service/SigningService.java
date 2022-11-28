@@ -42,25 +42,34 @@ public class SigningService {
         if (signatures.stream().anyMatch(signature -> signature.getOrgInVirtOrg() == orgInVirtOrg)) {
             return; // org already signed the document
         }
-        verifyExistingSignatures(signatures);
+        verifyExistingSignatures(submittedDocument, signatures);
 
         String signatureXML = signXML(submittedDocument);
         Signature signature = new Signature(orgInVirtOrg, submittedDocument, signatureXML);
         signatureRepository.save(signature);
     }
 
-    private void verifyExistingSignatures(List<Signature> signatures) throws XMLSignatureException {
+    private void verifyExistingSignatures(SubmittedDocument submittedDocument, List<Signature> signatures) throws XMLSignatureException {
+        String decodedXML = XMLUtils.decodeString(submittedDocument.getEncodedContent());
+        Document document = XMLUtils.getDocumentFromXML(decodedXML);
+
         for (Signature signature : signatures) {
-            Document signatureDocument = XMLUtils.getDocumentFromXML(signature.getEncodedSignature());
-            if (!xmlSigningService.verifySignature(signatureDocument)) {
+            if (!verifySignature(document, signature)) {
                 throw new XMLSignatureException("Signature could not be verified.");
             }
         }
     }
 
+    private boolean verifySignature(Document document, Signature signature) {
+        String decodedSignature = XMLUtils.decodeString(signature.getEncodedSignature());
+        Document signatureDocument = XMLUtils.getDocumentFromXML(decodedSignature);
+        Document documentWithSignature = xmlSigningService.combineDocumentAndSignature(document, signatureDocument);
+
+        return xmlSigningService.verifySignature(documentWithSignature);
+    }
+
     private String signXML(SubmittedDocument submittedDocument) {
-        byte[] decodedBytes = Base64.getDecoder().decode(submittedDocument.getEncodedContent());
-        String decodedXML = new String(decodedBytes);
+        String decodedXML = XMLUtils.decodeString(submittedDocument.getEncodedContent());
 
         String signatureXML = xmlSigningService.signDocument(decodedXML);
 
