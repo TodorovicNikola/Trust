@@ -14,6 +14,7 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.Base64;
 
 public class XMLUtils {
     public static Document getDocumentFromXML(String documentXML) {
@@ -49,5 +50,10 @@ public class XMLUtils {
         } catch (TransformerException | IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static String decodeString(String encodedString) {
+        byte[] decodedBytes = Base64.getDecoder().decode(encodedString);
+        return new String(decodedBytes);
     }
 }
