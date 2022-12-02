@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><mod:Process xmlns:mod="http://www.trust40.com/process-modeling" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="CBP" name="CBP" startStep="//@elements.1" xmi:version="2.0">
+        
+  
+  <elements exposeToCollaboratingParties="true" id="3cbfade3-469c-48f9-84f8-30f8e05dda86" isTraced="true" name="Start" outRelationships="//@relationships.9" type="START" xsi:type="mod:ProcessStep"/>
+      
+  
+  <elements exposeToCollaboratingParties="true" id="20ff99b6-b20d-4864-954c-f2f47e50c988" inRelationships="//@relationships.9" name="Parallelism" outRelationships="//@relationships.10 //@relationships.11" type="PARALLELISM" xsi:type="mod:Gate"/>
+      
+  
+  <elements alias="L-B Side Assembling" exposeToCollaboratingParties="true" id="af8c6ba5-f99e-4ecc-9aa4-b3d560e2bc4f" inRelationships="//@relationships.11" isTraced="true" name="SA01 - Side Assembling (L-B)" outRelationships="//@relationships.13" xsi:type="mod:ProcessStep">
+            
+    
+    <capability exposeToCollaboratingParties="true" id="70dcdd57-fca9-4a68-9b73-3e1ffceb3d4b" name="Assemble"/>
+                    
+    
+    <outProducts exposeToCollaboratingParties="true" id="b0533a73-a03c-4c97-ae19-da879262fd67" name="L-B Side" quantity="1">          </outProducts>
+          
+  
+  </elements>
+      
+  
+  <elements alias="R-U Side Assembling" exposeToCollaboratingParties="true" id="46ca746d-c048-4a8c-b24a-5d4eae5be376" inRelationships="//@relationships.10" isTraced="true" name="SA01 - Side Assembling (R-U)" outRelationships="//@relationships.12" xsi:type="mod:ProcessStep"/>
+      
+  
+  <elements exposeToCollaboratingParties="true" id="b685a0c6-2dc3-4991-994b-35d6692089bf" inRelationships="//@relationships.12 //@relationships.13" name="Parallelism" outRelationships="//@relationships.20" type="PARALLELISM" xsi:type="mod:Gate"/>
+      
+  
+  <elements alias="Assemble Frame" exposeToCollaboratingParties="true" id="ab776f26-39df-4de2-8712-20b24bf17903" inRelationships="//@relationships.20" isTraced="true" name="FA01 - Frame Assembling" outRelationships="//@relationships.21" xsi:type="mod:ProcessStep"/>
+      
+  
+  <elements alias="Add Back Side" exposeToCollaboratingParties="true" id="a4c1ba97-bb6b-4e12-be2e-a96ba84f4aa8" inRelationships="//@relationships.21" isTraced="true" name="BAH01 - Back Side Hammering" outRelationships="//@relationships.22" xsi:type="mod:ProcessStep"/>
+      
+  
+  <elements alias="Pack the Box" exposeToCollaboratingParties="true" id="b96b23b3-edd8-4fef-8d5d-d62a64db1beb" inRelationships="//@relationships.16" isTraced="true" name="PA01 - Packaging" outRelationships="//@relationships.15" xsi:type="mod:ProcessStep"/>
+      
+  
+  <elements alias="Measure Dimensions" exposeToCollaboratingParties="true" id="8b7bcb31-48d5-4611-af0a-eece04c5e1fa" inRelationships="//@relationships.22" isTraced="true" name="BI01 - Box Inspection" notation="INSPECTION" outRelationships="//@relationships.17" xsi:type="mod:ProcessStep">
+            
+    
+    <capability exposeToCollaboratingParties="true" id="ca485c15-b802-4239-a718-02b29703cba4" name="Inspect">
+                  
+      
+      <constraints exposeToCollaboratingParties="true" isPersisted="true" metricUnit="" name="WidthDev &lt; 30 mm" physicalDimension="" value="WidthDev &lt; 30 mm"/>
+                
+    
+    </capability>
+            
+    
+    <inProducts exposeToCollaboratingParties="true" id="013f7926-f388-4bf9-b9dd-135eae25413f" name="Box" quantity="1"/>
+            
+    
+    <outProducts exposeToCollaboratingParties="true" id="9112a628-0954-408a-849a-2e8998b00897" name="Inspected Box" quantity="1"/>
+          
+  
+  </elements>
+      
+  
+  <elements exposeToCollaboratingParties="true" id="16dd1607-3d26-4aa0-93ee-2234d60d4bf9" inRelationships="//@relationships.17" name="Decision" outRelationships="//@relationships.16 //@relationships.18" xsi:type="mod:Gate"/>
+      
+  
+  <elements exposeToCollaboratingParties="true" id="12cd505e-c847-4881-806b-448ea295d7f1" inRelationships="//@relationships.15 //@relationships.19" name="Decision" outRelationships="//@relationships.14" xsi:type="mod:Gate"/>
+      
+  
+  <elements exposeToCollaboratingParties="true" id="a17d5fe4-bea7-4e1d-ae35-7887f3af4b48" inRelationships="//@relationships.14" isTraced="true" name="End" type="END" xsi:type="mod:ProcessStep"/>
+                                                    
+
+</mod:Process>
