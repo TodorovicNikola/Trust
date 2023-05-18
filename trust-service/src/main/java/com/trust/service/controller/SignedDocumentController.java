@@ -1,5 +1,6 @@
 package com.trust.service.controller;
 
+import com.trust.service.controller.dto.SignatureDTO;
 import com.trust.service.exception.SubmittedDocumentNotExistException;
 import org.apache.xml.security.signature.XMLSignatureException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +26,9 @@ public class SignedDocumentController {
 
 	@PostMapping
 	public ResponseEntity postSignedDocument(@RequestHeader("Authorization") String apiKey,
-			@RequestBody SignedDocumentDto signedDocumentDto) {
+			@RequestBody SignatureDTO signatureDTO) {
 		try {
-			signingService.save(apiKey, signedDocumentDto);
+			signingService.save(apiKey, signatureDTO);
 		} catch (XMLSignatureException | SubmittedDocumentNotExistException e) {
 			return ResponseEntity.badRequest().build();
 		}

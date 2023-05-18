@@ -1,10 +1,17 @@
 package process_planning;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Base64;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.sirius.ui.business.api.dialect.DialectEditor;
 import org.eclipse.sirius.viewpoint.DRepresentation;
 import org.eclipse.sirius.viewpoint.DSemanticDecorator;
@@ -19,6 +26,7 @@ public class SignDocumentHandler extends AbstractHandler {
 
 	public static String resourcePath = "/signed_documents";
 	public HttpRequestHelper httpRequestHelper = new HttpRequestHelper(resourcePath);
+	public XMLSigningService xmlSigningService = new XMLSigningService();
 	
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -31,14 +39,39 @@ public class SignDocumentHandler extends AbstractHandler {
 			if (representation instanceof DSemanticDecorator) {
 				DSemanticDecorator semanticDecorator = (DSemanticDecorator) representation;
 
-				Process process = (Process) semanticDecorator.getTarget();
-				String requestBody = "{ \"name\": \"" + process.getId() + "\" }";
-				try {
-					httpRequestHelper.sendPostRequest(requestBody);
-				} catch (IOException e) {
+				String path = ResourcesPlugin.getWorkspace().getRoot()
+						.getFile(new Path(semanticDecorator.getTarget().eResource().getURI().toPlatformString(true))).getLocationURI()
+						.toString().substring(6);
+				System.out.println("Path: " + path);
+
+				try (FileInputStream file = new FileInputStream(path);
+						BufferedReader reader = new BufferedReader(new InputStreamReader(file));) {
+
+					String modelXML = "";
+					String line;
+					while ((line = reader.readLine()) != null) {
+						modelXML += line;
+					}
+					
+					String signatureXML = xmlSigningService.signDocument(modelXML);
+					String encodedXMLSignature = Base64.getEncoder().encodeToString(signatureXML.getBytes());
+					
+					Process process = (Process) semanticDecorator.getTarget();
+
+					String requestBody = "{ \"virtualOrganizationId\":1, \"organizationId\":1, \"name\": \"" + process.getId() + "\", \"encodedContent\":\"" + encodedXMLSignature +  "\" }";
+					
+					
+					System.out.println(requestBody);
+					httpRequestHelper.sendPostRequest(requestBody);					
+				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
+
+
 			}
 		}
 		return null;

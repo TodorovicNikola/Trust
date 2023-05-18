@@ -17,15 +17,19 @@ import org.eclipse.sirius.viewpoint.DRepresentation;
 import org.eclipse.sirius.viewpoint.DSemanticDecorator;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.internal.Workbench;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 import helpers.HttpRequestHelper;
 import process_modeling.Process;
+import utils.XMLUtils;
 
 public class SubmitDocumentHandler extends AbstractHandler {
 
 	public static String resourcePath = "/submitted_documents";
 	public HttpRequestHelper httpRequestHelper = new HttpRequestHelper(resourcePath);
-	
+
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 
@@ -49,14 +53,15 @@ public class SubmitDocumentHandler extends AbstractHandler {
 					while ((line = reader.readLine()) != null) {
 						modelXML += line;
 					}
-					
-					String encodedXMLModel = Base64.getEncoder().encodeToString(modelXML.getBytes());
-					
+
+					String cleanedModel = removeElementsPrivateToOrg(new String(modelXML.getBytes()));
+					String encodedXMLModel = Base64.getEncoder().encodeToString(cleanedModel.getBytes());
+
 					Process process = (Process) semanticDecorator.getTarget();
-					
+
 					String requestBody = "{ \"virtualOrganizationId\":1, \"organizationId\":1, \"name\": \"" + process.getId() + "\", \"encodedContent\":\"" + encodedXMLModel +  "\" }";
 					System.out.println(requestBody);
-					httpRequestHelper.sendPostRequest(requestBody);					
+					httpRequestHelper.sendPostRequest(requestBody);
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -69,6 +74,32 @@ public class SubmitDocumentHandler extends AbstractHandler {
 		}
 
 		return null;
+	}
+
+	public static String removeElementsPrivateToOrg(String decodedContent) {
+		Document document = XMLUtils.getDocumentFromXML(decodedContent);
+
+		assert document != null;
+		removeElementsPrivateToOrg(document.getDocumentElement());
+
+		return XMLUtils.getXMLFromDocument(document);
+	}
+
+	private static void removeElementsPrivateToOrg(Element element) {
+		NodeList nodeList = element.getChildNodes();
+		for (int i = 0; i < nodeList.getLength(); i++) {
+			if (nodeList.item(i) instanceof Element) {
+				Element child = (Element) nodeList.item(i);
+				// These elements are on CBP layer, we don't touch those
+				if (element.getTagName().equals("organizations"))
+					continue;
+				// Elements without this attribute should be removed
+				if (child.hasAttribute("exposeToCollaboratingParties"))
+					removeElementsPrivateToOrg(child);
+				else
+					element.removeChild(child);
+			}
+		}
 	}
 
 }

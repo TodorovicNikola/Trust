@@ -1,5 +1,6 @@
 package com.trust.service.service;
 
+import com.trust.service.controller.dto.SignatureDTO;
 import com.trust.service.exception.SubmittedDocumentNotExistException;
 import com.trust.service.model.Signature;
 import com.trust.service.repository.SignatureRepository;
@@ -33,10 +34,10 @@ public class SigningService {
     }
 
     @Transactional
-    public void save(String apiKey, SignedDocumentDto signedDocumentDto) throws XMLSignatureException, SubmittedDocumentNotExistException {
+    public void save(String apiKey, SignatureDTO signatureDTO) throws XMLSignatureException, SubmittedDocumentNotExistException {
         OrgInVirtOrg orgInVirtOrg = orgInVirtOrgService.findByApiKey(apiKey);
         SubmittedDocument submittedDocument = submittedDocumentService
-                .findByName(signedDocumentDto.getName());
+                .findByName(signatureDTO.getName());
 
         List<Signature> signatures = signatureRepository.findAllBySubmittedDocument(submittedDocument);
         if (signatures.stream().anyMatch(signature -> signature.getOrgInVirtOrg() == orgInVirtOrg)) {
@@ -44,7 +45,7 @@ public class SigningService {
         }
         verifyExistingSignatures(submittedDocument, signatures);
 
-        String signatureXML = signXML(submittedDocument);
+        String signatureXML = signatureDTO.getEncodedContent();
         Signature signature = new Signature(orgInVirtOrg, submittedDocument, signatureXML);
         signatureRepository.save(signature);
     }
@@ -68,11 +69,4 @@ public class SigningService {
         return xmlSigningService.verifySignature(documentWithSignature);
     }
 
-    private String signXML(SubmittedDocument submittedDocument) {
-        String decodedXML = XMLUtils.decodeString(submittedDocument.getEncodedContent());
-
-        String signatureXML = xmlSigningService.signDocument(decodedXML);
-
-        return Base64.getEncoder().encodeToString(signatureXML.getBytes());
-    }
 }
