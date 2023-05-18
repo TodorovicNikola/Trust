@@ -22,7 +22,10 @@ Automatic-Module-Name: project_modelling_design
 Bundle-ClassPath: libraries/jackson-databind-2.13.1.jar,
  .,
  libraries/jackson-core-2.13.1.jar,
- libraries/jackson-annotations-2.13.1.jar
+ libraries/jackson-annotations-2.13.1.jar,
+ libraries/bcpkix-jdk15on-1.70.jar,
+ libraries/bcprov-jdk15on-1.70.jar,
+ libraries/xmlsec-3.0.0.jar
 Export-Package: com.fasterxml.jackson.annotation,
  com.fasterxml.jackson.core,
  com.fasterxml.jackson.core.async,
