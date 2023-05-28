@@ -35,7 +35,7 @@ public class XMLUtils {
             TransformerFactory transfac = TransformerFactory.newInstance();
             Transformer trans = transfac.newTransformer();
             trans.setOutputProperty(OutputKeys.METHOD, "xml");
-            trans.setOutputProperty(OutputKeys.INDENT, "yes");
+//            trans.setOutputProperty(OutputKeys.INDENT, "yes");
 //            trans.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", Integer.toString(2));
 
             StringWriter sw = new StringWriter();
