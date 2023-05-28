@@ -26,11 +26,10 @@ public class SignDocumentHandler extends AbstractHandler {
 
 	public static String resourcePath = "/signed_documents";
 	public HttpRequestHelper httpRequestHelper = new HttpRequestHelper(resourcePath);
-	public XMLSigningService xmlSigningService = new XMLSigningService();
 	
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-
+		XMLSigningService xmlSigningService = new XMLSigningService();
 		@SuppressWarnings("restriction")
 		IEditorPart editor = Workbench.getInstance().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 		if (editor instanceof DialectEditor) {

@@ -27,12 +27,15 @@ import java.security.cert.X509Certificate;
 
 public class XMLSigningService {
 
-    private final String privateKeyOrg1Usr1 = "..\\trust-dlt\\hlf-explorer\\examples\\net1\\organizations\\peerOrganizations\\org1.example.com\\users\\User1@org1.example.com\\tls\\client.key";
-    private final String certificateOrg1Usr1 = "..\\trust-dlt\\hlf-explorer\\examples\\net1\\organizations\\peerOrganizations\\org1.example.com\\users\\User1@org1.example.com\\tls\\client.crt";
+    private final String privateKeyOrg1Usr1 = "..\\Trust\\trust-dlt\\hlf-explorer\\examples\\net1\\organizations\\peerOrganizations\\org1.example.com\\users\\User1@org1.example.com\\tls\\client.key";
+    private final String certificateOrg1Usr1 = "..\\Trust\\trust-dlt\\hlf-explorer\\examples\\net1\\organizations\\peerOrganizations\\org1.example.com\\users\\User1@org1.example.com\\tls\\client.crt";
 
-    static {
+
+    
+    public XMLSigningService() {
         Security.addProvider(new BouncyCastleProvider());
         org.apache.xml.security.Init.init();
+   
     }
 
     /**
