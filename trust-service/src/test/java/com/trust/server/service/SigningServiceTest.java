@@ -26,16 +26,11 @@ public class SigningServiceTest {
         }
 
         XMLSigningService xmlSigningService = new XMLSigningService();
-        String signatureXML = xmlSigningService.signDocument(xml);
-        try {
-            Files.writeString(Path.of("test-signature.xml"), signatureXML, StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        xmlSigningService.signDocument(xml);
 
         String actual = null;
         try {
-            actual = Fixtures.loadFile("test-signed-without-signature.xml");
+            actual = Fixtures.signedXMLWithoutSignature();
         } catch (IOException e) {
             assertFalse("Failed loading the file.", true);
         }
@@ -48,9 +43,9 @@ public class SigningServiceTest {
         String xml = null;
         String sig = null;
         try {
-            actual = Fixtures.loadFile("test-signed-with-signature.xml");
-            xml = Fixtures.loadFile("test-signed-without-signature.xml");
-            sig = Fixtures.loadFile("test-signature.xml");
+            actual = Fixtures.xmlDocumentWithSignature();
+            xml = Fixtures.xmlInput();
+            sig = Fixtures.xmlSignaure();
         } catch (IOException e) {
             assertFalse("Failed loading the file.", true);
         }
@@ -61,11 +56,6 @@ public class SigningServiceTest {
         Document combined = signingService.combineDocumentAndSignature(document, signatureDocument);
         String combinedString = XMLUtils.getXMLFromDocument(combined);
 
-        try {
-            Files.writeString(Path.of("test-combined.xml"), combinedString, StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
         assertEquals("XMLs", actual, combinedString);
     }
 
@@ -74,8 +64,8 @@ public class SigningServiceTest {
         String doc = null;
         String sig = null;
         try {
-            doc = Fixtures.loadFile("test-signed-without-signature.xml");
-            sig = Fixtures.loadFile("test-signature.xml");
+            doc = Fixtures.xmlInput();
+            sig = Fixtures.xmlSignaure();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
