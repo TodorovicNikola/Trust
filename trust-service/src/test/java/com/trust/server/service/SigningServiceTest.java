@@ -7,9 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.w3c.dom.Document;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
 import static org.springframework.test.util.AssertionErrors.assertEquals;
 import static org.springframework.test.util.AssertionErrors.assertFalse;
@@ -45,7 +42,7 @@ public class SigningServiceTest {
         try {
             actual = Fixtures.xmlDocumentWithSignature();
             xml = Fixtures.xmlInput();
-            sig = Fixtures.xmlSignaure();
+            sig = Fixtures.xmlSignature();
         } catch (IOException e) {
             assertFalse("Failed loading the file.", true);
         }
@@ -65,7 +62,7 @@ public class SigningServiceTest {
         String sig = null;
         try {
             doc = Fixtures.xmlInput();
-            sig = Fixtures.xmlSignaure();
+            sig = Fixtures.xmlSignature();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

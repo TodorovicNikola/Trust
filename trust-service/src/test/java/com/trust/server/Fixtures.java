@@ -11,18 +11,18 @@ public class Fixtures {
     }
 
     public static String xmlInput() throws IOException {
-        return loadFile("test-document.xml");
+        return loadFile("src/test/java/com/trust/server/data/test-document.xml");
     }
 
     public static String signedXMLWithoutSignature() throws IOException {
-        return loadFile("test-signed-without-signature.xml");
+        return loadFile("src/test/java/com/trust/server/data/test-signed-without-signature.xml");
     }
 
     public static String xmlDocumentWithSignature() throws IOException {
-        return loadFile("test-document-with-signature.xml");
+        return loadFile("src/test/java/com/trust/server/data/test-document-with-signature.xml");
     }
 
-    public static String xmlSignaure() throws IOException {
-        return loadFile("test-signature.xml");
+    public static String xmlSignature() throws IOException {
+        return loadFile("src/test/java/com/trust/server/data/test-signature.xml");
     }
 }
