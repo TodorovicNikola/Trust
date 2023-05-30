@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
@@ -20,6 +22,7 @@ import org.eclipse.ui.internal.Workbench;
 
 import helpers.HttpRequestHelper;
 import process_modeling.Process;
+import utils.XMLUtils;
 
 
 public class SignDocumentHandler extends AbstractHandler {
@@ -43,32 +46,33 @@ public class SignDocumentHandler extends AbstractHandler {
 						.toString().substring(6);
 				System.out.println("Path: " + path);
 
-				try (FileInputStream file = new FileInputStream(path);
-						BufferedReader reader = new BufferedReader(new InputStreamReader(file));) {
+				Process process = (Process) semanticDecorator.getTarget();
 
-					String modelXML = "";
-					String line;
-					while ((line = reader.readLine()) != null) {
-						modelXML += line;
-					}
-					
-					String signatureXML = xmlSigningService.signDocument(modelXML);
-					String encodedXMLSignature = Base64.getEncoder().encodeToString(signatureXML.getBytes());
-					
-					Process process = (Process) semanticDecorator.getTarget();
+				HttpRequestHelper submitDocumentEndpoint = new HttpRequestHelper("/submitted_documents");
+				Map<String, String> requestParams = new HashMap<String, String>();
+				requestParams.put("virtualOrganizationId", "1");
+				requestParams.put("organizationId", "1");
+				requestParams.put("name", process.getId().toString());
 
-					String requestBody = "{ \"virtualOrganizationId\":1, \"organizationId\":1, \"name\": \"" + process.getId() + "\", \"encodedContent\":\"" + encodedXMLSignature +  "\" }";
+				String response = submitDocumentEndpoint.sendGetRequest(requestParams);		
+				String modelXML = XMLUtils.decodeString(response);
+				System.out.println(modelXML);
+				
 					
+				String signatureXML = xmlSigningService.signDocument(modelXML);
+				System.out.println(signatureXML);
+				String encodedXMLSignature = Base64.getEncoder().encodeToString(signatureXML.getBytes());
 					
-					System.out.println(requestBody);
-					httpRequestHelper.sendPostRequest(requestBody);					
-				} catch (FileNotFoundException e) {
+				String requestBody = "{ \"virtualOrganizationId\":1, \"organizationId\":1, \"name\": \"" + process.getId() + "\", \"encodedContent\":\"" + encodedXMLSignature +  "\" }";
+					
+				System.out.println(requestBody);
+				try {
+					httpRequestHelper.sendPostRequest(requestBody);
+				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				}					
+
 
 
 			}
