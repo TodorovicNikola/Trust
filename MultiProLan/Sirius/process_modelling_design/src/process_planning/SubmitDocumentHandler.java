@@ -58,8 +58,14 @@ public class SubmitDocumentHandler extends AbstractHandler {
 					String encodedXMLModel = Base64.getEncoder().encodeToString(cleanedModel.getBytes());
 
 					Process process = (Process) semanticDecorator.getTarget();
+					String virtualOrganizationId = "1";
+					String organizationId = "1";
+					String name = process.getId();
 
-					String requestBody = "{ \"virtualOrganizationId\":1, \"organizationId\":1, \"name\": \"" + process.getId() + "\", \"encodedContent\":\"" + encodedXMLModel +  "\" }";
+					String requestBody = "{ \"virtualOrganizationId\":" + virtualOrganizationId
+							+ ", \"organizationId\":" + organizationId
+							+ ", \"name\": \"" + name
+							+ "\", \"encodedContent\":\"" + encodedXMLModel +  "\" }";
 					System.out.println(requestBody);
 					httpRequestHelper.sendPostRequest(requestBody);
 				} catch (FileNotFoundException e) {

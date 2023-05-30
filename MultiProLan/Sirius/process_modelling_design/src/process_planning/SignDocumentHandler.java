@@ -32,6 +32,7 @@ public class SignDocumentHandler extends AbstractHandler {
 	
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
+		
 		XMLSigningService xmlSigningService = new XMLSigningService();
 		@SuppressWarnings("restriction")
 		IEditorPart editor = Workbench.getInstance().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
@@ -47,23 +48,27 @@ public class SignDocumentHandler extends AbstractHandler {
 				System.out.println("Path: " + path);
 
 				Process process = (Process) semanticDecorator.getTarget();
+				String virtualOrganizationId = "1";
+				String organizationId = "1";
+				String name = process.getId().toString();
 
 				HttpRequestHelper submitDocumentEndpoint = new HttpRequestHelper("/submitted_documents");
 				Map<String, String> requestParams = new HashMap<String, String>();
-				requestParams.put("virtualOrganizationId", "1");
-				requestParams.put("organizationId", "1");
-				requestParams.put("name", process.getId().toString());
+				requestParams.put("virtualOrganizationId", virtualOrganizationId);
+				requestParams.put("organizationId", organizationId);
+				requestParams.put("name", name);
 
 				String response = submitDocumentEndpoint.sendGetRequest(requestParams);		
 				String modelXML = XMLUtils.decodeString(response);
-				System.out.println(modelXML);
-				
 					
 				String signatureXML = xmlSigningService.signDocument(modelXML);
-				System.out.println(signatureXML);
+
 				String encodedXMLSignature = Base64.getEncoder().encodeToString(signatureXML.getBytes());
 					
-				String requestBody = "{ \"virtualOrganizationId\":1, \"organizationId\":1, \"name\": \"" + process.getId() + "\", \"encodedContent\":\"" + encodedXMLSignature +  "\" }";
+				String requestBody = "{ \"virtualOrganizationId\":" + virtualOrganizationId
+						+ ", \"organizationId\":" + organizationId
+						+ ", \"name\": \"" + name
+						+ "\", \"encodedContent\":\"" + encodedXMLSignature +  "\" }";
 					
 				System.out.println(requestBody);
 				try {
@@ -72,8 +77,6 @@ public class SignDocumentHandler extends AbstractHandler {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}					
-
-
 
 			}
 		}
