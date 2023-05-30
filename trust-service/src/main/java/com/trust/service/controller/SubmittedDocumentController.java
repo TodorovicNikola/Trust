@@ -28,10 +28,8 @@ public class SubmittedDocumentController {
 
 	@GetMapping
 	public ResponseEntity<String> getSubmittedDocument(@RequestHeader("Authorization") String apiKey,
-											   @RequestParam String virtualOrganizationId,
-											   @RequestParam String organizationId,
 											   @RequestParam String name) {
-		String document = submittedDocumentService.get(apiKey, virtualOrganizationId, organizationId, name);
+		String document = submittedDocumentService.get(apiKey, name);
 		return ResponseEntity.ok(document);
 
 	}

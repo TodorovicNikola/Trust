@@ -3,9 +3,9 @@ package com.trust.service.service;
 import com.trust.service.model.OrgInVirtOrg;
 import com.trust.service.model.Signature;
 import com.trust.service.model.SubmittedDocument;
+import com.trust.service.model.VirtualOrganization;
 import com.trust.service.repository.SignatureRepository;
 import com.trust.service.util.XMLUtils;
-import org.apache.xml.security.signature.XMLSignatureException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
@@ -32,10 +32,17 @@ public class VerificationService {
         OrgInVirtOrg orgInVirtOrg = orgInVirtOrgService.findByApiKey(apiKey);
         SubmittedDocument submittedDocument = submittedDocumentService
                 .findByName(name);
-        // TODO: verify that this org can check/is in the virt org
+        checkIfOrganizationCanAccessDocument(orgInVirtOrg, submittedDocument);
 
         List<Signature> signatures = signatureRepository.findAllBySubmittedDocument(submittedDocument);
         return verifyExistingSignatures(submittedDocument, signatures);
+    }
+
+    static void checkIfOrganizationCanAccessDocument(OrgInVirtOrg orgInVirtOrg, SubmittedDocument submittedDocument) {
+        VirtualOrganization partnersVirtOrg = orgInVirtOrg.getVirtualOrganization();
+        VirtualOrganization documentsVirtOrg = submittedDocument.getOrgInVirtOrg().getVirtualOrganization();
+        if (partnersVirtOrg != documentsVirtOrg)
+            throw new RuntimeException("API key doesn't belong to virtual organization of the artifact to be signed.");
     }
 
     boolean verifyExistingSignatures(SubmittedDocument submittedDocument, List<Signature> signatures) {

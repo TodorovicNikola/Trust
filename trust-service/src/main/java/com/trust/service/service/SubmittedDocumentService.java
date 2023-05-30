@@ -18,6 +18,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import static com.trust.service.service.VerificationService.checkIfOrganizationCanAccessDocument;
+
 @Service
 public class SubmittedDocumentService {
 	private final SubmittedDocumentRepository submittedDocumentRepository;
@@ -81,9 +83,11 @@ public class SubmittedDocumentService {
 	}
 
 	@Transactional
-	public String get(String apiKey, String virtualOrganizationId, String organizationId, String name) {
-		// TODO: check if apiKey, virtOrg and org are valid and this name belongs to virtOrg
+	public String get(String apiKey, String name) {
+		OrgInVirtOrg orgInVirtOrg = orgInVirtOrgService.findByApiKey(apiKey);
 		SubmittedDocument submittedDocument = findByName(name);
+		checkIfOrganizationCanAccessDocument(orgInVirtOrg, submittedDocument);
+
 		return submittedDocument.getEncodedContent();
 	}
 }
