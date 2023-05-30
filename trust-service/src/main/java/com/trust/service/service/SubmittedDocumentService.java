@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.trust.service.controller.dto.SubmittedDocumentDto;
-import com.trust.service.exception.EntityNotExistsException;
 import com.trust.service.model.OrgInVirtOrg;
 import com.trust.service.model.SubmittedDocument;
 import com.trust.service.repository.SubmittedDocumentRepository;
@@ -79,5 +78,12 @@ public class SubmittedDocumentService {
 		}
 
 		return submittedDocumentOptional.get();
+	}
+
+	@Transactional
+	public String get(String apiKey, String virtualOrganizationId, String organizationId, String name) {
+		// TODO: check if apiKey, virtOrg and org are valid and this name belongs to virtOrg
+		SubmittedDocument submittedDocument = findByName(name);
+		return submittedDocument.getEncodedContent();
 	}
 }
