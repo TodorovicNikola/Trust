@@ -51,19 +51,24 @@ public class XMLSigningService {
         Certificate certificate = readCertificate();
 
         Element signature = signDocument(doc, key, certificate);
-        Document documentWithSignature;
-        try {
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            documentWithSignature = builder.newDocument();
-            documentWithSignature.adoptNode(signature);
-            documentWithSignature.appendChild(signature);
-        } catch (ParserConfigurationException e) {
-            throw new RuntimeException(e);
-        }
+        Document documentWithSignature = createDocumentFromElement(signature);
 
         return XMLUtils.getXMLFromDocument(documentWithSignature);
     }
+
+	private Document createDocumentFromElement(Element element) {
+		Document document;
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            document = builder.newDocument();
+            document.adoptNode(element);
+            document.appendChild(element);
+        } catch (ParserConfigurationException e) {
+            throw new RuntimeException(e);
+        }
+		return document;
+	}
 
     private Element signDocument(Document doc, PrivateKey key, Certificate certificate) {
         try {
