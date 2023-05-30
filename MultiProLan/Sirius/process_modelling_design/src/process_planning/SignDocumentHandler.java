@@ -54,8 +54,6 @@ public class SignDocumentHandler extends AbstractHandler {
 
 				HttpRequestHelper submitDocumentEndpoint = new HttpRequestHelper("/submitted_documents");
 				Map<String, String> requestParams = new HashMap<String, String>();
-				requestParams.put("virtualOrganizationId", virtualOrganizationId);
-				requestParams.put("organizationId", organizationId);
 				requestParams.put("name", name);
 
 				String response = submitDocumentEndpoint.sendGetRequest(requestParams);		
