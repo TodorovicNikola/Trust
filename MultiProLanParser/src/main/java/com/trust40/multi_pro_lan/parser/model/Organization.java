@@ -12,7 +12,7 @@ public class Organization  extends IDNamedElement{
 
     public Organization(Element element) {
         super(element, "BROKER");
-        this.role = element.getAttribute("OrganizationRole");
+        this.role = element.getAttribute("role");
         this.host = element.getAttribute("dltPeerAddress").split(":")[0];
         this.port = element.getAttribute("dltPeerAddress").split(":")[1];
 

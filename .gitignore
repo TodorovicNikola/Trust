@@ -37,3 +37,11 @@ Simulator/
 ##############################
 .gradle
 !gradle-wrapper.jar
+
+
+##############################
+## MultiProLan GenModel Files
+##############################
+MultiProLan/*.edit/
+MultiProLan/*.editor/
+MultiProLan/*.tests/
