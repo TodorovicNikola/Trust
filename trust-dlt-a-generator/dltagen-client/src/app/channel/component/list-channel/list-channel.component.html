@@ -1,0 +1,19 @@
+<table>
+    <thead>
+        <tr>
+            <td>id</td>
+            <td>name</td>
+            <td>status</td>
+            <td>endorsement policy</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let channel of channels">
+            <td>{{channel.id}}</td>
+            <td>{{channel.name}}</td>
+            <td>{{channel.status}}</td>
+            <td>{{channel.endorsementPolicy}}</td>
+            <td><button [routerLink]="['/channel', channel.id]">Open</button></td>
+        </tr>
+    </tbody>
+</table>
