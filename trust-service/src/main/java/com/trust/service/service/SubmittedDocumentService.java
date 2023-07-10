@@ -11,13 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.trust.service.controller.dto.SubmittedDocumentDto;
-import com.trust.service.exception.EntityNotExistsException;
 import com.trust.service.model.OrgInVirtOrg;
 import com.trust.service.model.SubmittedDocument;
 import com.trust.service.repository.SubmittedDocumentRepository;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+
+import static com.trust.service.service.VerificationService.checkIfOrganizationCanAccessDocument;
 
 @Service
 public class SubmittedDocumentService {
@@ -79,5 +80,14 @@ public class SubmittedDocumentService {
 		}
 
 		return submittedDocumentOptional.get();
+	}
+
+	@Transactional
+	public String get(String apiKey, String name) {
+		OrgInVirtOrg orgInVirtOrg = orgInVirtOrgService.findByApiKey(apiKey);
+		SubmittedDocument submittedDocument = findByName(name);
+		checkIfOrganizationCanAccessDocument(orgInVirtOrg, submittedDocument);
+
+		return submittedDocument.getEncodedContent();
 	}
 }

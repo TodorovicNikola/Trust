@@ -1,7 +1,7 @@
-package com.trust.service.service;
+package process_planning;
 
-import com.trust.service.util.SecurityUtils;
-import com.trust.service.util.XMLUtils;
+import utils.SecurityUtils;
+import utils.XMLUtils;
 import org.apache.xml.security.keys.KeyInfo;
 import org.apache.xml.security.keys.keyresolver.implementations.RSAKeyValueResolver;
 import org.apache.xml.security.keys.keyresolver.implementations.X509CertificateResolver;
@@ -9,33 +9,33 @@ import org.apache.xml.security.signature.XMLSignature;
 import org.apache.xml.security.transforms.Transforms;
 import org.apache.xml.security.utils.Constants;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-import javax.print.Doc;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.*;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 
-@Service
 public class XMLSigningService {
 
-    private final String privateKeyOrg1Usr1 = "..\\trust-dlt\\hlf-explorer\\examples\\net1\\organizations\\peerOrganizations\\org1.example.com\\users\\User1@org1.example.com\\tls\\client.key";
-    private final String certificateOrg1Usr1 = "..\\trust-dlt\\hlf-explorer\\examples\\net1\\organizations\\peerOrganizations\\org1.example.com\\users\\User1@org1.example.com\\tls\\client.crt";
+    private final String privateKeyOrg1Usr1 = "..\\Trust\\trust-dlt\\hlf-explorer\\examples\\net1\\organizations\\peerOrganizations\\org1.example.com\\users\\User1@org1.example.com\\tls\\client.key";
+    private final String certificateOrg1Usr1 = "..\\Trust\\trust-dlt\\hlf-explorer\\examples\\net1\\organizations\\peerOrganizations\\org1.example.com\\users\\User1@org1.example.com\\tls\\client.crt";
 
-    static {
+
+    
+    public XMLSigningService() {
         Security.addProvider(new BouncyCastleProvider());
         org.apache.xml.security.Init.init();
+   
     }
 
     /**
@@ -56,19 +56,19 @@ public class XMLSigningService {
         return XMLUtils.getXMLFromDocument(documentWithSignature);
     }
 
-    private static Document createDocumentFromElement(Element element) {
-        Document documentWithSignature;
+	private Document createDocumentFromElement(Element element) {
+		Document document;
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
-            documentWithSignature = builder.newDocument();
-            documentWithSignature.adoptNode(element);
-            documentWithSignature.appendChild(element);
+            document = builder.newDocument();
+            document.adoptNode(element);
+            document.appendChild(element);
         } catch (ParserConfigurationException e) {
             throw new RuntimeException(e);
         }
-        return documentWithSignature;
-    }
+		return document;
+	}
 
     private Element signDocument(Document doc, PrivateKey key, Certificate certificate) {
         try {
@@ -148,7 +148,7 @@ public class XMLSigningService {
    }
 
     private PrivateKey readPrivateKey() {
-        try (Reader reader = Files.newBufferedReader(Path.of(privateKeyOrg1Usr1), StandardCharsets.UTF_8)) {
+        try (Reader reader = Files.newBufferedReader(Paths.get(privateKeyOrg1Usr1), StandardCharsets.UTF_8)) {
             return SecurityUtils.readPrivateKey(reader);
         } catch (InvalidKeyException | IOException e) {
             throw new RuntimeException(e);
@@ -156,7 +156,7 @@ public class XMLSigningService {
     }
 
     private Certificate readCertificate() {
-        try (Reader reader = Files.newBufferedReader(Path.of(certificateOrg1Usr1), StandardCharsets.UTF_8)) {
+        try (Reader reader = Files.newBufferedReader(Paths.get(certificateOrg1Usr1), StandardCharsets.UTF_8)) {
             return SecurityUtils.readX509Certificate(reader);
         } catch (CertificateException | IOException e) {
             throw new RuntimeException(e);

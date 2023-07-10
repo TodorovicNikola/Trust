@@ -1,4 +1,4 @@
-package com.trust.service.util;
+package utils;
 
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
