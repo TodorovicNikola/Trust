@@ -25,6 +25,6 @@ Artefacts related to the Monitoring Platform component, as well as the instructi
 ## Examples
 
 The Examples directory contains the following:
-* Models created using CE-MultiProLan (as images an as Sirius model files)
+* Models created using CE-MultiProLan (as images and as Sirius model files)
 * Sample smart contract code generated based on those models (for CPM and IPM models)
 
