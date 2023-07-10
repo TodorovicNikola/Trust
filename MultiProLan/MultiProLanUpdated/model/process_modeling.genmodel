@@ -224,7 +224,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process_modeling.ecore#//Organization/dltPeerAddress"/>
     </genClasses>
     <genClasses ecoreClass="process_modeling.ecore#//ContractualObligation">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process_modeling.ecore#//ContractualObligation/parameters"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process_modeling.ecore#//ContractualObligation/constraints"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

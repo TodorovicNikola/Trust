@@ -17,9 +17,9 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import process_modeling.Constraint;
 import process_modeling.ContractualObligation;
 import process_modeling.IDNamedElement;
-import process_modeling.Parameter;
 import process_modeling.Process_modelingPackage;
 
 /**
@@ -34,7 +34,7 @@ import process_modeling.Process_modelingPackage;
  *   <li>{@link process_modeling.impl.ContractualObligationImpl#getName <em>Name</em>}</li>
  *   <li>{@link process_modeling.impl.ContractualObligationImpl#isExposeToCollaboratingParties <em>Expose To Collaborating Parties</em>}</li>
  *   <li>{@link process_modeling.impl.ContractualObligationImpl#getAlias <em>Alias</em>}</li>
- *   <li>{@link process_modeling.impl.ContractualObligationImpl#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link process_modeling.impl.ContractualObligationImpl#getConstraints <em>Constraints</em>}</li>
  * </ul>
  *
  * @generated
@@ -121,14 +121,14 @@ public class ContractualObligationImpl extends PersistableImpl implements Contra
 	protected String alias = ALIAS_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
+	 * The cached value of the '{@link #getConstraints() <em>Constraints</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getParameters()
+	 * @see #getConstraints()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Parameter> parameters;
+	protected EList<Constraint> constraints;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -247,11 +247,11 @@ public class ContractualObligationImpl extends PersistableImpl implements Contra
 	 * @generated
 	 */
 	@Override
-	public EList<Parameter> getParameters() {
-		if (parameters == null) {
-			parameters = new EObjectContainmentEList<Parameter>(Parameter.class, this, Process_modelingPackage.CONTRACTUAL_OBLIGATION__PARAMETERS);
+	public EList<Constraint> getConstraints() {
+		if (constraints == null) {
+			constraints = new EObjectContainmentEList<Constraint>(Constraint.class, this, Process_modelingPackage.CONTRACTUAL_OBLIGATION__CONSTRAINTS);
 		}
-		return parameters;
+		return constraints;
 	}
 
 	/**
@@ -262,8 +262,8 @@ public class ContractualObligationImpl extends PersistableImpl implements Contra
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case Process_modelingPackage.CONTRACTUAL_OBLIGATION__PARAMETERS:
-				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
+			case Process_modelingPackage.CONTRACTUAL_OBLIGATION__CONSTRAINTS:
+				return ((InternalEList<?>)getConstraints()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -284,8 +284,8 @@ public class ContractualObligationImpl extends PersistableImpl implements Contra
 				return isExposeToCollaboratingParties();
 			case Process_modelingPackage.CONTRACTUAL_OBLIGATION__ALIAS:
 				return getAlias();
-			case Process_modelingPackage.CONTRACTUAL_OBLIGATION__PARAMETERS:
-				return getParameters();
+			case Process_modelingPackage.CONTRACTUAL_OBLIGATION__CONSTRAINTS:
+				return getConstraints();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -311,9 +311,9 @@ public class ContractualObligationImpl extends PersistableImpl implements Contra
 			case Process_modelingPackage.CONTRACTUAL_OBLIGATION__ALIAS:
 				setAlias((String)newValue);
 				return;
-			case Process_modelingPackage.CONTRACTUAL_OBLIGATION__PARAMETERS:
-				getParameters().clear();
-				getParameters().addAll((Collection<? extends Parameter>)newValue);
+			case Process_modelingPackage.CONTRACTUAL_OBLIGATION__CONSTRAINTS:
+				getConstraints().clear();
+				getConstraints().addAll((Collection<? extends Constraint>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -339,8 +339,8 @@ public class ContractualObligationImpl extends PersistableImpl implements Contra
 			case Process_modelingPackage.CONTRACTUAL_OBLIGATION__ALIAS:
 				setAlias(ALIAS_EDEFAULT);
 				return;
-			case Process_modelingPackage.CONTRACTUAL_OBLIGATION__PARAMETERS:
-				getParameters().clear();
+			case Process_modelingPackage.CONTRACTUAL_OBLIGATION__CONSTRAINTS:
+				getConstraints().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -362,8 +362,8 @@ public class ContractualObligationImpl extends PersistableImpl implements Contra
 				return exposeToCollaboratingParties != EXPOSE_TO_COLLABORATING_PARTIES_EDEFAULT;
 			case Process_modelingPackage.CONTRACTUAL_OBLIGATION__ALIAS:
 				return ALIAS_EDEFAULT == null ? alias != null : !ALIAS_EDEFAULT.equals(alias);
-			case Process_modelingPackage.CONTRACTUAL_OBLIGATION__PARAMETERS:
-				return parameters != null && !parameters.isEmpty();
+			case Process_modelingPackage.CONTRACTUAL_OBLIGATION__CONSTRAINTS:
+				return constraints != null && !constraints.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

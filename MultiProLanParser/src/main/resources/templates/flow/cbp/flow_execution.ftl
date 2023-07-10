@@ -62,9 +62,9 @@ func (fe *Execution) ${elementUniqueNameMap[elementId]}Func(actionArgsMap map[st
         <#else>
 	fe.State.TerminationActivated = true
         </#if>
-        <#if capabilityMap[elementId]?has_content && capabilityMap[elementId].constraints?has_content> <#-- rukovanje capability constraints-ima -->
+        <#if contractualObligationMap[elementId]?has_content && contractualObligationMap[elementId].constraints?has_content> <#-- rukovanje capability constraints-ima -->
 
-            <#list capabilityMap[elementId].constraints as constraint>
+            <#list contractualObligationMap[elementId].constraints as constraint>
     fe.State.${elementUniqueNameMap[elementId]}Var.${constraint.physicalDimension} = actionArgsMap["${constraint.physicalDimension}"].(float64)
     if actionArgsMap["${constraint.physicalDimension}"].(float64) ${constraint.relationalOperator} ${constraint.value} {
         fe.State.${elementUniqueNameMap[elementId]}Var.${constraint.physicalDimension}Fulfilled = true
@@ -72,17 +72,6 @@ func (fe *Execution) ${elementUniqueNameMap[elementId]}Func(actionArgsMap map[st
         fe.State.${elementUniqueNameMap[elementId]}Var.${constraint.physicalDimension}Fulfilled = false
         fe.State.ConstraintsFulfilled = false
     }
-            </#list>
-        </#if>
-        <#if inputProductsMap[elementId]?has_content> <#-- rukovanje input proizvodima -->
-            <#list inputProductsMap[elementId] as product>
-                <#if product.quantity == 1 >
-    fe.State.${elementUniqueNameMap[elementId]}Var.${product.uniqueName}_ID = actionArgsMap["${product.uniqueName}_ID"].(string)
-                <#else>
-                    <#list 1..product.quantity as i>
-    fe.State.${elementUniqueNameMap[elementId]}Var.${product.uniqueName}_ID_${i} = actionArgsMap["${product.uniqueName}_ID_${i}"].(string)
-                    </#list>
-                </#if>
             </#list>
         </#if>
 

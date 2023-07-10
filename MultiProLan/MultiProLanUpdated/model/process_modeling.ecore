@@ -306,7 +306,7 @@
     <eLiterals name="ADDITIONAL_PARTNER" value="2"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ContractualObligation" eSuperTypes="#//Persistable #//IDNamedElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
-        eType="#//Parameter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" upperBound="-1"
+        eType="#//Constraint" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

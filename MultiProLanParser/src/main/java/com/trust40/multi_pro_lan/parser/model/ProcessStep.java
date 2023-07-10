@@ -7,8 +7,9 @@ import java.util.List;
 
 public class ProcessStep extends ProcessElement {
     protected Capability capability;
+    protected ContractualObligation contractualObligation;
     protected List<Product> inputProducts = new ArrayList<>();
-    protected Swimlane swimlane;
+    protected Organization organization;
 
     public ProcessStep(Element processStepElement) {
         super(processStepElement, "REGULAR");
@@ -32,11 +33,17 @@ public class ProcessStep extends ProcessElement {
     public ProcessStep(Element processStepElement, Element swimlaneElement) {
         super(processStepElement, "REGULAR");
 
-        swimlane = new Swimlane(swimlaneElement);
+        organization = new Organization(swimlaneElement);
 
         org.w3c.dom.Element capabilityElement = (org.w3c.dom.Element) processStepElement.getElementsByTagName("capability").item(0);
         if (capabilityElement != null) {
             capability = new Capability(capabilityElement);
+
+        }
+
+        org.w3c.dom.Element contractualObligationElement = (org.w3c.dom.Element) processStepElement.getElementsByTagName("contractualObligation").item(0);
+        if (contractualObligationElement != null) {
+            contractualObligation = new ContractualObligation(contractualObligationElement);
 
         }
     }
@@ -45,15 +52,19 @@ public class ProcessStep extends ProcessElement {
         return capability;
     }
 
+    public ContractualObligation getContractualObligation() {
+        return contractualObligation;
+    }
+
     public List<Product> getInputProducts() {
         return inputProducts;
     }
 
-    public Swimlane getSwimlane() {
-        return swimlane;
+    public Organization getOrganization() {
+        return organization;
     }
 
     public String toString() {
-        return String.format("ProcessStep[id=%s, name=%s, capability=%s, inputProducts=%s, swimlane=%s]", id, name, capability, inputProducts, swimlane);
+        return String.format("ProcessStep[id=%s, name=%s, capability=%s, contractualObligation=%s, inputProducts=%s, organization=%s]", id, name, capability, contractualObligation, inputProducts, organization);
     }
 }

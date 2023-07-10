@@ -2528,13 +2528,13 @@ public interface Process_modelingPackage extends EPackage {
 	int CONTRACTUAL_OBLIGATION__ALIAS = PERSISTABLE_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTRACTUAL_OBLIGATION__PARAMETERS = PERSISTABLE_FEATURE_COUNT + 4;
+	int CONTRACTUAL_OBLIGATION__CONSTRAINTS = PERSISTABLE_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Contractual Obligation</em>' class.
@@ -3895,15 +3895,15 @@ public interface Process_modelingPackage extends EPackage {
 	EClass getContractualObligation();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link process_modeling.ContractualObligation#getParameters <em>Parameters</em>}'.
+	 * Returns the meta object for the containment reference list '{@link process_modeling.ContractualObligation#getConstraints <em>Constraints</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Parameters</em>'.
-	 * @see process_modeling.ContractualObligation#getParameters()
+	 * @return the meta object for the containment reference list '<em>Constraints</em>'.
+	 * @see process_modeling.ContractualObligation#getConstraints()
 	 * @see #getContractualObligation()
 	 * @generated
 	 */
-	EReference getContractualObligation_Parameters();
+	EReference getContractualObligation_Constraints();
 
 	/**
 	 * Returns the meta object for enum '{@link process_modeling.EResourceType <em>EResource Type</em>}'.
@@ -5001,12 +5001,12 @@ public interface Process_modelingPackage extends EPackage {
 		EClass CONTRACTUAL_OBLIGATION = eINSTANCE.getContractualObligation();
 
 		/**
-		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Constraints</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CONTRACTUAL_OBLIGATION__PARAMETERS = eINSTANCE.getContractualObligation_Parameters();
+		EReference CONTRACTUAL_OBLIGATION__CONSTRAINTS = eINSTANCE.getContractualObligation_Constraints();
 
 		/**
 		 * The meta object literal for the '{@link process_modeling.EResourceType <em>EResource Type</em>}' enum.
