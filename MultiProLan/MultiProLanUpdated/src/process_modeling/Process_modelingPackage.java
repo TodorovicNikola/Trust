@@ -550,13 +550,31 @@ public interface Process_modelingPackage extends EPackage {
 	int PROCESS_ELEMENT__STATUS = ID_NAMED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
+	 * The feature id for the '<em><b>Obligations Fulfilled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS_ELEMENT__OBLIGATIONS_FULFILLED = ID_NAMED_ELEMENT_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Related Dlt Content</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS_ELEMENT__RELATED_DLT_CONTENT = ID_NAMED_ELEMENT_FEATURE_COUNT + 8;
+
+	/**
 	 * The number of structural features of the '<em>Process Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROCESS_ELEMENT_FEATURE_COUNT = ID_NAMED_ELEMENT_FEATURE_COUNT + 7;
+	int PROCESS_ELEMENT_FEATURE_COUNT = ID_NAMED_ELEMENT_FEATURE_COUNT + 9;
 
 	/**
 	 * The number of operations of the '<em>Process Element</em>' class.
@@ -677,6 +695,24 @@ public interface Process_modelingPackage extends EPackage {
 	int PROCESS_STEP__STATUS = PROCESS_ELEMENT__STATUS;
 
 	/**
+	 * The feature id for the '<em><b>Obligations Fulfilled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS_STEP__OBLIGATIONS_FULFILLED = PROCESS_ELEMENT__OBLIGATIONS_FULFILLED;
+
+	/**
+	 * The feature id for the '<em><b>Related Dlt Content</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS_STEP__RELATED_DLT_CONTENT = PROCESS_ELEMENT__RELATED_DLT_CONTENT;
+
+	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -776,13 +812,22 @@ public interface Process_modelingPackage extends EPackage {
 	int PROCESS_STEP__CONTRACTUAL_OBLIGATION = PROCESS_ELEMENT_FEATURE_COUNT + 10;
 
 	/**
+	 * The feature id for the '<em><b>Related Interface Process</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS_STEP__RELATED_INTERFACE_PROCESS = PROCESS_ELEMENT_FEATURE_COUNT + 11;
+
+	/**
 	 * The number of structural features of the '<em>Process Step</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROCESS_STEP_FEATURE_COUNT = PROCESS_ELEMENT_FEATURE_COUNT + 11;
+	int PROCESS_STEP_FEATURE_COUNT = PROCESS_ELEMENT_FEATURE_COUNT + 12;
 
 	/**
 	 * The number of operations of the '<em>Process Step</em>' class.
@@ -1375,6 +1420,24 @@ public interface Process_modelingPackage extends EPackage {
 	int GATE__STATUS = PROCESS_ELEMENT__STATUS;
 
 	/**
+	 * The feature id for the '<em><b>Obligations Fulfilled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GATE__OBLIGATIONS_FULFILLED = PROCESS_ELEMENT__OBLIGATIONS_FULFILLED;
+
+	/**
+	 * The feature id for the '<em><b>Related Dlt Content</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GATE__RELATED_DLT_CONTENT = PROCESS_ELEMENT__RELATED_DLT_CONTENT;
+
+	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1801,6 +1864,24 @@ public interface Process_modelingPackage extends EPackage {
 	int SUB_PROCESS__STATUS = PROCESS_ELEMENT__STATUS;
 
 	/**
+	 * The feature id for the '<em><b>Obligations Fulfilled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUB_PROCESS__OBLIGATIONS_FULFILLED = PROCESS_ELEMENT__OBLIGATIONS_FULFILLED;
+
+	/**
+	 * The feature id for the '<em><b>Related Dlt Content</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUB_PROCESS__RELATED_DLT_CONTENT = PROCESS_ELEMENT__RELATED_DLT_CONTENT;
+
+	/**
 	 * The feature id for the '<em><b>Process</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1944,6 +2025,24 @@ public interface Process_modelingPackage extends EPackage {
 	 * @ordered
 	 */
 	int UNORDERED_STEPS__STATUS = PROCESS_ELEMENT__STATUS;
+
+	/**
+	 * The feature id for the '<em><b>Obligations Fulfilled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNORDERED_STEPS__OBLIGATIONS_FULFILLED = PROCESS_ELEMENT__OBLIGATIONS_FULFILLED;
+
+	/**
+	 * The feature id for the '<em><b>Related Dlt Content</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNORDERED_STEPS__RELATED_DLT_CONTENT = PROCESS_ELEMENT__RELATED_DLT_CONTENT;
 
 	/**
 	 * The feature id for the '<em><b>Steps</b></em>' containment reference list.
@@ -2274,6 +2373,24 @@ public interface Process_modelingPackage extends EPackage {
 	int VIRTUAL_ORGANIZATION__STATUS = PROCESS_ELEMENT__STATUS;
 
 	/**
+	 * The feature id for the '<em><b>Obligations Fulfilled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_ORGANIZATION__OBLIGATIONS_FULFILLED = PROCESS_ELEMENT__OBLIGATIONS_FULFILLED;
+
+	/**
+	 * The feature id for the '<em><b>Related Dlt Content</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_ORGANIZATION__RELATED_DLT_CONTENT = PROCESS_ELEMENT__RELATED_DLT_CONTENT;
+
+	/**
 	 * The feature id for the '<em><b>Organizations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2417,6 +2534,24 @@ public interface Process_modelingPackage extends EPackage {
 	 * @ordered
 	 */
 	int ORGANIZATION__STATUS = PROCESS_ELEMENT__STATUS;
+
+	/**
+	 * The feature id for the '<em><b>Obligations Fulfilled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORGANIZATION__OBLIGATIONS_FULFILLED = PROCESS_ELEMENT__OBLIGATIONS_FULFILLED;
+
+	/**
+	 * The feature id for the '<em><b>Related Dlt Content</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORGANIZATION__RELATED_DLT_CONTENT = PROCESS_ELEMENT__RELATED_DLT_CONTENT;
 
 	/**
 	 * The feature id for the '<em><b>Role</b></em>' attribute.
@@ -2713,6 +2848,17 @@ public interface Process_modelingPackage extends EPackage {
 	 * @generated
 	 */
 	int EORGANIZATION_ROLE = 35;
+
+
+	/**
+	 * The meta object id for the '{@link process_modeling.EProcessElementObligationsFulfilled <em>EProcess Element Obligations Fulfilled</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see process_modeling.EProcessElementObligationsFulfilled
+	 * @see process_modeling.impl.Process_modelingPackageImpl#getEProcessElementObligationsFulfilled()
+	 * @generated
+	 */
+	int EPROCESS_ELEMENT_OBLIGATIONS_FULFILLED = 36;
 
 
 	/**
@@ -3076,6 +3222,17 @@ public interface Process_modelingPackage extends EPackage {
 	EReference getProcessStep_ContractualObligation();
 
 	/**
+	 * Returns the meta object for the reference '{@link process_modeling.ProcessStep#getRelatedInterfaceProcess <em>Related Interface Process</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Related Interface Process</em>'.
+	 * @see process_modeling.ProcessStep#getRelatedInterfaceProcess()
+	 * @see #getProcessStep()
+	 * @generated
+	 */
+	EReference getProcessStep_RelatedInterfaceProcess();
+
+	/**
 	 * Returns the meta object for class '{@link process_modeling.Relationship <em>Relationship</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3366,6 +3523,28 @@ public interface Process_modelingPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getProcessElement_Status();
+
+	/**
+	 * Returns the meta object for the attribute '{@link process_modeling.ProcessElement#getObligationsFulfilled <em>Obligations Fulfilled</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Obligations Fulfilled</em>'.
+	 * @see process_modeling.ProcessElement#getObligationsFulfilled()
+	 * @see #getProcessElement()
+	 * @generated
+	 */
+	EAttribute getProcessElement_ObligationsFulfilled();
+
+	/**
+	 * Returns the meta object for the attribute '{@link process_modeling.ProcessElement#getRelatedDltContent <em>Related Dlt Content</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Related Dlt Content</em>'.
+	 * @see process_modeling.ProcessElement#getRelatedDltContent()
+	 * @see #getProcessElement()
+	 * @generated
+	 */
+	EAttribute getProcessElement_RelatedDltContent();
 
 	/**
 	 * Returns the meta object for class '{@link process_modeling.Gate <em>Gate</em>}'.
@@ -4066,6 +4245,16 @@ public interface Process_modelingPackage extends EPackage {
 	EEnum getEOrganizationRole();
 
 	/**
+	 * Returns the meta object for enum '{@link process_modeling.EProcessElementObligationsFulfilled <em>EProcess Element Obligations Fulfilled</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>EProcess Element Obligations Fulfilled</em>'.
+	 * @see process_modeling.EProcessElementObligationsFulfilled
+	 * @generated
+	 */
+	EEnum getEProcessElementObligationsFulfilled();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4359,6 +4548,14 @@ public interface Process_modelingPackage extends EPackage {
 		EReference PROCESS_STEP__CONTRACTUAL_OBLIGATION = eINSTANCE.getProcessStep_ContractualObligation();
 
 		/**
+		 * The meta object literal for the '<em><b>Related Interface Process</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROCESS_STEP__RELATED_INTERFACE_PROCESS = eINSTANCE.getProcessStep_RelatedInterfaceProcess();
+
+		/**
 		 * The meta object literal for the '{@link process_modeling.impl.RelationshipImpl <em>Relationship</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4583,6 +4780,22 @@ public interface Process_modelingPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PROCESS_ELEMENT__STATUS = eINSTANCE.getProcessElement_Status();
+
+		/**
+		 * The meta object literal for the '<em><b>Obligations Fulfilled</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROCESS_ELEMENT__OBLIGATIONS_FULFILLED = eINSTANCE.getProcessElement_ObligationsFulfilled();
+
+		/**
+		 * The meta object literal for the '<em><b>Related Dlt Content</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROCESS_ELEMENT__RELATED_DLT_CONTENT = eINSTANCE.getProcessElement_RelatedDltContent();
 
 		/**
 		 * The meta object literal for the '{@link process_modeling.impl.GateImpl <em>Gate</em>}' class.
@@ -5167,6 +5380,16 @@ public interface Process_modelingPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum EORGANIZATION_ROLE = eINSTANCE.getEOrganizationRole();
+
+		/**
+		 * The meta object literal for the '{@link process_modeling.EProcessElementObligationsFulfilled <em>EProcess Element Obligations Fulfilled</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see process_modeling.EProcessElementObligationsFulfilled
+		 * @see process_modeling.impl.Process_modelingPackageImpl#getEProcessElementObligationsFulfilled()
+		 * @generated
+		 */
+		EEnum EPROCESS_ELEMENT_OBLIGATIONS_FULFILLED = eINSTANCE.getEProcessElementObligationsFulfilled();
 
 	}
 

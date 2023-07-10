@@ -35,19 +35,19 @@
   <extension
    point="org.eclipse.ui.handlers">
     <handler
-     class="web_socket.process_planning.SubmitDocumentHandler"
+     class="process_planning.SubmitDocumentHandler"
      commandId="submit_document_command">
     </handler>
     <handler
-     class="web_socket.process_planning.SignDocumentHandler"
+     class="process_planning.SignDocumentHandler"
      commandId="sign_document_command">
     </handler>
     <handler
-     class="web_socket.process_execution.LaunchProcessHandler"
+     class="process_execution.LaunchProcessHandler"
      commandId="launch_process_command">
     </handler>
     <handler
-     class="web_socket.process_execution.MonitorProcessHandler"
+     class="process_execution.MonitorProcessHandler"
      commandId="monitor_process_command">
     </handler>
   </extension>  

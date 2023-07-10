@@ -1,6 +1,11 @@
 package flow
 
-import "fmt"
+import (
+	"fmt"
+	"encoding/json"
+
+	"github.com/hyperledger/fabric-contract-api-go/contractapi"
+)
 
 type Execution struct {
 	ID    string
@@ -11,175 +16,273 @@ func NewFlowExecution(ID string) Execution {
 	flowExecution := Execution{}
 	flowExecution.ID = ID
 	flowExecution.State.ConstraintsFulfilled = true
-	flowExecution.State.El_Start___51d2Active = true
+	flowExecution.State.El_Start___aa98Active = true
 
 	return flowExecution
 }
 
-func (fe *Execution) Execute(action string, actionArgsMap map[string]interface{}) error {
-	var retVal bool
+func (fe *Execution) Execute(action string, actionArgsMap map[string]interface{}, ctx contractapi.TransactionContextInterface) (bool, error) {
+	var retVal = true
+	var err error
 
 	switch action {
-	case "El_End___2905":
-		retVal = fe.El_End___2905Func(actionArgsMap)
-	case "El_ProduceWoodenBox___b297":
-		retVal = fe.El_ProduceWoodenBox___b297Func(actionArgsMap)
-	case "El_Start___51d2":
-		retVal = fe.El_Start___51d2Func(actionArgsMap)
-	case "El_ShipFrontCover___1cce":
-		retVal = fe.El_ShipFrontCover___1cceFunc(actionArgsMap)
-	case "El_EngraveAcrylicFrontCov___9e43":
-		retVal = fe.El_EngraveAcrylicFrontCov___9e43Func(actionArgsMap)
-	case "El_ShipWoodenBox___b7c5":
-		retVal = fe.El_ShipWoodenBox___b7c5Func(actionArgsMap)
-	case "El_PackWineBottle___c394":
-		retVal = fe.El_PackWineBottle___c394Func(actionArgsMap)
-	default:
-		return fmt.Errorf("Invalid Action Execution Attempted! No such action as: %s ", action)
+     case "El_ShipFrontCover___6cc0":
+         retVal, err = fe.El_ShipFrontCover___6cc0Func(actionArgsMap, ctx)
+     case "El_ProduceWoodenBox___665b":
+         retVal, err = fe.El_ProduceWoodenBox___665bFunc(actionArgsMap, ctx)
+     case "El_PackWineBottle___e71b":
+         retVal, err = fe.El_PackWineBottle___e71bFunc(actionArgsMap, ctx)
+     case "El_End___696a":
+         retVal, err = fe.El_End___696aFunc(actionArgsMap, ctx)
+     case "El_Start___aa98":
+         retVal, err = fe.El_Start___aa98Func(actionArgsMap, ctx)
+     case "El_EngraveAcrylicFrontCov___418f":
+         retVal, err = fe.El_EngraveAcrylicFrontCov___418fFunc(actionArgsMap, ctx)
+     case "El_ShipWoodenBox___9607":
+         retVal, err = fe.El_ShipWoodenBox___9607Func(actionArgsMap, ctx)
+    default:
+    	return false, fmt.Errorf("Invalid Action Execution Attempted! No such action as: %s ", action)
+    }
+
+	if err != nil {
+		return false, err
 	}
 
 	if !retVal {
-		return fmt.Errorf("Invalid Action Execution Attempted! State not adequate for action! State: %+v ", fe)
+		return false, fmt.Errorf("Invalid Action Execution Attempted! State not adequate for action! State: %+v ", fe)
 	}
 
-	return nil
+	return true, nil
 }
 
-func (fe *Execution) El_End___2905Func(actionArgsMap map[string]interface{}) bool {
-	if !fe.State.El_End___2905Active {
-		return false
+
+
+func (fe *Execution) El_ShipFrontCover___6cc0Func(actionArgsMap map[string]interface{}, ctx contractapi.TransactionContextInterface) (bool, error) {
+	if !fe.State.El_ShipFrontCover___6cc0Active {
+		return false, nil
 	}
 
 	// previous elements <- false
-	fe.State.El_End___2905Active = false
-
-	fe.State.TerminationActivated = true
-
-	return true
-
-}
-
-func (fe *Execution) El_ProduceWoodenBox___b297Func(actionArgsMap map[string]interface{}) bool {
-	if !fe.State.El_ProduceWoodenBox___b297Active {
-		return false
-	}
-
-	// previous elements <- false
-	fe.State.El_ProduceWoodenBox___b297Active = false
+	fe.State.El_ShipFrontCover___6cc0Active = false
 
 	// next elements <- true
-	fe.State.El_ShipWoodenBox___b7c5Active = true
+	fe.State.El_6cc01341_3547_459c_aa0___2ad6Active = true
+    fe.El_Parallelism___dbd4Func()
 
-	return true
+    fe.State.El_ShipFrontCover___6cc0Var.ElementExecutionCompleted = true
+    fe.State.El_ShipFrontCover___6cc0Var.ElementConstraintsFulfilled = true
+    fe.State.El_ShipFrontCover___6cc0Var.C_Pieces = actionArgsMap["C_Pieces"].(float64)
+    if actionArgsMap["C_Pieces"].(float64) == 5 {
+        fe.State.El_ShipFrontCover___6cc0Var.C_PiecesFulfilled = true
+    } else {
+        fe.State.El_ShipFrontCover___6cc0Var.C_PiecesFulfilled = false
+        fe.State.ConstraintsFulfilled = false
+        fe.State.El_ShipFrontCover___6cc0Var.ElementConstraintsFulfilled = false
+
+    }
+    fe.State.El_ShipFrontCover___6cc0Var.C_Pieces = actionArgsMap["C_Pieces"].(float64)
+
+
+	return true, nil
 
 }
 
-func (fe *Execution) El_Start___51d2Func(actionArgsMap map[string]interface{}) bool {
-	if !fe.State.El_Start___51d2Active {
-		return false
+
+func (fe *Execution) El_ProduceWoodenBox___665bFunc(actionArgsMap map[string]interface{}, ctx contractapi.TransactionContextInterface) (bool, error) {
+	if !fe.State.El_ProduceWoodenBox___665bActive {
+		return false, nil
 	}
 
 	// previous elements <- false
-	fe.State.El_Start___51d2Active = false
+	fe.State.El_ProduceWoodenBox___665bActive = false
 
 	// next elements <- true
-	fe.State.El_EngraveAcrylicFrontCov___9e43Active = true
-	fe.State.El_ProduceWoodenBox___b297Active = true
+	fe.State.El_ShipWoodenBox___9607Active = true
 
-	return true
+    fe.State.El_ProduceWoodenBox___665bVar.ElementExecutionCompleted = true
+    fe.State.El_ProduceWoodenBox___665bVar.ElementConstraintsFulfilled = true
+
+    params := []string{"GetSuccessfulFlowExecutionCount", fe.ID}
+    queryArgs := make([][]byte, len(params))
+    for i, arg := range params {
+        queryArgs[i] = []byte(arg)
+    }
+
+    response := ctx.GetStub().InvokeChaincode("ip-cc", queryArgs, "mychannel")  // zbog ovoga ti treba ID IP-a, da znas koji CC treba da se invokuje...
+
+    var countDto CountDto
+    err := json.Unmarshal(response.Payload, &countDto)
+    if err != nil {
+        return false, err
+    }
+
+    if countDto.Count < 5 {
+        fe.State.El_ProduceWoodenBox___665bVar.C_PiecesFulfilled = false
+        fe.State.ConstraintsFulfilled = false
+        fe.State.El_ProduceWoodenBox___665bVar.ElementConstraintsFulfilled = false
+    } else {
+        fe.State.El_ProduceWoodenBox___665bVar.C_PiecesFulfilled = true
+    }
+    fe.State.El_ProduceWoodenBox___665bVar.C_Pieces = countDto.Count
+
+
+	return true, nil
 
 }
 
-// func (fe *Execution) El_Parallelism___e87aFunc() {
-// 	if !fe.State.El_Parallelism___e87aActive {
-// 		return
-// 	}
 
-// 	// previous elements <- false
-// 	fe.State.El_Parallelism___e87aActive = false
 
-// 	// next elements <- true
-// 	fe.State.El_EngraveAcrylicFrontCov___9e43Active = true
+// func (fe *Execution) El_Parallelism___27f0Func() {
+//     if !fe.State.El_Parallelism___27f0Active {
+//         return
+//     }
 
-// 	fe.State.El_ProduceWoodenBox___b297Active = true
+//     // previous elements <- false
+//     fe.State.El_Parallelism___27f0Active = false
+
+//         // next elements <- true
+//     fe.State.El_ProduceWoodenBox___665bActive = true
+
+//     fe.State.El_EngraveAcrylicFrontCov___418fActive = true
 
 // }
 
-func (fe *Execution) El_Parallelism___f22bFunc() {
-	if !fe.State.El_b7c5e47c_e036_49ea_831___d6efActive {
-		return
-	}
-	if !fe.State.El_1cce97f4_4285_48f4_894___b339Active {
-		return
-	}
+func (fe *Execution) El_Parallelism___dbd4Func() {
+    if !fe.State.El_960773f4_1339_4673_896___9ec9Active {
+        return
+    }
+    if !fe.State.El_6cc01341_3547_459c_aa0___2ad6Active {
+        return
+    }
 
-	// previous elements <- false
-	fe.State.El_b7c5e47c_e036_49ea_831___d6efActive = false
-	fe.State.El_1cce97f4_4285_48f4_894___b339Active = false
+    // previous elements <- false
+    fe.State.El_960773f4_1339_4673_896___9ec9Active = false
+    fe.State.El_6cc01341_3547_459c_aa0___2ad6Active = false
 
-	// next elements <- true
-	fe.State.El_PackWineBottle___c394Active = true
-
-}
-
-func (fe *Execution) El_ShipFrontCover___1cceFunc(actionArgsMap map[string]interface{}) bool {
-	if !fe.State.El_ShipFrontCover___1cceActive {
-		return false
-	}
-
-	// previous elements <- false
-	fe.State.El_ShipFrontCover___1cceActive = false
-
-	// next elements <- true
-	fe.State.El_1cce97f4_4285_48f4_894___b339Active = true
-	fe.El_Parallelism___f22bFunc()
-
-	return true
+        // next elements <- true
+    fe.State.El_PackWineBottle___e71bActive = true
 
 }
 
-func (fe *Execution) El_EngraveAcrylicFrontCov___9e43Func(actionArgsMap map[string]interface{}) bool {
-	if !fe.State.El_EngraveAcrylicFrontCov___9e43Active {
-		return false
+
+func (fe *Execution) El_PackWineBottle___e71bFunc(actionArgsMap map[string]interface{}, ctx contractapi.TransactionContextInterface) (bool, error) {
+	if !fe.State.El_PackWineBottle___e71bActive {
+		return false, nil
 	}
 
 	// previous elements <- false
-	fe.State.El_EngraveAcrylicFrontCov___9e43Active = false
+	fe.State.El_PackWineBottle___e71bActive = false
 
 	// next elements <- true
-	fe.State.El_ShipFrontCover___1cceActive = true
+	fe.State.El_End___696aActive = true
 
-	return true
+    fe.State.El_PackWineBottle___e71bVar.ElementExecutionCompleted = true
+    fe.State.El_PackWineBottle___e71bVar.ElementConstraintsFulfilled = true
+    fe.State.El_PackWineBottle___e71bVar.C_Pieces = actionArgsMap["C_Pieces"].(float64)
+    if actionArgsMap["C_Pieces"].(float64) == 5 {
+        fe.State.El_PackWineBottle___e71bVar.C_PiecesFulfilled = true
+    } else {
+        fe.State.El_PackWineBottle___e71bVar.C_PiecesFulfilled = false
+        fe.State.ConstraintsFulfilled = false
+        fe.State.El_PackWineBottle___e71bVar.ElementConstraintsFulfilled = false
+
+    }
+    fe.State.El_PackWineBottle___e71bVar.C_Pieces = actionArgsMap["C_Pieces"].(float64)
+
+
+	return true, nil
 
 }
 
-func (fe *Execution) El_ShipWoodenBox___b7c5Func(actionArgsMap map[string]interface{}) bool {
-	if !fe.State.El_ShipWoodenBox___b7c5Active {
-		return false
+
+func (fe *Execution) El_End___696aFunc(actionArgsMap map[string]interface{}, ctx contractapi.TransactionContextInterface) (bool, error) {
+	if !fe.State.El_End___696aActive {
+		return false, nil
 	}
 
 	// previous elements <- false
-	fe.State.El_ShipWoodenBox___b7c5Active = false
+	fe.State.El_End___696aActive = false
 
-	// next elements <- true
-	fe.State.El_b7c5e47c_e036_49ea_831___d6efActive = true
-	fe.El_Parallelism___f22bFunc()
+	fe.State.TerminationActivated = true
 
-	return true
+	return true, nil
 
 }
 
-func (fe *Execution) El_PackWineBottle___c394Func(actionArgsMap map[string]interface{}) bool {
-	if !fe.State.El_PackWineBottle___c394Active {
-		return false
+
+func (fe *Execution) El_Start___aa98Func(actionArgsMap map[string]interface{}, ctx contractapi.TransactionContextInterface) (bool, error) {
+	if !fe.State.El_Start___aa98Active {
+		return false, nil
 	}
 
 	// previous elements <- false
-	fe.State.El_PackWineBottle___c394Active = false
+	fe.State.El_Start___aa98Active = false
 
 	// next elements <- true
-	fe.State.El_End___2905Active = true
+	fe.State.El_ProduceWoodenBox___665bActive = true
+	fe.State.El_EngraveAcrylicFrontCov___418fActive = true
+        
+	return true, nil
 
-	return true
+}
+
+
+func (fe *Execution) El_EngraveAcrylicFrontCov___418fFunc(actionArgsMap map[string]interface{}, ctx contractapi.TransactionContextInterface) (bool, error) {
+	if !fe.State.El_EngraveAcrylicFrontCov___418fActive {
+		return false, nil
+	}
+
+	// previous elements <- false
+	fe.State.El_EngraveAcrylicFrontCov___418fActive = false
+
+	// next elements <- true
+	fe.State.El_ShipFrontCover___6cc0Active = true
+         
+    fe.State.El_EngraveAcrylicFrontCov___418fVar.ElementExecutionCompleted = true
+    fe.State.El_EngraveAcrylicFrontCov___418fVar.ElementConstraintsFulfilled = true
+    fe.State.El_EngraveAcrylicFrontCov___418fVar.C_Pieces = actionArgsMap["C_Pieces"].(float64)
+    if actionArgsMap["C_Pieces"].(float64) == 5 {
+        fe.State.El_EngraveAcrylicFrontCov___418fVar.C_PiecesFulfilled = true
+    } else {
+        fe.State.El_EngraveAcrylicFrontCov___418fVar.C_PiecesFulfilled = false
+        fe.State.ConstraintsFulfilled = false
+        fe.State.El_EngraveAcrylicFrontCov___418fVar.ElementConstraintsFulfilled = false
+
+    }
+    fe.State.El_EngraveAcrylicFrontCov___418fVar.C_Pieces = actionArgsMap["C_Pieces"].(float64)
+
+
+	return true, nil
+
+}
+
+
+func (fe *Execution) El_ShipWoodenBox___9607Func(actionArgsMap map[string]interface{}, ctx contractapi.TransactionContextInterface) (bool, error) {
+	if !fe.State.El_ShipWoodenBox___9607Active {
+		return false, nil
+	}
+
+	// previous elements <- false
+	fe.State.El_ShipWoodenBox___9607Active = false
+
+	// next elements <- true
+	fe.State.El_960773f4_1339_4673_896___9ec9Active = true
+    fe.El_Parallelism___dbd4Func()
+
+    fe.State.El_ShipWoodenBox___9607Var.ElementExecutionCompleted = true
+    fe.State.El_ShipWoodenBox___9607Var.ElementConstraintsFulfilled = true
+    fe.State.El_ShipWoodenBox___9607Var.C_Pieces = actionArgsMap["C_Pieces"].(float64)
+    if actionArgsMap["C_Pieces"].(float64) == 5 {
+        fe.State.El_ShipWoodenBox___9607Var.C_PiecesFulfilled = true
+    } else {
+        fe.State.El_ShipWoodenBox___9607Var.C_PiecesFulfilled = false
+        fe.State.ConstraintsFulfilled = false
+        fe.State.El_ShipWoodenBox___9607Var.ElementConstraintsFulfilled = false
+
+    }
+    fe.State.El_ShipWoodenBox___9607Var.C_Pieces = actionArgsMap["C_Pieces"].(float64)
+
+
+	return true, nil
 
 }

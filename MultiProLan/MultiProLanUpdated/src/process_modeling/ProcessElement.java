@@ -17,6 +17,8 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link process_modeling.ProcessElement#getOutRelationships <em>Out Relationships</em>}</li>
  *   <li>{@link process_modeling.ProcessElement#isIsErrorGroup <em>Is Error Group</em>}</li>
  *   <li>{@link process_modeling.ProcessElement#getStatus <em>Status</em>}</li>
+ *   <li>{@link process_modeling.ProcessElement#getObligationsFulfilled <em>Obligations Fulfilled</em>}</li>
+ *   <li>{@link process_modeling.ProcessElement#getRelatedDltContent <em>Related Dlt Content</em>}</li>
  * </ul>
  *
  * @see process_modeling.Process_modelingPackage#getProcessElement()
@@ -98,5 +100,53 @@ public interface ProcessElement extends IDNamedElement, Traceable {
 	 * @generated
 	 */
 	void setStatus(EProcessElementStatus value);
+
+	/**
+	 * Returns the value of the '<em><b>Obligations Fulfilled</b></em>' attribute.
+	 * The default value is <code>"TRUE"</code>.
+	 * The literals are from the enumeration {@link process_modeling.EProcessElementObligationsFulfilled}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Obligations Fulfilled</em>' attribute.
+	 * @see process_modeling.EProcessElementObligationsFulfilled
+	 * @see #setObligationsFulfilled(EProcessElementObligationsFulfilled)
+	 * @see process_modeling.Process_modelingPackage#getProcessElement_ObligationsFulfilled()
+	 * @model default="TRUE"
+	 * @generated
+	 */
+	EProcessElementObligationsFulfilled getObligationsFulfilled();
+
+	/**
+	 * Sets the value of the '{@link process_modeling.ProcessElement#getObligationsFulfilled <em>Obligations Fulfilled</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Obligations Fulfilled</em>' attribute.
+	 * @see process_modeling.EProcessElementObligationsFulfilled
+	 * @see #getObligationsFulfilled()
+	 * @generated
+	 */
+	void setObligationsFulfilled(EProcessElementObligationsFulfilled value);
+
+	/**
+	 * Returns the value of the '<em><b>Related Dlt Content</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Related Dlt Content</em>' attribute.
+	 * @see #setRelatedDltContent(String)
+	 * @see process_modeling.Process_modelingPackage#getProcessElement_RelatedDltContent()
+	 * @model
+	 * @generated
+	 */
+	String getRelatedDltContent();
+
+	/**
+	 * Sets the value of the '{@link process_modeling.ProcessElement#getRelatedDltContent <em>Related Dlt Content</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Related Dlt Content</em>' attribute.
+	 * @see #getRelatedDltContent()
+	 * @generated
+	 */
+	void setRelatedDltContent(String value);
 
 } // ProcessElement

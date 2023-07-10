@@ -45,6 +45,7 @@ import process_modeling.Resource;
  *   <li>{@link process_modeling.impl.ProcessStepImpl#getCompletionCriterion <em>Completion Criterion</em>}</li>
  *   <li>{@link process_modeling.impl.ProcessStepImpl#getErrors <em>Errors</em>}</li>
  *   <li>{@link process_modeling.impl.ProcessStepImpl#getContractualObligation <em>Contractual Obligation</em>}</li>
+ *   <li>{@link process_modeling.impl.ProcessStepImpl#getRelatedInterfaceProcess <em>Related Interface Process</em>}</li>
  * </ul>
  *
  * @generated
@@ -209,6 +210,16 @@ public class ProcessStepImpl extends ProcessElementImpl implements ProcessStep {
 	 * @ordered
 	 */
 	protected ContractualObligation contractualObligation;
+
+	/**
+	 * The cached value of the '{@link #getRelatedInterfaceProcess() <em>Related Interface Process</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRelatedInterfaceProcess()
+	 * @generated
+	 * @ordered
+	 */
+	protected process_modeling.Process relatedInterfaceProcess;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -524,6 +535,46 @@ public class ProcessStepImpl extends ProcessElementImpl implements ProcessStep {
 	 * @generated
 	 */
 	@Override
+	public process_modeling.Process getRelatedInterfaceProcess() {
+		if (relatedInterfaceProcess != null && relatedInterfaceProcess.eIsProxy()) {
+			InternalEObject oldRelatedInterfaceProcess = (InternalEObject)relatedInterfaceProcess;
+			relatedInterfaceProcess = (process_modeling.Process)eResolveProxy(oldRelatedInterfaceProcess);
+			if (relatedInterfaceProcess != oldRelatedInterfaceProcess) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Process_modelingPackage.PROCESS_STEP__RELATED_INTERFACE_PROCESS, oldRelatedInterfaceProcess, relatedInterfaceProcess));
+			}
+		}
+		return relatedInterfaceProcess;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public process_modeling.Process basicGetRelatedInterfaceProcess() {
+		return relatedInterfaceProcess;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setRelatedInterfaceProcess(process_modeling.Process newRelatedInterfaceProcess) {
+		process_modeling.Process oldRelatedInterfaceProcess = relatedInterfaceProcess;
+		relatedInterfaceProcess = newRelatedInterfaceProcess;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Process_modelingPackage.PROCESS_STEP__RELATED_INTERFACE_PROCESS, oldRelatedInterfaceProcess, relatedInterfaceProcess));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case Process_modelingPackage.PROCESS_STEP__CAPABILITY:
@@ -572,6 +623,9 @@ public class ProcessStepImpl extends ProcessElementImpl implements ProcessStep {
 				return getErrors();
 			case Process_modelingPackage.PROCESS_STEP__CONTRACTUAL_OBLIGATION:
 				return getContractualObligation();
+			case Process_modelingPackage.PROCESS_STEP__RELATED_INTERFACE_PROCESS:
+				if (resolve) return getRelatedInterfaceProcess();
+				return basicGetRelatedInterfaceProcess();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -621,6 +675,9 @@ public class ProcessStepImpl extends ProcessElementImpl implements ProcessStep {
 			case Process_modelingPackage.PROCESS_STEP__CONTRACTUAL_OBLIGATION:
 				setContractualObligation((ContractualObligation)newValue);
 				return;
+			case Process_modelingPackage.PROCESS_STEP__RELATED_INTERFACE_PROCESS:
+				setRelatedInterfaceProcess((process_modeling.Process)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -666,6 +723,9 @@ public class ProcessStepImpl extends ProcessElementImpl implements ProcessStep {
 			case Process_modelingPackage.PROCESS_STEP__CONTRACTUAL_OBLIGATION:
 				setContractualObligation((ContractualObligation)null);
 				return;
+			case Process_modelingPackage.PROCESS_STEP__RELATED_INTERFACE_PROCESS:
+				setRelatedInterfaceProcess((process_modeling.Process)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -700,6 +760,8 @@ public class ProcessStepImpl extends ProcessElementImpl implements ProcessStep {
 				return errors != null && !errors.isEmpty();
 			case Process_modelingPackage.PROCESS_STEP__CONTRACTUAL_OBLIGATION:
 				return contractualObligation != null;
+			case Process_modelingPackage.PROCESS_STEP__RELATED_INTERFACE_PROCESS:
+				return relatedInterfaceProcess != null;
 		}
 		return super.eIsSet(featureID);
 	}

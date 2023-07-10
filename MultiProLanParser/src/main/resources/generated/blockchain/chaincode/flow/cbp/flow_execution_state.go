@@ -34,41 +34,46 @@ type ExecutionState struct {
 
 
 type El_ShipFrontCover___6cc0Struct struct {
+    ElementExecutionCompleted bool
+    ElementConstraintsFulfilled bool
     C_Pieces float64
     C_PiecesFulfilled bool
-    C_Deadline float64
-    C_DeadlineFulfilled bool
 }
 
 
 type El_ProduceWoodenBox___665bStruct struct {
+    ElementExecutionCompleted bool
+    ElementConstraintsFulfilled bool
     C_Pieces float64
     C_PiecesFulfilled bool
-    C_Deadline float64
-    C_DeadlineFulfilled bool
 }
 
 
 type El_PackWineBottle___e71bStruct struct {
+    ElementExecutionCompleted bool
+    ElementConstraintsFulfilled bool
     C_Pieces float64
     C_PiecesFulfilled bool
-    C_Deadline float64
-    C_DeadlineFulfilled bool
 }
 
 
 type El_EngraveAcrylicFrontCov___418fStruct struct {
+    ElementExecutionCompleted bool
+    ElementConstraintsFulfilled bool
     C_Pieces float64
     C_PiecesFulfilled bool
-    C_Deadline float64
-    C_DeadlineFulfilled bool
 }
 
 
 type El_ShipWoodenBox___9607Struct struct {
+    ElementExecutionCompleted bool
+    ElementConstraintsFulfilled bool
     C_Pieces float64
     C_PiecesFulfilled bool
-    C_Deadline float64
-    C_DeadlineFulfilled bool
 }
 
+
+type CountDto struct {
+	CBP_ID string `json:"CBP_ID"`
+	Count  float64    `json:Count`
+}

@@ -23,6 +23,7 @@ import process_modeling.EErrorType;
 import process_modeling.EGateType;
 import process_modeling.EOrganizationRole;
 import process_modeling.EPersistenceType;
+import process_modeling.EProcessElementObligationsFulfilled;
 import process_modeling.EProcessElementStatus;
 import process_modeling.EProcessParameterType;
 import process_modeling.EProcessStepNotation;
@@ -308,6 +309,13 @@ public class Process_modelingPackageImpl extends EPackageImpl implements Process
 	 * @generated
 	 */
 	private EEnum eOrganizationRoleEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum eProcessElementObligationsFulfilledEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -716,6 +724,16 @@ public class Process_modelingPackageImpl extends EPackageImpl implements Process
 	 * @generated
 	 */
 	@Override
+	public EReference getProcessStep_RelatedInterfaceProcess() {
+		return (EReference)processStepEClass.getEStructuralFeatures().get(11);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getRelationship() {
 		return relationshipEClass;
 	}
@@ -978,6 +996,26 @@ public class Process_modelingPackageImpl extends EPackageImpl implements Process
 	@Override
 	public EAttribute getProcessElement_Status() {
 		return (EAttribute)processElementEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getProcessElement_ObligationsFulfilled() {
+		return (EAttribute)processElementEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getProcessElement_RelatedDltContent() {
+		return (EAttribute)processElementEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -1646,6 +1684,16 @@ public class Process_modelingPackageImpl extends EPackageImpl implements Process
 	 * @generated
 	 */
 	@Override
+	public EEnum getEProcessElementObligationsFulfilled() {
+		return eProcessElementObligationsFulfilledEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Process_modelingFactory getProcess_modelingFactory() {
 		return (Process_modelingFactory)getEFactoryInstance();
 	}
@@ -1704,6 +1752,7 @@ public class Process_modelingPackageImpl extends EPackageImpl implements Process
 		createEAttribute(processStepEClass, PROCESS_STEP__COMPLETION_CRITERION);
 		createEReference(processStepEClass, PROCESS_STEP__ERRORS);
 		createEReference(processStepEClass, PROCESS_STEP__CONTRACTUAL_OBLIGATION);
+		createEReference(processStepEClass, PROCESS_STEP__RELATED_INTERFACE_PROCESS);
 
 		relationshipEClass = createEClass(RELATIONSHIP);
 		createEAttribute(relationshipEClass, RELATIONSHIP__TYPE);
@@ -1736,6 +1785,8 @@ public class Process_modelingPackageImpl extends EPackageImpl implements Process
 		createEReference(processElementEClass, PROCESS_ELEMENT__OUT_RELATIONSHIPS);
 		createEAttribute(processElementEClass, PROCESS_ELEMENT__IS_ERROR_GROUP);
 		createEAttribute(processElementEClass, PROCESS_ELEMENT__STATUS);
+		createEAttribute(processElementEClass, PROCESS_ELEMENT__OBLIGATIONS_FULFILLED);
+		createEAttribute(processElementEClass, PROCESS_ELEMENT__RELATED_DLT_CONTENT);
 
 		gateEClass = createEClass(GATE);
 		createEAttribute(gateEClass, GATE__TYPE);
@@ -1816,6 +1867,7 @@ public class Process_modelingPackageImpl extends EPackageImpl implements Process
 		eProcessParameterTypeEEnum = createEEnum(EPROCESS_PARAMETER_TYPE);
 		ePersistenceTypeEEnum = createEEnum(EPERSISTENCE_TYPE);
 		eOrganizationRoleEEnum = createEEnum(EORGANIZATION_ROLE);
+		eProcessElementObligationsFulfilledEEnum = createEEnum(EPROCESS_ELEMENT_OBLIGATIONS_FULFILLED);
 	}
 
 	/**
@@ -1907,6 +1959,7 @@ public class Process_modelingPackageImpl extends EPackageImpl implements Process
 		initEAttribute(getProcessStep_CompletionCriterion(), ecorePackage.getEString(), "completionCriterion", null, 0, 1, ProcessStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getProcessStep_Errors(), this.getError(), null, "errors", null, 0, -1, ProcessStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getProcessStep_ContractualObligation(), this.getContractualObligation(), null, "contractualObligation", null, 0, 1, ProcessStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProcessStep_RelatedInterfaceProcess(), this.getProcess(), null, "relatedInterfaceProcess", null, 0, 1, ProcessStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(relationshipEClass, Relationship.class, "Relationship", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRelationship_Type(), this.getERelationshipType(), "type", null, 1, 1, Relationship.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1939,6 +1992,8 @@ public class Process_modelingPackageImpl extends EPackageImpl implements Process
 		initEReference(getProcessElement_OutRelationships(), this.getRelationship(), this.getRelationship_Source(), "outRelationships", null, 0, -1, ProcessElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getProcessElement_IsErrorGroup(), ecorePackage.getEBoolean(), "isErrorGroup", null, 1, 1, ProcessElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getProcessElement_Status(), this.getEProcessElementStatus(), "status", null, 1, 1, ProcessElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getProcessElement_ObligationsFulfilled(), this.getEProcessElementObligationsFulfilled(), "obligationsFulfilled", "TRUE", 0, 1, ProcessElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getProcessElement_RelatedDltContent(), ecorePackage.getEString(), "relatedDltContent", null, 0, 1, ProcessElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(gateEClass, Gate.class, "Gate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getGate_Type(), this.getEGateType(), "type", null, 1, 1, Gate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2070,6 +2125,7 @@ public class Process_modelingPackageImpl extends EPackageImpl implements Process
 		addEEnumLiteral(eProcessElementStatusEEnum, EProcessElementStatus.ACTIVE);
 		addEEnumLiteral(eProcessElementStatusEEnum, EProcessElementStatus.ERROR);
 		addEEnumLiteral(eProcessElementStatusEEnum, EProcessElementStatus.NONE);
+		addEEnumLiteral(eProcessElementStatusEEnum, EProcessElementStatus.COMPLETED);
 
 		initEEnum(eErrorTypeEEnum, EErrorType.class, "EErrorType");
 		addEEnumLiteral(eErrorTypeEEnum, EErrorType.DEFAULT);
@@ -2092,6 +2148,10 @@ public class Process_modelingPackageImpl extends EPackageImpl implements Process
 		addEEnumLiteral(eOrganizationRoleEEnum, EOrganizationRole.BROKER);
 		addEEnumLiteral(eOrganizationRoleEEnum, EOrganizationRole.CORE_PARTNER);
 		addEEnumLiteral(eOrganizationRoleEEnum, EOrganizationRole.ADDITIONAL_PARTNER);
+
+		initEEnum(eProcessElementObligationsFulfilledEEnum, EProcessElementObligationsFulfilled.class, "EProcessElementObligationsFulfilled");
+		addEEnumLiteral(eProcessElementObligationsFulfilledEEnum, EProcessElementObligationsFulfilled.TRUE);
+		addEEnumLiteral(eProcessElementObligationsFulfilledEEnum, EProcessElementObligationsFulfilled.FALSE);
 
 		// Create resource
 		createResource(eNS_URI);

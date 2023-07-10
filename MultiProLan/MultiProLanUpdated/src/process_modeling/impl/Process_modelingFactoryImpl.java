@@ -23,6 +23,7 @@ import process_modeling.EErrorType;
 import process_modeling.EGateType;
 import process_modeling.EOrganizationRole;
 import process_modeling.EPersistenceType;
+import process_modeling.EProcessElementObligationsFulfilled;
 import process_modeling.EProcessElementStatus;
 import process_modeling.EProcessParameterType;
 import process_modeling.EProcessStepNotation;
@@ -149,6 +150,8 @@ public class Process_modelingFactoryImpl extends EFactoryImpl implements Process
 				return createEPersistenceTypeFromString(eDataType, initialValue);
 			case Process_modelingPackage.EORGANIZATION_ROLE:
 				return createEOrganizationRoleFromString(eDataType, initialValue);
+			case Process_modelingPackage.EPROCESS_ELEMENT_OBLIGATIONS_FULFILLED:
+				return createEProcessElementObligationsFulfilledFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -194,6 +197,8 @@ public class Process_modelingFactoryImpl extends EFactoryImpl implements Process
 				return convertEPersistenceTypeToString(eDataType, instanceValue);
 			case Process_modelingPackage.EORGANIZATION_ROLE:
 				return convertEOrganizationRoleToString(eDataType, instanceValue);
+			case Process_modelingPackage.EPROCESS_ELEMENT_OBLIGATIONS_FULFILLED:
+				return convertEProcessElementObligationsFulfilledToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -692,6 +697,26 @@ public class Process_modelingFactoryImpl extends EFactoryImpl implements Process
 	 * @generated
 	 */
 	public String convertEOrganizationRoleToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EProcessElementObligationsFulfilled createEProcessElementObligationsFulfilledFromString(EDataType eDataType, String initialValue) {
+		EProcessElementObligationsFulfilled result = EProcessElementObligationsFulfilled.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertEProcessElementObligationsFulfilledToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

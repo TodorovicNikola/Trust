@@ -73,6 +73,7 @@
       <genEnumLiterals ecoreEnumLiteral="process_modeling.ecore#//EProcessElementStatus/ACTIVE"/>
       <genEnumLiterals ecoreEnumLiteral="process_modeling.ecore#//EProcessElementStatus/ERROR"/>
       <genEnumLiterals ecoreEnumLiteral="process_modeling.ecore#//EProcessElementStatus/NONE"/>
+      <genEnumLiterals ecoreEnumLiteral="process_modeling.ecore#//EProcessElementStatus/COMPLETED"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="process_modeling.ecore#//EErrorType">
       <genEnumLiterals ecoreEnumLiteral="process_modeling.ecore#//EErrorType/DEFAULT"/>
@@ -95,6 +96,10 @@
       <genEnumLiterals ecoreEnumLiteral="process_modeling.ecore#//EOrganizationRole/BROKER"/>
       <genEnumLiterals ecoreEnumLiteral="process_modeling.ecore#//EOrganizationRole/CORE_PARTNER"/>
       <genEnumLiterals ecoreEnumLiteral="process_modeling.ecore#//EOrganizationRole/ADDITIONAL_PARTNER"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="process_modeling.ecore#//EProcessElementObligationsFulfilled">
+      <genEnumLiterals ecoreEnumLiteral="process_modeling.ecore#//EProcessElementObligationsFulfilled/TRUE"/>
+      <genEnumLiterals ecoreEnumLiteral="process_modeling.ecore#//EProcessElementObligationsFulfilled/FALSE"/>
     </genEnums>
     <genClasses ecoreClass="process_modeling.ecore#//Resource">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process_modeling.ecore#//Resource/isActuator"/>
@@ -131,6 +136,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process_modeling.ecore#//ProcessStep/completionCriterion"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process_modeling.ecore#//ProcessStep/errors"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process_modeling.ecore#//ProcessStep/contractualObligation"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference process_modeling.ecore#//ProcessStep/relatedInterfaceProcess"/>
     </genClasses>
     <genClasses ecoreClass="process_modeling.ecore#//Relationship">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process_modeling.ecore#//Relationship/type"/>
@@ -163,6 +169,8 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference process_modeling.ecore#//ProcessElement/outRelationships"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process_modeling.ecore#//ProcessElement/isErrorGroup"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process_modeling.ecore#//ProcessElement/status"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process_modeling.ecore#//ProcessElement/obligationsFulfilled"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process_modeling.ecore#//ProcessElement/relatedDltContent"/>
     </genClasses>
     <genClasses ecoreClass="process_modeling.ecore#//Gate">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process_modeling.ecore#//Gate/type"/>

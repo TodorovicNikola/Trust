@@ -20,6 +20,8 @@ type ExecutionState struct {
     <#if contractualObligationMap[elementId]?has_content && contractualObligationMap[elementId].constraints?has_content>
 
 type ${elementUniqueNameMap[elementId]}Struct struct {
+    ElementExecutionCompleted bool
+    ElementConstraintsFulfilled bool
             <#list contractualObligationMap[elementId].constraints as constraint>
     ${constraint.physicalDimension} float64
     ${constraint.physicalDimension}Fulfilled bool
@@ -37,3 +39,8 @@ type ${elementUniqueNameMap[elementId]}Struct struct {
 
     </#if>
 </#list>
+
+type CountDto struct {
+	CBP_ID string `json:"CBP_ID"`
+	Count  float64    `json:Count`
+}
