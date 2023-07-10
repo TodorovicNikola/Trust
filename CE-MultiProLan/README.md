@@ -28,3 +28,12 @@ Additionally, Java 8 or higher is needed.
 1. For creating the modeling project (within which the created models will be stored) Right click on the .odesign > New > Other > Sirius > Modeling Project
 1. To create a new model: Right click on Project > New > Other > Example EMF Model Creation Wizards > something.process_modeling > Select root element – Process
 1. Right Click on Process (within something.process_modeling) > New Representation > Process (ML) Matched Process (DL) Model, CBP Model or IP Model > Diagram Name
+
+
+### Useful Links
+* [https://www.eclipse.org/sirius/doc/](https://www.eclipse.org/sirius/doc/)
+* [https://wiki.eclipse.org/Sirius/Tutorials](https://wiki.eclipse.org/Sirius/Tutorials)
+* [https://wiki.eclipse.org/Sirius/Tutorials/StarterTutorial](https://wiki.eclipse.org/Sirius/Tutorials/StarterTutorial)
+* [https://wiki.eclipse.org/Sirius/Tutorials/AdvancedTutorial] (https://wiki.eclipse.org/Sirius/Tutorials/AdvancedTutorial)
+* [https://wiki.eclipse.org/Sirius/Tutorials/CompartmentsTutorial] (https://wiki.eclipse.org/Sirius/Tutorials/CompartmentsTutorial)
+* [https://www.eclipse.org/sirius/doc/specifier/general/Writing_Queries.html](https://www.eclipse.org/sirius/doc/specifier/general/Writing_Queries.html)
