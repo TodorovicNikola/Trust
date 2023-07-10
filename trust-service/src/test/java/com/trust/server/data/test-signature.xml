@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<ds:SignedInfo>
+<ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+<ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha512"/>
+<ds:Reference URI="">
+<ds:Transforms>
+<ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+<ds:Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/>
+</ds:Transforms>
+<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+<ds:DigestValue>l7Zj3x5IGQGyk/DMY6GE7ZT5ESg=</ds:DigestValue>
+</ds:Reference>
+</ds:SignedInfo>
+<ds:SignatureValue>
+4pHkyo7YaPy798njKGLsMp9DmwwOewqdSlwRLWncYwIX1LPlf1YVcqMysSEyqznUC4jfOh7vjCN/&#13;
+CEsBJ+yu4A==
+</ds:SignatureValue>
+<ds:KeyInfo>
+<ds:KeyValue>
+<dsig11:ECKeyValue xmlns:dsig11="http://www.w3.org/2009/xmldsig11#">
+<dsig11:NamedCurve URI="urn:oid:1.2.840.10045.3.1.7"/>
+<dsig11:PublicKey>BBUXlo0A5LEOp4R9cRQ7TJICaDJy7FmLgvmhsB/+UkKCTqq9R1Lsy0bX2GDrw0H9DbN/4zZvXksj&#13;
+hvjevumLe90=</dsig11:PublicKey>
+</dsig11:ECKeyValue>
+</ds:KeyValue>
+<ds:X509Data>
+<ds:X509Certificate>
+MIICOzCCAeGgAwIBAgIQQMhILn3TstTKp/KARfHMuzAKBggqhkjOPQQDAjB2MQswCQYDVQQGEwJV&#13;
+UzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzEZMBcGA1UEChMQ&#13;
+b3JnMS5leGFtcGxlLmNvbTEfMB0GA1UEAxMWdGxzY2Eub3JnMS5leGFtcGxlLmNvbTAeFw0yMDA4&#13;
+MjUxMTM0MDBaFw0zMDA4MjMxMTM0MDBaMFsxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9y&#13;
+bmlhMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMR8wHQYDVQQDDBZVc2VyMUBvcmcxLmV4YW1wbGUu&#13;
+Y29tMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEFReWjQDksQ6nhH1xFDtMkgJoMnLsWYuC+aGw&#13;
+H/5SQoJOqr1HUuzLRtfYYOvDQf0Ns3/jNm9eSyOG+N6+6Yt73aNsMGowDgYDVR0PAQH/BAQDAgWg&#13;
+MB0GA1UdJQQWMBQGCCsGAQUFBwMBBggrBgEFBQcDAjAMBgNVHRMBAf8EAjAAMCsGA1UdIwQkMCKA&#13;
+IEBUUtz7U8NbDw+qXd98b4M1JeH0wX6GJFr2jgo6VhTSMAoGCCqGSM49BAMCA0gAMEUCIQD0k5PP&#13;
+K/dofjRJ9R5A3iJkyMMB7UjPq/fr6jAgX7lujgIgQJDn9zHYKuzclcwdcGswQNMvbkEi1tuD5SvL&#13;
+u4itNZc=
+</ds:X509Certificate>
+</ds:X509Data>
+</ds:KeyInfo>
+</ds:Signature>
