@@ -2,11 +2,7 @@ package com.trust.service.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.trust.service.controller.dto.SubmittedDocumentDto;
 import com.trust.service.service.SubmittedDocumentService;
@@ -27,6 +23,14 @@ public class SubmittedDocumentController {
 			@RequestBody SubmittedDocumentDto submittedDocumentDto) {
 		submittedDocumentService.save(apiKey, submittedDocumentDto);
 		return ResponseEntity.noContent().build();
+
+	}
+
+	@GetMapping
+	public ResponseEntity<String> getSubmittedDocument(@RequestHeader("Authorization") String apiKey,
+											   @RequestParam String name) {
+		String document = submittedDocumentService.get(apiKey, name);
+		return ResponseEntity.ok(document);
 
 	}
 }

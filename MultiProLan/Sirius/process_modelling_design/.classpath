@@ -6,5 +6,15 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="lib" path="libraries/jackson-databind-2.13.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="libraries/jackson-core-2.13.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="libraries/bcpkix-jdk15on-1.70.jar"/>
+	<classpathentry exported="true" kind="lib" path="libraries/bcprov-jdk15on-1.70.jar"/>
+	<classpathentry exported="true" kind="lib" path="libraries/bcutil-jdk15on-1.70.jar"/>
+	<classpathentry exported="true" kind="lib" path="libraries/commons-codec-1.15.jar"/>
+	<classpathentry exported="true" kind="lib" path="libraries/jakarta.activation-2.0.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="libraries/jakarta.xml.bind-api-3.0.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="libraries/slf4j-api-2.0.7.jar"/>
+	<classpathentry exported="true" kind="lib" path="libraries/stax2-api-4.2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="libraries/woodstox-core-6.5.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="libraries/xmlsec-3.0.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

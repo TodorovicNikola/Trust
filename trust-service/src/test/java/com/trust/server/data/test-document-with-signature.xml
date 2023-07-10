@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?><mod:process xmlns:mod="http://www.trust40.com/process-modeling" xmlns:xmi="http://www.omg.org/xmi" xmlns:xsi="http://www.w3.org/2001/xmlschema-instance" id="mpe" name="mpe" startstep="//@elements.1" xmi:version="2.0">
+  <elements id="b6620baa-4924-499f-bd13-7a69403f74ab" name="acme wine inc." xsi:type="mod:virtualorganization">
+    <organizations id="1d04c684-321b-4b5a-b76e-e536fc1690ad" name="winery" obligationsfulfilled="false">
+      <elements id="0c03ecbf-2b41-4295-8aad-afd699772d95" name="start" outrelationships="//@relationships.0" type="start" xsi:type="mod:processstep"/>
+      <elements id="88a90be7-1545-4ece-b56e-0fece9566d11" inrelationships="//@relationships.8" name="end" type="end" xsi:type="mod:processstep"/>
+      <elements id="8ea755a9-0bee-4360-bb02-e6d7009822ef" inrelationships="//@relationships.7" name="pack wine bottle" outrelationships="//@relationships.8" xsi:type="mod:processstep"/>
+    </organizations>
+    <organizations id="b41fcfd7-6205-4784-a5db-d5a7379a37d0" name="woodworking company" obligationsfulfilled="false" role="core_partner">
+      <elements id="b56abc61-2845-4f28-9378-4b23753e1ada" inrelationships="//@relationships.0" name="parallelism" outrelationships="//@relationships.1 //@relationships.2" type="parallelism" xsi:type="mod:gate"/>
+      <elements id="cc3adb97-decb-4199-ac2e-9032ed105ab7" inrelationships="//@relationships.1" name="produce wooden box" outrelationships="//@relationships.4" relatedinterfaceprocess="/" xsi:type="mod:processstep">
+        <contractualobligation id="bf64f0a8-d967-49ae-94e5-aa2858411084" name="contract params">
+          <constraints physicaldimension="pieces" value="500"/>
+          <constraints physicaldimension="deadline" value="2022-10-10"/>
+        </contractualobligation>
+      </elements>
+      <elements id="b742bd51-c1cf-42a3-8b63-82b539bea009" inrelationships="//@relationships.4" name="ship wooden box" notation="transportation" outrelationships="//@relationships.6" xsi:type="mod:processstep"/>
+      <elements id="7d5c69cf-56ce-4838-b8df-e426b70b0cc3" inrelationships="//@relationships.5 //@relationships.6" name="parallelism" outrelationships="//@relationships.7" type="parallelism" xsi:type="mod:gate"/>
+    </organizations>
+    <organizations id="cd044af5-b321-432e-9106-afdba2605a78" name="acrylic engraving company" obligationsfulfilled="false" role="additional_partner">
+      <elements id="d88ac4a3-cfb0-41ce-943f-e16639f8cf02" inrelationships="//@relationships.2" name="engrave acrylic front cover" outrelationships="//@relationships.3" xsi:type="mod:processstep"/>
+      <elements id="79eaf0d8-cb62-4ba5-bce5-c5292c2e3816" inrelationships="//@relationships.3" name="ship front cover" notation="transportation" outrelationships="//@relationships.5" xsi:type="mod:processstep"/>
+    </organizations>
+  </elements>
+  <elements exposetocollaboratingparties="true" id="3cbfade3-469c-48f9-84f8-30f8e05dda86" istraced="true" name="start" outrelationships="//@relationships.9" type="start" xsi:type="mod:processstep"/>
+  <elements exposetocollaboratingparties="true" id="20ff99b6-b20d-4864-954c-f2f47e50c988" inrelationships="//@relationships.9" name="parallelism" outrelationships="//@relationships.10 //@relationships.11" type="parallelism" xsi:type="mod:gate"/>
+  <elements alias="l-b side assembling" exposetocollaboratingparties="true" id="af8c6ba5-f99e-4ecc-9aa4-b3d560e2bc4f" inrelationships="//@relationships.11" istraced="true" name="sa01 - side assembling (l-b)" outrelationships="//@relationships.13" xsi:type="mod:processstep">
+    <capability exposetocollaboratingparties="true" id="70dcdd57-fca9-4a68-9b73-3e1ffceb3d4b" name="assemble"/>
+    <inproducts id="b742d25f-5d1c-4491-891a-858c8e710031" name="bottom side" quantity="1"/>
+    <inproducts id="89ddc50b-a2d7-402c-b7f9-07e52e6a8704" name="left side" quantity="1">
+      <constraints value="width = 11 cm"/>
+    </inproducts>
+    <outproducts exposetocollaboratingparties="true" id="b0533a73-a03c-4c97-ae19-da879262fd67" name="l-b side" quantity="1">
+      <constraints value="height = 11 cm"/>
+    </outproducts>
+  </elements>
+  <elements alias="r-u side assembling" exposetocollaboratingparties="true" id="46ca746d-c048-4a8c-b24a-5d4eae5be376" inrelationships="//@relationships.10" istraced="true" name="sa01 - side assembling (r-u)" outrelationships="//@relationships.12" xsi:type="mod:processstep"/>
+  <elements exposetocollaboratingparties="true" id="b685a0c6-2dc3-4991-994b-35d6692089bf" inrelationships="//@relationships.12 //@relationships.13" name="parallelism" outrelationships="//@relationships.20" type="parallelism" xsi:type="mod:gate"/>
+  <elements alias="assemble frame" exposetocollaboratingparties="true" id="ab776f26-39df-4de2-8712-20b24bf17903" inrelationships="//@relationships.20" istraced="true" name="fa01 - frame assembling" outrelationships="//@relationships.21" xsi:type="mod:processstep"/>
+  <elements alias="add back side" exposetocollaboratingparties="true" id="a4c1ba97-bb6b-4e12-be2e-a96ba84f4aa8" inrelationships="//@relationships.21" istraced="true" name="bah01 - back side hammering" outrelationships="//@relationships.22" xsi:type="mod:processstep"/>
+  <elements alias="pack the box" exposetocollaboratingparties="true" id="b96b23b3-edd8-4fef-8d5d-d62a64db1beb" inrelationships="//@relationships.16 //@relationships.23" istraced="true" name="pa01 - packaging" outrelationships="//@relationships.15 //@relationships.24" xsi:type="mod:processstep"/>
+  <elements alias="measure dimensions" exposetocollaboratingparties="true" id="8b7bcb31-48d5-4611-af0a-eece04c5e1fa" inrelationships="//@relationships.22" istraced="true" name="bi01 - box inspection" notation="inspection" outrelationships="//@relationships.17 //@relationships.23" xsi:type="mod:processstep">
+    <capability exposetocollaboratingparties="true" id="ca485c15-b802-4239-a718-02b29703cba4" name="inspect">
+      <constraints exposetocollaboratingparties="true" ispersisted="true" metricunit="" name="widthdev &lt; 30 mm" physicaldimension="" value="widthdev &lt; 30 mm"/>
+    </capability>
+    <inproducts exposetocollaboratingparties="true" id="013f7926-f388-4bf9-b9dd-135eae25413f" name="box" quantity="1"/>
+    <outproducts exposetocollaboratingparties="true" id="9112a628-0954-408a-849a-2e8998b00897" name="inspected box" quantity="1"/>
+  </elements>
+  <elements id="16dd1607-3d26-4aa0-93ee-2234d60d4bf9" inrelationships="//@relationships.17" name="decision" outrelationships="//@relationships.16 //@relationships.18" xsi:type="mod:gate"/>
+  <elements id="12cd505e-c847-4881-806b-448ea295d7f1" inrelationships="//@relationships.15 //@relationships.19" name="decision" outrelationships="//@relationships.14" xsi:type="mod:gate"/>
+  <elements exposetocollaboratingparties="true" id="a17d5fe4-bea7-4e1d-ae35-7887f3af4b48" inrelationships="//@relationships.14 //@relationships.24" istraced="true" name="end" type="end" xsi:type="mod:processstep"/>
+  <elements alias="handle defective box" id="d04058ca-b00a-45a7-830c-6a91d4879e0a" inrelationships="//@relationships.18" name="nt-sq_04_pi001 - discard defective component" outrelationships="//@relationships.19" xsi:type="mod:processstep"/>
+  <relationships id="7e2ac583-d3f0-497d-8135-81b803ae1942" name="0c03ecbf-2b41-4295-8aad-afd699772d95_b56abc61-2845-4f28-9379-4b23753e1ada_flow" source="//@elements.0/@organizations.0/@elements.0" target="//@elements.0/@organizations.1/@elements.0"/>
+  <relationships id="3eacb128-1fb2-4e85-9553-a9bb84acb246" name="b56abc61-2845-4f28-9379-4b23753e1ada_cc3adb97-decb-4199-ac2e-9032ed105ab7_flow" source="//@elements.0/@organizations.1/@elements.0" target="//@elements.0/@organizations.1/@elements.1"/>
+  <relationships id="11184717-564b-469d-83aa-0bc2588c92d1" name="b56abc61-2845-4f28-9379-4b23753e1ada_d88ac4a3-cfb0-41ce-943f-e16639f8cf02_flow" source="//@elements.0/@organizations.1/@elements.0" target="//@elements.0/@organizations.2/@elements.0"/>
+  <relationships id="72ae8370-3180-491f-8eb8-08865ded1c2a" name="d88ac4a3-cfb0-41ce-943f-e16639f8cf02_79eaf0d8-cb62-4ba5-bce5-c5292c2e3816_flow" source="//@elements.0/@organizations.2/@elements.0" target="//@elements.0/@organizations.2/@elements.1"/>
+  <relationships id="9966d4ad-732f-48db-98bc-b440a4d23503" name="cc3adb97-decb-4199-ac2e-9032ed105ab7_b742bd51-c1cf-42a3-8b63-82b539bea009_flow" source="//@elements.0/@organizations.1/@elements.1" target="//@elements.0/@organizations.1/@elements.2"/>
+  <relationships id="2d78c395-4ea1-4e38-a994-4d2eb928b581" name="79eaf0d8-cb62-4ba5-bce5-c5292c2e3816_7d5c69cf-56ce-4838-b8df-e426b70b0cc3_flow" source="//@elements.0/@organizations.2/@elements.1" target="//@elements.0/@organizations.1/@elements.3"/>
+  <relationships id="3c4af3ac-c3b8-4efd-bd8b-e0c7b67688e6" name="b742bd51-c1cf-42a3-8b63-82b539bea009_7d5c69cf-56ce-4838-b8df-e426b70b0cc3_flow" source="//@elements.0/@organizations.1/@elements.2" target="//@elements.0/@organizations.1/@elements.3"/>
+  <relationships id="4634c265-fa36-49b5-bc73-e3207bd39aeb" name="7d5c69cf-56ce-4838-b8df-e426b70b0cc3_8ea755a9-0bee-4360-bb02-e6d7009822ef_flow" source="//@elements.0/@organizations.1/@elements.3" target="//@elements.0/@organizations.0/@elements.2"/>
+  <relationships id="7a92e9c8-cc3e-41d3-b3ae-c58240b7844f" name="8ea755a9-0bee-4360-bb02-e6d7009822ef_88a90be7-1545-4ece-b56e-0fece9566d11_flow" source="//@elements.0/@organizations.0/@elements.2" target="//@elements.0/@organizations.0/@elements.1"/>
+  <relationships id="f9201d9b-8746-4214-8ed7-babf065313db" name="3cbfade3-469c-48f9-84f8-30f8e05dda86_20ff99b6-b20d-4864-954c-f2f47e50c988_flow" source="//@elements.1" target="//@elements.2"/>
+  <relationships id="34755e57-fc17-4ead-8e2f-89e9e0227db4" name="20ff99b6-b20d-4864-954c-f2f47e50c988_46ca746d-c048-4a8c-b24a-5d4eae5be376_flow" source="//@elements.2" target="//@elements.4"/>
+  <relationships id="1b274ac7-465d-498f-b6ee-2a6ff5445846" name="20ff99b6-b20d-4864-954c-f2f47e50c988_af8c6ba5-f99e-4ecc-9aa4-b3d560e2bc4f_flow" source="//@elements.2" target="//@elements.3"/>
+  <relationships id="cb4393aa-b9e8-4a91-8d3e-3625c782001a" name="46ca746d-c048-4a8c-b24a-5d4eae5be376_b685a0c6-2dc3-4991-994b-35d6692089bf_flow" source="//@elements.4" target="//@elements.5"/>
+  <relationships id="c793698e-ff05-43ad-815f-4d73f21b76ec" name="af8c6ba5-f99e-4ecc-9aa4-b3d560e2bc4f_b685a0c6-2dc3-4991-994b-35d6692089bf_flow" source="//@elements.3" target="//@elements.5"/>
+  <relationships id="e11721c5-c3fe-47a1-890c-18e41cb82a46" name="12cd505e-c847-4881-806b-448ea295d7f1_a17d5fe4-bea7-4e1d-ae35-7887f3af4b48_flow" source="//@elements.11" target="//@elements.12"/>
+  <relationships id="59e203f5-f135-4edf-b1b4-f2b5bfef04a7" name="b96b23b3-edd8-4fef-8d5d-d62a64db1beb_12cd505e-c847-4881-806b-448ea295d7f1_flow" source="//@elements.8" target="//@elements.11"/>
+  <relationships id="41949373-0742-4334-95b7-96c570375318" logicalcondition="hasdefect = false" name="16dd1607-3d26-4aa0-93ee-2234d60d4bf9_b96b23b3-edd8-4fef-8d5d-d62a64db1beb_flow" source="//@elements.10" target="//@elements.8"/>
+  <relationships id="dd926ddb-dad4-417a-8a52-8fe016008983" name="8b7bcb31-48d5-4611-af0a-eece04c5e1fa_16dd1607-3d26-4aa0-93ee-2234d60d4bf9_flow" source="//@elements.9" target="//@elements.10"/>
+  <relationships id="381363d5-6890-4960-bcb4-c8800f061d22" logicalcondition="hasdefect = true" message="" name="16dd1607-3d26-4aa0-93ee-2234d60d4bf9_d04058ca-b00a-45a7-830c-6a91d4879e0a_flow" source="//@elements.10" target="//@elements.13"/>
+  <relationships id="7476f814-80cc-4026-b9fa-b976640b9b9d" name="d04058ca-b00a-45a7-830c-6a91d4879e0a_12cd505e-c847-4881-806b-448ea295d7f1_flow" source="//@elements.13" target="//@elements.11"/>
+  <relationships id="e43d26a3-fab8-4952-8b4d-6310e167ce38" name="b685a0c6-2dc3-4991-994b-35d6692089bf_ab776f26-39df-4de2-8712-20b24bf17903_flow" source="//@elements.5" target="//@elements.6"/>
+  <relationships id="93008fa9-8a73-4ff4-85be-4ac53082d777" name="ab776f26-39df-4de2-8712-20b24bf17903_a4c1ba97-bb6b-4e12-be2e-a96ba84f4aa8_flow" source="//@elements.6" target="//@elements.7"/>
+  <relationships id="df234f60-97d4-429e-bda4-f4905635fe58" name="a4c1ba97-bb6b-4e12-be2e-a96ba84f4aa8_8b7bcb31-48d5-4611-af0a-eece04c5e1fa_flow" source="//@elements.7" target="//@elements.9"/>
+  <relationships id="10d3e66a-f3e4-454f-90f1-77ee4a9d8b3e" name="8b7bcb31-48d5-4611-af0a-eece04c5e1fa_b96b23b3-edd8-4fef-8d5d-d62a64db1beb_flow" source="//@elements.9" target="//@elements.8"/>
+  <relationships id="cc58e4c5-3291-40fd-a7ae-d3b583fc720e" name="b96b23b3-edd8-4fef-8d5d-d62a64db1beb_a17d5fe4-bea7-4e1d-ae35-7887f3af4b48_flow" source="//@elements.8" target="//@elements.12"/>
+<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<ds:SignedInfo>
+<ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+<ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha512"/>
+<ds:Reference URI="">
+<ds:Transforms>
+<ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+<ds:Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/>
+</ds:Transforms>
+<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+<ds:DigestValue>l7Zj3x5IGQGyk/DMY6GE7ZT5ESg=</ds:DigestValue>
+</ds:Reference>
+</ds:SignedInfo>
+<ds:SignatureValue>
+4pHkyo7YaPy798njKGLsMp9DmwwOewqdSlwRLWncYwIX1LPlf1YVcqMysSEyqznUC4jfOh7vjCN/&#13;
+CEsBJ+yu4A==
+</ds:SignatureValue>
+<ds:KeyInfo>
+<ds:KeyValue>
+<dsig11:ECKeyValue xmlns:dsig11="http://www.w3.org/2009/xmldsig11#">
+<dsig11:NamedCurve URI="urn:oid:1.2.840.10045.3.1.7"/>
+<dsig11:PublicKey>BBUXlo0A5LEOp4R9cRQ7TJICaDJy7FmLgvmhsB/+UkKCTqq9R1Lsy0bX2GDrw0H9DbN/4zZvXksj&#13;
+hvjevumLe90=</dsig11:PublicKey>
+</dsig11:ECKeyValue>
+</ds:KeyValue>
+<ds:X509Data>
+<ds:X509Certificate>
+MIICOzCCAeGgAwIBAgIQQMhILn3TstTKp/KARfHMuzAKBggqhkjOPQQDAjB2MQswCQYDVQQGEwJV&#13;
+UzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzEZMBcGA1UEChMQ&#13;
+b3JnMS5leGFtcGxlLmNvbTEfMB0GA1UEAxMWdGxzY2Eub3JnMS5leGFtcGxlLmNvbTAeFw0yMDA4&#13;
+MjUxMTM0MDBaFw0zMDA4MjMxMTM0MDBaMFsxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9y&#13;
+bmlhMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMR8wHQYDVQQDDBZVc2VyMUBvcmcxLmV4YW1wbGUu&#13;
+Y29tMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEFReWjQDksQ6nhH1xFDtMkgJoMnLsWYuC+aGw&#13;
+H/5SQoJOqr1HUuzLRtfYYOvDQf0Ns3/jNm9eSyOG+N6+6Yt73aNsMGowDgYDVR0PAQH/BAQDAgWg&#13;
+MB0GA1UdJQQWMBQGCCsGAQUFBwMBBggrBgEFBQcDAjAMBgNVHRMBAf8EAjAAMCsGA1UdIwQkMCKA&#13;
+IEBUUtz7U8NbDw+qXd98b4M1JeH0wX6GJFr2jgo6VhTSMAoGCCqGSM49BAMCA0gAMEUCIQD0k5PP&#13;
+K/dofjRJ9R5A3iJkyMMB7UjPq/fr6jAgX7lujgIgQJDn9zHYKuzclcwdcGswQNMvbkEi1tuD5SvL&#13;
+u4itNZc=
+</ds:X509Certificate>
+</ds:X509Data>
+</ds:KeyInfo>
+</ds:Signature></mod:process>
