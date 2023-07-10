@@ -51,7 +51,7 @@ Uname: exploreradmin
 Pass: exploreradminpw
 ```
 
-Prilikom ```docker-compose down```, iz nekog razloga ne pobrise volumes, pa moras to rucno uraditi:
+*Note*: ```docker-compose down```, doesn't delete the related volumes, so this has to be done manually!
 
 ```
 docker volume rm hlf-explorer_pgdata
