@@ -37,3 +37,17 @@ Simulator/
 ##############################
 .gradle
 !gradle-wrapper.jar
+
+# Generated artefacts
+trust-dlt/
+tmp/
+Caliper/output/
+
+# IDE
+.idea
+.vscode
+.bin
+
+
+
+

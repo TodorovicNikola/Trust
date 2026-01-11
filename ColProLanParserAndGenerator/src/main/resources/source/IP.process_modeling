@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mod:Process xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mod="http://www.trust40.com/process-modeling">
+  <elements xsi:type="mod:ProcessStep" id="628dd498-52ba-4cfc-9e8e-4f442cd0d241" name="FA01 - Frame Assembling" exposeToCollaboratingParties="true" alias="Frame Assembling" isTraced="true" logStartTime="true" logEndTime="true" inRelationships="//@relationships.5" outRelationships="//@relationships.1">
+    <capability id="78efc031-2937-476c-b193-a79fce6b474f" name="Assemble">
+      <parameters key="n" value="4"/>
+      <parameters key="r" value="7 mm"/>
+    </capability>
+    <inProducts id="7adf1f83-942b-463e-88ed-d6de2d309de5" name="R-U side" equivalent="//@elements.9/@outProducts.0" quantity="1">
+      <constraints physicalDimension="Height" relationalOperator="=" value="11" metricUnit="cm"/>
+      <constraints physicalDimension="Depth" relationalOperator="=" value="11" metricUnit="cm"/>
+      <constraints physicalDimension="Width" relationalOperator="=" value="36" metricUnit="cm"/>
+    </inProducts>
+    <inProducts id="5acaf273-c345-4823-b242-f75840140081" name="L-B side" equivalent="//@elements.7/@outProducts.0" quantity="1">
+      <constraints physicalDimension="Height" relationalOperator="=" value="11" metricUnit="cm"/>
+      <constraints physicalDimension="Depth" relationalOperator="=" value="11" metricUnit="cm"/>
+      <constraints physicalDimension="Width" relationalOperator="=" value="36" metricUnit="cm"/>
+    </inProducts>
+    <outProducts id="255d729a-2789-4066-b3f0-5a1aa613470d" name="Frame" quantity="1">
+      <constraints physicalDimension="Depth" relationalOperator="=" value="11" metricUnit="cm"/>
+      <constraints physicalDimension="Width" relationalOperator="=" value="36" metricUnit="cm"/>
+      <constraints physicalDimension="Height" relationalOperator="=" value="11" metricUnit="cm"/>
+    </outProducts>
+  </elements>
+  <elements xsi:type="mod:ProcessStep" id="9e4fc6dc-6846-43aa-b283-50721c1ea2d3" name="PA01 - Packaging" exposeToCollaboratingParties="true" alias="Pack the Box" isTraced="true" inRelationships="//@relationships.11" outRelationships="//@relationships.2">
+    <capability id="3dcd5d2d-223d-48ab-8798-e81e408f5604" name="Package"/>
+    <inProducts id="a7acc11a-7161-46ab-9673-90abc3ea4bae" name="Inspected box" equivalent="//@elements.12/@outProducts.0" quantity="1">
+      <constraints physicalDimension="Height" relationalOperator="=" value="11" metricUnit="cm"/>
+      <constraints physicalDimension="Width" relationalOperator="=" value="36" metricUnit="cm"/>
+      <constraints physicalDimension="Depth" relationalOperator="=" value="11" metricUnit="cm"/>
+    </inProducts>
+    <outProducts id="18377bbf-fabd-4363-ab5e-e299b260173e" name="Packed box" quantity="1">
+      <constraints physicalDimension="Height" relationalOperator="=" value="11" metricUnit="cm"/>
+      <constraints physicalDimension="Width" relationalOperator="=" value="36" metricUnit="cm"/>
+      <constraints physicalDimension="Depth" relationalOperator="=" value="11" metricUnit="cm"/>
+    </outProducts>
+  </elements>
+  <elements xsi:type="mod:Gate" id="02d3aa49-51fd-44ed-b3b3-8124cd93ff4e" name="Decision" exposeToCollaboratingParties="true" inRelationships="//@relationships.2 //@relationships.6" outRelationships="//@relationships.10"/>
+  <elements xsi:type="mod:Gate" id="4d3a05f6-8b0f-4f4a-a56b-99027329f01f" name="Parallelism" exposeToCollaboratingParties="true" inRelationships="//@relationships.0" outRelationships="//@relationships.3 //@relationships.12" type="PARALLELISM"/>
+  <elements xsi:type="mod:ProcessStep" id="f5bfcb4c-26a3-454c-944d-2e45905f2ac8" name="End" exposeToCollaboratingParties="true" isTraced="true" inRelationships="//@relationships.10" type="END"/>
+  <elements xsi:type="mod:Gate" id="25c8fd48-1b1c-476a-bd56-c24fb9026487" name="Parallelism" exposeToCollaboratingParties="true" inRelationships="//@relationships.8 //@relationships.7" outRelationships="//@relationships.5" type="PARALLELISM"/>
+  <elements xsi:type="mod:ProcessStep" id="2f8fd15f-153b-44a1-8789-0232844dac96" name="NT-SQ_04_PI001 - Discard Defective Component" exposeToCollaboratingParties="true" alias="Handle Defective Box" inRelationships="//@relationships.9" outRelationships="//@relationships.6">
+    <capability id="a5da70f6-e58e-4290-beb1-bb8856ad34fe" name="Discard"/>
+    <inProducts id="b7acc11a-7161-46ab-9673-90abc3ea4bae" name="Inspected box" equivalent="//@elements.12/@outProducts.0" quantity="1">
+      <constraints physicalDimension="Height" relationalOperator="=" value="11" metricUnit="cm"/>
+      <constraints physicalDimension="Width" relationalOperator="=" value="36" metricUnit="cm"/>
+      <constraints physicalDimension="Depth" relationalOperator="=" value="11" metricUnit="cm"/>
+    </inProducts>
+  </elements>
+  <elements xsi:type="mod:ProcessStep" id="35720525-a266-458d-a083-598016750de8" name="SA01 - Side Assembling (L-B)" exposeToCollaboratingParties="true" alias="L-B Side Assembling" isTraced="true" logStartTime="true" logEndTime="true" inRelationships="//@relationships.12" outRelationships="//@relationships.7">
+    <capability id="71eefc68-d98d-4544-899c-838dab63bac8" name="Assemble" exposeToCollaboratingParties="true">
+      <constraints exposeToCollaboratingParties="true" isPersisted="true" persistenceType="PLAIN_TEXT" physicalDimension="t_max" relationalOperator="=" value="1" metricUnit="min"/>
+      <parameters key="r" value="7 mm"/>
+      <parameters exposeToCollaboratingParties="true" key="n" value="2"/>
+    </capability>
+    <inProducts id="8d5b2ae8-4f88-4476-8ef7-7ac5db063409" name="Bottom side" quantity="1">
+      <constraints physicalDimension="Width" relationalOperator="=" value="36" metricUnit="cm"/>
+      <constraints physicalDimension="Height" relationalOperator="=" value="11" metricUnit="cm"/>
+    </inProducts>
+    <inProducts id="7911627f-934b-44b4-a70f-4b44007e2e6d" name="Left side" quantity="1">
+      <constraints physicalDimension="Width" relationalOperator="=" value="11" metricUnit="cm"/>
+      <constraints physicalDimension="Height" relationalOperator="=" value="11" metricUnit="cm"/>
+    </inProducts>
+    <outProducts id="f4a59202-bee7-4366-bce8-ccff541dd80b" name="L-B side" exposeToCollaboratingParties="true" quantity="1">
+      <constraints exposeToCollaboratingParties="true" physicalDimension="Width" relationalOperator="=" value="36" metricUnit="cm"/>
+      <constraints exposeToCollaboratingParties="true" physicalDimension="Height" relationalOperator="=" value="11" metricUnit="cm"/>
+      <constraints exposeToCollaboratingParties="true" physicalDimension="Depth" relationalOperator="=" value="11" metricUnit="cm"/>
+    </outProducts>
+  </elements>
+  <elements xsi:type="mod:ProcessStep" id="6ea3f3c4-cda6-4371-bed4-1309b4998d04" name="BAH01 - Back Side Hammering" exposeToCollaboratingParties="true" alias="Back Side Hammering" isTraced="true" logStartTime="true" logEndTime="true" inRelationships="//@relationships.1" outRelationships="//@relationships.4">
+    <capability id="d69c650d-da30-42d6-b7b7-d692f6240027" name="Hammer">
+      <parameters key="r" value="15 mm"/>
+      <parameters key="n" value="6"/>
+    </capability>
+    <inProducts id="7a69e078-3a5e-453f-adea-fb30818285f8" name="Frame" equivalent="//@elements.0/@outProducts.0" quantity="1">
+      <constraints physicalDimension="Height" relationalOperator="=" value="11" metricUnit="cm"/>
+      <constraints physicalDimension="Depth" relationalOperator="=" value="11" metricUnit="cm"/>
+      <constraints physicalDimension="Width" relationalOperator="=" value="36" metricUnit="cm"/>
+    </inProducts>
+    <inProducts id="bad62e00-cc67-45fb-a868-cb1b396aa49c" name="Back side" quantity="1">
+      <constraints physicalDimension="Height" relationalOperator="=" value="11" metricUnit="cm"/>
+      <constraints physicalDimension="Depth" relationalOperator="=" value="11" metricUnit="cm"/>
+      <constraints physicalDimension="Width" relationalOperator="=" value="36" metricUnit="cm"/>
+    </inProducts>
+    <outProducts id="da178872-4f56-4588-8075-cb92ffc4ab61" name="Box" quantity="1">
+      <constraints physicalDimension="Depth" relationalOperator="=" value="11" metricUnit="cm"/>
+      <constraints physicalDimension="Width" relationalOperator="=" value="36" metricUnit="cm"/>
+      <constraints physicalDimension="Height" relationalOperator="=" value="11" metricUnit="cm"/>
+    </outProducts>
+  </elements>
+  <elements xsi:type="mod:ProcessStep" id="5becce2a-b83b-469c-a005-2ec9c0c271fa" name="SA01 - Side Assembling (R-U)" exposeToCollaboratingParties="true" alias="R-U Side Assembling" isTraced="true" logStartTime="true" logEndTime="true" inRelationships="//@relationships.3" outRelationships="//@relationships.8">
+    <capability id="156e8710-fe82-4305-b52a-62879f09a6d7" name="Assemble" exposeToCollaboratingParties="true">
+      <constraints exposeToCollaboratingParties="true" isPersisted="true" persistenceType="PLAIN_TEXT" physicalDimension="t_max" relationalOperator="=" value="1" metricUnit="min"/>
+      <parameters exposeToCollaboratingParties="true" key="n" value="2"/>
+      <parameters key="r" value="7 mm"/>
+    </capability>
+    <inProducts id="6d488fda-97e5-48bf-88ae-5ed27270a990" name="Upper side" quantity="1">
+      <constraints physicalDimension="Height" relationalOperator="=" value="11" metricUnit="cm"/>
+      <constraints physicalDimension="Width" relationalOperator="=" value="36" metricUnit="cm"/>
+    </inProducts>
+    <inProducts id="7819fc15-16f3-455c-b4f9-dcdb7f02c7bb" name="Right side" quantity="1">
+      <constraints physicalDimension="Height" relationalOperator="=" value="11" metricUnit="cm"/>
+      <constraints physicalDimension="Width" relationalOperator="=" value="11" metricUnit="cm"/>
+    </inProducts>
+    <outProducts id="908ff032-47a6-49dd-8030-4082caeeccc3" name="R-U side" exposeToCollaboratingParties="true" quantity="1">
+      <constraints exposeToCollaboratingParties="true" physicalDimension="Width" relationalOperator="=" value="36" metricUnit="cm"/>
+      <constraints exposeToCollaboratingParties="true" physicalDimension="Height" relationalOperator="=" value="11" metricUnit="cm"/>
+      <constraints exposeToCollaboratingParties="true" physicalDimension="Depth" relationalOperator="=" value="11" metricUnit="cm"/>
+    </outProducts>
+  </elements>
+  <elements xsi:type="mod:ProcessStep" id="479d913b-b4bf-45cd-b39c-6ca081a2421a" name="Start" exposeToCollaboratingParties="true" alias="Start" isTraced="true" outRelationships="//@relationships.0" type="START"/>
+  <elements xsi:type="mod:Gate" id="b023e308-274b-4c17-b4e3-d6059c71f62b" name="Decision" exposeToCollaboratingParties="true" inRelationships="//@relationships.13" outRelationships="//@relationships.9 //@relationships.11"/>
+  <elements xsi:type="mod:ProcessStep" id="592cea39-ce17-4651-9cfa-dacf7e2d0d0a" name="BI01 - Box Inspection" exposeToCollaboratingParties="true" alias="Box Inspection" isTraced="true" inRelationships="//@relationships.4" outRelationships="//@relationships.13" notation="INSPECTION">
+    <capability id="ba63457f-075e-49de-8aad-8b05a396bb72" name="Inspect" exposeToCollaboratingParties="true" alias="asdfasdf">
+      <constraints exposeToCollaboratingParties="true" isPersisted="true" persistenceType="ENCRYPTED" physicalDimension="WidthDev" relationalOperator="&lt;" value="5" metricUnit="mm"/>
+      <constraints exposeToCollaboratingParties="true" isPersisted="true" persistenceType="ENCRYPTED" physicalDimension="HeightDev" relationalOperator="&lt;" value="3" metricUnit="mm"/>
+      <constraints exposeToCollaboratingParties="true" isPersisted="true" persistenceType="ENCRYPTED" physicalDimension="DepthDev" relationalOperator="&lt;" value="3" metricUnit="mm"/>
+      <constraints exposeToCollaboratingParties="true" persistenceType="PLAIN_TEXT" physicalDimension="CornerAngle" relationalOperator="=" value="90" metricUnit="°"/>
+      <constraints persistenceType="PLAIN_TEXT" physicalDimension="MaxPinDev" relationalOperator="&lt;" value="1" metricUnit="mm"/>
+    </capability>
+    <inProducts id="f1ce64fb-a9c7-4d01-abef-92ee352cb5ce" name="Box" exposeToCollaboratingParties="true" equivalent="//@elements.8/@outProducts.0" quantity="1">
+      <constraints exposeToCollaboratingParties="true" physicalDimension="Width" relationalOperator="=" value="36" metricUnit="cm"/>
+      <constraints exposeToCollaboratingParties="true" physicalDimension="Height" relationalOperator="=" value="11" metricUnit="cm"/>
+      <constraints exposeToCollaboratingParties="true" physicalDimension="Depth" relationalOperator="=" value="11" metricUnit="cm"/>
+    </inProducts>
+    <outProducts id="3b9d89ea-d848-4d37-96b4-cb69ae039127" name="Inspected box" exposeToCollaboratingParties="true" quantity="1">
+      <constraints exposeToCollaboratingParties="true" physicalDimension="Width" relationalOperator="=" value="36" metricUnit="cm"/>
+      <constraints exposeToCollaboratingParties="true" physicalDimension="Height" relationalOperator="=" value="11" metricUnit="cm"/>
+      <constraints exposeToCollaboratingParties="true" physicalDimension="Depth" relationalOperator="=" value="11" metricUnit="cm"/>
+    </outProducts>
+  </elements>
+  <relationships id="e252a1af-339a-406b-8000-e961c200fc0d" name="479d913b-b4bf-45cd-b39c-6ca081a2421a_4d3a05f6-8b0f-4f4a-a56b-99027329f01f_flow" exposeToCollaboratingParties="true" source="//@elements.10" target="//@elements.3"/>
+  <relationships id="1505446c-9694-4d0e-8435-e497e285fa2b" name="628dd498-52ba-4cfc-9e8e-4f442cd0d241_6ea3f3c4-cda6-4371-bed4-1309b4998d04_flow" source="//@elements.0" target="//@elements.8"/>
+  <relationships id="cf66a045-48e4-4fb9-8977-dcfbd81b540a" name="9e4fc6dc-6846-43aa-b283-50721c1ea2d3_02d3aa49-51fd-44ed-b3b3-8124cd93ff4e_flow" source="//@elements.1" target="//@elements.2"/>
+  <relationships id="c138c489-1dc5-47d7-9bb7-1e41b04a1847" name="4d3a05f6-8b0f-4f4a-a56b-99027329f01f_5becce2a-b83b-469c-a005-2ec9c0c271fa_flow" logicalCondition="" message="" source="//@elements.3" target="//@elements.9"/>
+  <relationships id="2aa3b9e2-b2ad-4141-ab33-7f12cbaeb008" name="6ea3f3c4-cda6-4371-bed4-1309b4998d04_0685f0cc-1d49-475a-b69b-7831a6348656_flow" source="//@elements.8" target="//@elements.12"/>
+  <relationships id="b8a7bbf0-38f8-4dca-8aef-512ad52c3b07" name="25c8fd48-1b1c-476a-bd56-c24fb9026487_628dd498-52ba-4cfc-9e8e-4f442cd0d241_flow" source="//@elements.5" target="//@elements.0"/>
+  <relationships id="bc95e7ad-ea35-4809-908e-3e8f72f1f44a" name="2f8fd15f-153b-44a1-8789-0232844dac96_02d3aa49-51fd-44ed-b3b3-8124cd93ff4e_flow" source="//@elements.6" target="//@elements.2"/>
+  <relationships id="d0b1ded1-798a-4ea4-8416-263770795638" name="35720525-a266-458d-a083-598016750de8_25c8fd48-1b1c-476a-bd56-c24fb9026487_flow" source="//@elements.7" target="//@elements.5"/>
+  <relationships id="0167640e-0aa4-4f21-8902-2acd6465b4af" name="5becce2a-b83b-469c-a005-2ec9c0c271fa_25c8fd48-1b1c-476a-bd56-c24fb9026487_flow" source="//@elements.9" target="//@elements.5"/>
+  <relationships id="b774cb4b-0d63-4923-9842-f2b647d39374" name="b023e308-274b-4c17-b4e3-d6059c71f62b_2f8fd15f-153b-44a1-8789-0232844dac96_flow" logicalCondition="hasDefect = True" message="" source="//@elements.11" target="//@elements.6"/>
+  <relationships id="611d1512-05e3-4427-9e60-c0e2d2551bf8" name="02d3aa49-51fd-44ed-b3b3-8124cd93ff4e_f5bfcb4c-26a3-454c-944d-2e45905f2ac8_flow" source="//@elements.2" target="//@elements.4"/>
+  <relationships id="e87446ed-1add-4d2d-9fc5-fa9dadf60e1c" name="b023e308-274b-4c17-b4e3-d6059c71f62b_9e4fc6dc-6846-43aa-b283-50721c1ea2d3_flow" logicalCondition="hasDefect = False" source="//@elements.11" target="//@elements.1"/>
+  <relationships id="2c2c6603-082e-427e-ac09-51eb74600899" name="4d3a05f6-8b0f-4f4a-a56b-99027329f01f_35720525-a266-458d-a083-598016750de8_flow" source="//@elements.3" target="//@elements.7"/>
+  <relationships id="73e4ee91-034a-4e83-abe2-ff1f56bbfb11" name="592cea39-ce17-4651-9cfa-dacf7e2d0d0a_b023e308-274b-4c17-b4e3-d6059c71f62b_flow" source="//@elements.12" target="//@elements.11"/>
+</mod:Process>

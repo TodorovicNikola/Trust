@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mod:Process xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mod="http://www.trust40.com/process-modeling" id="" name="" version="1">
+  <elements xsi:type="mod:CollaborativeNetwork" id="7b73ea33-9dec-4f9c-81bc-735a4c051425" name="ACME Wine Inc.">
+    <organizations id="ad18e518-dcec-4f3c-a396-2af353d37fa3" name="Winery" dltPeerAddress="hehe:80">
+      <elements xsi:type="mod:ProcessStep" id="e23afdf0-59cd-45f6-a774-8901e9f801cc" name="Start" outRelationships="//@relationships.9" type="START"/>
+      <elements xsi:type="mod:ProcessStep" id="b6532d19-c671-44bc-a81f-d6e296288698" name="Pack Wine Bottle" inRelationships="//@relationships.16" outRelationships="//@relationships.17">
+        <contractualObligation id="dfcbacb1-bb5c-45ca-a749-e636d3fe4139" name="Contractual Obligation">
+          <constraints physicalDimension="Pieces" relationalOperator="=" value="500"/>
+          <constraints physicalDimension="Deadline" relationalOperator="=" value="Deadline = 2025-08-31"/>
+        </contractualObligation>
+      </elements>
+      <elements xsi:type="mod:ProcessStep" id="3d91afd8-f962-45a7-9759-9cae1871e46c" name="End" inRelationships="//@relationships.17" type="END"/>
+    </organizations>
+    <organizations id="245de0b2-3796-471f-89bc-5f112bb7fd48" name="Woodworking Company" role="CORE_PARTNER" dltPeerAddress="hehe:80">
+      <elements xsi:type="mod:ProcessStep" id="5ec38696-207f-48c6-b16e-87b2d2174b86" name="Produce Wooden Box" inRelationships="//@relationships.10" outRelationships="//@relationships.11">
+        <contractualObligation id="bcbdecca-fb4a-44bf-b073-fb53fd0e86f6" name="Contractual Obligation">
+          <constraints physicalDimension="Pieces" relationalOperator="=" value="500"/>
+          <constraints physicalDimension="Deadline" relationalOperator="=" value="2026-08-15"/>
+          <constraints physicalDimension="Price" relationalOperator="=" value="10e"/>
+        </contractualObligation>
+        <relatedInterfaceProcess href="Basis.process_modeling#/"/>
+      </elements>
+      <elements xsi:type="mod:ProcessStep" id="049d08e5-6d2f-40cf-b10d-16b9570b003b" name="Ship Wooden Box" inRelationships="//@relationships.11" outRelationships="//@relationships.12" notation="TRANSPORTATION">
+        <contractualObligation id="36b1e30a-77d3-4b34-81d0-280aa4a20b2d" name="Contractual Obligation">
+          <constraints physicalDimension="Pieces" relationalOperator="=" value="500"/>
+          <constraints physicalDimension="Deadline" relationalOperator="=" value="2025-08-30"/>
+        </contractualObligation>
+      </elements>
+      <elements xsi:type="mod:Gate" id="f60b0b11-cfd4-4656-b33a-23d7f94c40fe" name="Parallelism" inRelationships="//@relationships.9" outRelationships="//@relationships.10 //@relationships.13" type="PARALLELISM"/>
+      <elements xsi:type="mod:Gate" id="1ae61ed5-f6aa-4819-987f-9ad2fa2a6cf7" name="Parallelism" inRelationships="//@relationships.12 //@relationships.15" outRelationships="//@relationships.16" type="PARALLELISM"/>
+    </organizations>
+    <organizations id="08e2202d-2035-4b1f-b04d-440008094ec8" name="Acrylic Engraving Company" role="ADDITIONAL_PARTNER" dltPeerAddress="hehe:80">
+      <elements xsi:type="mod:ProcessStep" id="33433900-26e2-4ae0-abbc-2cd0e37e3e65" name="Engrave Acrylic Front Cover" inRelationships="//@relationships.13" outRelationships="//@relationships.14">
+        <contractualObligation id="90b882ac-3776-4ff0-ad53-f481e3053ded" name="Contractual Obligation">
+          <constraints physicalDimension="Pieces" relationalOperator="=" value="500"/>
+          <constraints physicalDimension="Deadline" relationalOperator="=" value="2026-08-13"/>
+          <constraints physicalDimension="Price" relationalOperator="=" value="3e"/>
+        </contractualObligation>
+      </elements>
+      <elements xsi:type="mod:ProcessStep" id="79d62bab-96e4-45b7-804a-51d33df72034" name="Ship Front Cover" inRelationships="//@relationships.14" outRelationships="//@relationships.15" notation="TRANSPORTATION">
+        <contractualObligation id="ec65184f-dee6-43f0-a0f1-684da69addac" name="Contractual Obligation">
+          <constraints physicalDimension="Pieces" relationalOperator="=" value="500"/>
+          <constraints physicalDimension="Deadline" relationalOperator="=" value="2025-08-30"/>
+        </contractualObligation>
+      </elements>
+    </organizations>
+  </elements>
+  <relationships id="6fec270b-ad33-4f34-921a-d71b97ac5227" name="26de054c-364d-4a28-800b-1936fafe6494_a2dbf7f6-f1c7-46b6-830e-41576fbf2a6c_flow"/>
+  <relationships id="5ef57261-7e50-4bb4-9141-d4cc9d6b748f" name="a2dbf7f6-f1c7-46b6-830e-41576fbf2a6c_ffb9e2ad-070a-42b7-a059-dcbf5f8767c8_flow"/>
+  <relationships id="7cd43187-92c3-4cc2-82a3-ea64858e2932" name="a2dbf7f6-f1c7-46b6-830e-41576fbf2a6c_d3f53f27-7f05-40aa-847e-84634bf18110_flow"/>
+  <relationships id="6285e9e7-6298-44e4-bf9c-e4a22fe38777" name="c9361fdc-8a67-4e6c-be39-550abd07f888_9b45c4a0-ef96-423a-ba27-8aa833d69e08_flow"/>
+  <relationships id="41b03ea1-6937-4e8c-9c5a-b3a975676ddc" name="8e08d513-70ca-4979-aa78-89ba41836d35_c9361fdc-8a67-4e6c-be39-550abd07f888_flow"/>
+  <relationships id="3e8e468a-640f-409a-91a4-1c319bba527b" name="8e6e2828-eb0e-4de4-846a-e4652c652ac6_c9361fdc-8a67-4e6c-be39-550abd07f888_flow"/>
+  <relationships id="f11a522b-b989-4077-9bce-8360f9b625b7" name="d3f53f27-7f05-40aa-847e-84634bf18110_8e6e2828-eb0e-4de4-846a-e4652c652ac6_flow"/>
+  <relationships id="8f292a3e-aaa5-488c-876f-d24a9f6791f0" name="ffb9e2ad-070a-42b7-a059-dcbf5f8767c8_8e08d513-70ca-4979-aa78-89ba41836d35_flow"/>
+  <relationships id="22e7e56a-3da0-4324-90a5-e1664c211382" name="9b45c4a0-ef96-423a-ba27-8aa833d69e08_fdd177da-f8c5-4af9-810b-17498aeb276c_flow"/>
+  <relationships id="9f960cb6-145b-4262-9f99-1d87939353cb" name="e23afdf0-59cd-45f6-a774-8901e9f801cc_f60b0b11-cfd4-4656-b33a-23d7f94c40fe_flow" source="//@elements.0/@organizations.0/@elements.0" target="//@elements.0/@organizations.1/@elements.2"/>
+  <relationships id="b4181e93-0465-4450-b7c8-76a692258bc3" name="f60b0b11-cfd4-4656-b33a-23d7f94c40fe_5ec38696-207f-48c6-b16e-87b2d2174b86_flow" source="//@elements.0/@organizations.1/@elements.2" target="//@elements.0/@organizations.1/@elements.0"/>
+  <relationships id="d39ac545-c8f2-4a40-8ddb-b6fb1f7594d6" name="5ec38696-207f-48c6-b16e-87b2d2174b86_049d08e5-6d2f-40cf-b10d-16b9570b003b_flow" source="//@elements.0/@organizations.1/@elements.0" target="//@elements.0/@organizations.1/@elements.1"/>
+  <relationships id="0684c764-97fe-4f4b-af5e-b6cf7e6b524c" name="049d08e5-6d2f-40cf-b10d-16b9570b003b_1ae61ed5-f6aa-4819-987f-9ad2fa2a6cf7_flow" source="//@elements.0/@organizations.1/@elements.1" target="//@elements.0/@organizations.1/@elements.3"/>
+  <relationships id="cebf6bd6-bb3f-4d3d-b0cf-124160f26b0c" name="f60b0b11-cfd4-4656-b33a-23d7f94c40fe_33433900-26e2-4ae0-abbc-2cd0e37e3e65_flow" source="//@elements.0/@organizations.1/@elements.2" target="//@elements.0/@organizations.2/@elements.0"/>
+  <relationships id="46fa212b-a710-49cc-a29b-99cda3a08328" name="33433900-26e2-4ae0-abbc-2cd0e37e3e65_79d62bab-96e4-45b7-804a-51d33df72034_flow" source="//@elements.0/@organizations.2/@elements.0" target="//@elements.0/@organizations.2/@elements.1"/>
+  <relationships id="1c0e2d79-3bf6-4506-9a22-a61d65676519" name="79d62bab-96e4-45b7-804a-51d33df72034_1ae61ed5-f6aa-4819-987f-9ad2fa2a6cf7_flow" source="//@elements.0/@organizations.2/@elements.1" target="//@elements.0/@organizations.1/@elements.3"/>
+  <relationships id="c7f6e0f3-7636-4452-a3f7-2fab245254c0" name="1ae61ed5-f6aa-4819-987f-9ad2fa2a6cf7_b6532d19-c671-44bc-a81f-d6e296288698_flow" source="//@elements.0/@organizations.1/@elements.3" target="//@elements.0/@organizations.0/@elements.1"/>
+  <relationships id="7501f917-a904-4bc8-bb75-09dc02f3bf57" name="b6532d19-c671-44bc-a81f-d6e296288698_3d91afd8-f962-45a7-9759-9cae1871e46c_flow" source="//@elements.0/@organizations.0/@elements.1" target="//@elements.0/@organizations.0/@elements.2"/>
+</mod:Process>

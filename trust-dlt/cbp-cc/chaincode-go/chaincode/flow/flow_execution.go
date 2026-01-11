@@ -56,7 +56,6 @@ func (fe *Execution) Execute(action string, actionArgsMap map[string]interface{}
 }
 
 
-
 func (fe *Execution) El_ShipFrontCover___6cc0Func(actionArgsMap map[string]interface{}, ctx contractapi.TransactionContextInterface) (bool, error) {
 	if !fe.State.El_ShipFrontCover___6cc0Active {
 		return false, nil
@@ -83,11 +82,7 @@ func (fe *Execution) El_ShipFrontCover___6cc0Func(actionArgsMap map[string]inter
     fe.State.El_ShipFrontCover___6cc0Var.C_Pieces = actionArgsMap["C_Pieces"].(float64)
 
 
-	return true, nil
-
-}
-
-
+	return true, nil}
 func (fe *Execution) El_ProduceWoodenBox___665bFunc(actionArgsMap map[string]interface{}, ctx contractapi.TransactionContextInterface) (bool, error) {
 	if !fe.State.El_ProduceWoodenBox___665bActive {
 		return false, nil
@@ -126,27 +121,7 @@ func (fe *Execution) El_ProduceWoodenBox___665bFunc(actionArgsMap map[string]int
     fe.State.El_ProduceWoodenBox___665bVar.C_Pieces = countDto.Count
 
 
-	return true, nil
-
-}
-
-
-
-// func (fe *Execution) El_Parallelism___27f0Func() {
-//     if !fe.State.El_Parallelism___27f0Active {
-//         return
-//     }
-
-//     // previous elements <- false
-//     fe.State.El_Parallelism___27f0Active = false
-
-//         // next elements <- true
-//     fe.State.El_ProduceWoodenBox___665bActive = true
-
-//     fe.State.El_EngraveAcrylicFrontCov___418fActive = true
-
-// }
-
+	return true, nil}
 func (fe *Execution) El_Parallelism___dbd4Func() {
     if !fe.State.El_960773f4_1339_4673_896___9ec9Active {
         return
@@ -160,12 +135,9 @@ func (fe *Execution) El_Parallelism___dbd4Func() {
     fe.State.El_6cc01341_3547_459c_aa0___2ad6Active = false
 
         // next elements <- true
-    fe.State.El_PackWineBottle___e71bActive = true
-
-}
-
-
-func (fe *Execution) El_PackWineBottle___e71bFunc(actionArgsMap map[string]interface{}, ctx contractapi.TransactionContextInterface) (bool, error) {
+    fe.State.El_PackWineBottle___e71bActive = true}
+func (fe *Execution) El_PackWineBottle___e71bFunc(actionArgsMap map[string]interface{},
+     ctx contractapi.TransactionContextInterface) (bool, error) {
 	if !fe.State.El_PackWineBottle___e71bActive {
 		return false, nil
 	}
@@ -190,12 +162,9 @@ func (fe *Execution) El_PackWineBottle___e71bFunc(actionArgsMap map[string]inter
     fe.State.El_PackWineBottle___e71bVar.C_Pieces = actionArgsMap["C_Pieces"].(float64)
 
 
-	return true, nil
-
-}
-
-
-func (fe *Execution) El_End___696aFunc(actionArgsMap map[string]interface{}, ctx contractapi.TransactionContextInterface) (bool, error) {
+	return true, nil}
+func (fe *Execution) El_End___696aFunc(actionArgsMap map[string]interface{}, 
+    ctx contractapi.TransactionContextInterface) (bool, error) {
 	if !fe.State.El_End___696aActive {
 		return false, nil
 	}
@@ -205,12 +174,9 @@ func (fe *Execution) El_End___696aFunc(actionArgsMap map[string]interface{}, ctx
 
 	fe.State.TerminationActivated = true
 
-	return true, nil
-
-}
-
-
-func (fe *Execution) El_Start___aa98Func(actionArgsMap map[string]interface{}, ctx contractapi.TransactionContextInterface) (bool, error) {
+	return true, nil}
+func (fe *Execution) El_Start___aa98Func(actionArgsMap map[string]interface{}, 
+    ctx contractapi.TransactionContextInterface) (bool, error) {
 	if !fe.State.El_Start___aa98Active {
 		return false, nil
 	}
@@ -222,11 +188,7 @@ func (fe *Execution) El_Start___aa98Func(actionArgsMap map[string]interface{}, c
 	fe.State.El_ProduceWoodenBox___665bActive = true
 	fe.State.El_EngraveAcrylicFrontCov___418fActive = true
         
-	return true, nil
-
-}
-
-
+	return true, nil}
 func (fe *Execution) El_EngraveAcrylicFrontCov___418fFunc(actionArgsMap map[string]interface{}, ctx contractapi.TransactionContextInterface) (bool, error) {
 	if !fe.State.El_EngraveAcrylicFrontCov___418fActive {
 		return false, nil
@@ -252,11 +214,7 @@ func (fe *Execution) El_EngraveAcrylicFrontCov___418fFunc(actionArgsMap map[stri
     fe.State.El_EngraveAcrylicFrontCov___418fVar.C_Pieces = actionArgsMap["C_Pieces"].(float64)
 
 
-	return true, nil
-
-}
-
-
+	return true, nil}
 func (fe *Execution) El_ShipWoodenBox___9607Func(actionArgsMap map[string]interface{}, ctx contractapi.TransactionContextInterface) (bool, error) {
 	if !fe.State.El_ShipWoodenBox___9607Active {
 		return false, nil
@@ -283,6 +241,26 @@ func (fe *Execution) El_ShipWoodenBox___9607Func(actionArgsMap map[string]interf
     fe.State.El_ShipWoodenBox___9607Var.C_Pieces = actionArgsMap["C_Pieces"].(float64)
 
 
-	return true, nil
+	return true, nil}
 
-}
+
+
+
+    // func (fe *Execution) El_Parallelism___27f0Func() {
+
+
+        //     if !fe.State.El_Parallelism___27f0Active {
+//         return
+//     }
+
+//     // previous elements <- false
+//     fe.State.El_Parallelism___27f0Active = false
+
+//         // next elements <- true
+//     fe.State.El_ProduceWoodenBox___665bActive = true
+
+//     fe.State.El_EngraveAcrylicFrontCov___418fActive = true
+
+// }
+
+
