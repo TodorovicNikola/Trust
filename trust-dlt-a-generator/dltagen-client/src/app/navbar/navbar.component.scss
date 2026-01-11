@@ -1,0 +1,19 @@
+.navbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.navbar-item {
+    padding: 10px;
+    background-color: greenyellow;
+    border: 1px solid green;
+    color: black;
+    text-decoration: none;
+}
+
+.navbar-item:hover {
+    background-color: green;
+    color: white;
+}

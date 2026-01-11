@@ -1,0 +1,24 @@
+# needs:
+#   channel
+#   orderer
+#   organization (first organization)
+
+configtxgen -profile GeneratedGenesis -outputBlock ./channel-artifacts/${channel.id}.block -channelID ${channel.id} -configPath ./config
+
+# TODO: localhost:7053 is the orderer admin listenaddress
+export CORE_PEER_LOCALMSPID="${organization.mspId}"
+export CORE_PEER_TLS_ROOTCERT_FILE="../organizations/peerOrganizations/${organization.name}/tlsca/tlsca.${organization.name}-cert.pem"
+export CORE_PEER_MSPCONFIGPATH="../organizations/peerOrganizations/${organization.name}/users/${organization.admin.name}@${organization.name}/msp"
+export CORE_PEER_ADDRESS=${organization.host}:${organization.port}
+osnadmin channel join --channelID ${channel.id} --config-block ./channel-artifacts/${channel.id}.block -o localhost:7053 --ca-file "../organizations/ordererOrganizations/${orderer.name}/tlsca/tlsca.${orderer.name}-cert.pem" --client-cert "../organizations/ordererOrganizations/${orderer.name}/orderers/${orderer.peer.name}.${orderer.name}/tls/server.crt" --client-key "../organizations/ordererOrganizations/${orderer.name}/orderers/${orderer.peer.name}.${orderer.name}/tls/server.key"
+
+<#list channel.organizations as org>
+export CORE_PEER_LOCALMSPID="${org.mspId}"
+export CORE_PEER_TLS_ROOTCERT_FILE="../organizations/peerOrganizations/${org.name}/tlsca/tlsca.${org.name}-cert.pem"
+export CORE_PEER_MSPCONFIGPATH="../organizations/peerOrganizations/${org.name}/users/${org.admin.name}@${org.name}/msp"
+export CORE_PEER_ADDRESS=${org.host}:${org.port}
+
+peer channel join -b ./channel-artifacts/${channel.id}.block
+</#list>
+
+#TODO: set anchor peer

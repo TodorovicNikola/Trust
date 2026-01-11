@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+  <extension
+        point="org.eclipse.sirius.componentization">
+     <component
+           class="process_modelling_design.Activator"
+           id="project_modelling_design"
+           name="project_modelling_design">
+     </component>
+  </extension>
+  <extension
+   point="org.eclipse.ui.commands">
+    <command
+          description="Submit Document Command"
+          id="submit_document_command"
+          name="Submit Document Command">
+    </command>
+    <command
+          description="Sign Document Command"
+          id="sign_document_command"
+          name="Sign Document Command">
+    </command>
+    <command
+          description="Launch Process Command"
+          id="launch_process_command"
+          name="Launch Process Command">
+    </command>
+    <command
+          description="Monitor Process Command"
+          id="monitor_process_command"
+          name="Monitor Process Command">
+    </command>
+  </extension>
+  <extension
+   point="org.eclipse.ui.handlers">
+    <handler
+     class="process_planning.SubmitDocumentHandler"
+     commandId="submit_document_command">
+    </handler>
+    <handler
+     class="process_planning.SignDocumentHandler"
+     commandId="sign_document_command">
+    </handler>
+    <handler
+     class="process_execution.LaunchProcessHandler"
+     commandId="launch_process_command">
+    </handler>
+    <handler
+     class="process_execution.MonitorProcessHandler"
+     commandId="monitor_process_command">
+    </handler>
+  </extension>  
+  <extension point="org.eclipse.ui.menus">
+    <menuContribution
+	          allPopups="false"
+	          locationURI="toolbar:org.eclipse.sirius.diagram.ui.tabbar?after=additions">
+	  <command
+         commandId="submit_document_command"
+         icon="icons/toolbar/up-arrow.png"
+         id="org.eclipse.sirius.diagram.tabbar.submit.on.diagrame"
+         label="Submit Document"
+         style="push"
+         tooltip="Submit Document">
+	  </command>
+	  <command
+         commandId="sign_document_command"
+         icon="icons/toolbar/pen.png"
+         id="org.eclipse.sirius.diagram.tabbar.sign.on.diagrame"
+         label="Sign Document"
+         style="push"
+         tooltip="Sign Document">
+	  </command>
+	  <separator
+         name="additions"
+		 visible="true">
+	  </separator>
+	  	  <command
+         commandId="launch_process_command"
+         icon="icons/toolbar/play32x32.png"
+         id="org.eclipse.sirius.diagram.tabbar.launch.on.diagrame"
+         label="Launch Production"
+         style="push"
+         tooltip="Launch Production">
+	  </command>
+	  <command
+         commandId="monitor_process_command"
+         icon="icons/toolbar/loupe.png"
+         id="org.eclipse.sirius.diagram.tabbar.monitor.on.diagrame"
+         label="Monitor Process"
+         style="push"
+         tooltip="Monitor Process">
+	  </command>
+	</menuContribution>
+  </extension>
+</plugin>

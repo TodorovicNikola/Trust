@@ -1,2 +1,2 @@
-# CE-MultiProLan
-A repository for storing CE-MultiProLan research-related artifacts
+# ColProLan
+A repository for storing ColProLan research-related artifacts
