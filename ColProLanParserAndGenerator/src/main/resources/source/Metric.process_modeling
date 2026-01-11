@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mod:SystemOfUnits xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:mod="http://www.trust40.com/process-modeling" name="Metric">
+  <dimensions name="Length" symbol="L">
+    <units name="meter" symbol="m" is_base="true" scaling_factor="1"/>
+    <units name="centimeter" symbol="cm" scaling_factor="0.01"/>
+    <units name="millimeter" symbol=" mm" scaling_factor="0.001"/>
+  </dimensions>
+</mod:SystemOfUnits>

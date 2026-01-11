@@ -38,10 +38,13 @@ Simulator/
 .gradle
 !gradle-wrapper.jar
 
+# Generated artefacts
+trust-dlt/
+tmp/
+Caliper/output/
 
-##############################
-## MultiProLan GenModel Files
-##############################
-MultiProLan/*.edit/
-MultiProLan/*.editor/
-MultiProLan/*.tests/
+# IDE
+.idea
+.vscode
+.bin
+

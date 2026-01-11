@@ -1,0 +1,1 @@
+# Samo pokreni iz lokala go test -v, u wsl ubuntu nije instaliran HLF... :)
