@@ -27,7 +27,7 @@ public class IPParser extends AbstractParser {
     }
 
 
-    protected Map<String, ProcessElement> extractProcessElements(Document document) throws XPathExpressionException {
+    public Map<String, ProcessElement> extractProcessElements(Document document) throws XPathExpressionException {
         XPathFactory xpathFactory = XPathFactory.newInstance();
         XPath xpath = xpathFactory.newXPath();
         NodeList XMLElements = (NodeList) xpath.evaluate("Process/elements", document,

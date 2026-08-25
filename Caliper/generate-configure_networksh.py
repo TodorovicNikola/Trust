@@ -20,6 +20,7 @@ def run_initial_configs_fn():
     RET_VAL = """########## run_initial_configs_fn ##########
 set -o xtrace
 
+CHANNEL_NAME=orgchannel
 """
     return RET_VAL
 
@@ -102,7 +103,7 @@ docker-compose -f "./{org_name}/docker-compose-cli.yaml" up -d
 
 docker exec cli peer lifecycle chaincode install {sc_name}.tar.gz
 
-PACKAGE_ID=$(docker exec cli peer lifecycle chaincode queryinstalled | sed -n 's/.*Package ID: \\([^,]*\\),.*/\\1/p')
+PACKAGE_ID=$(docker-compose -f "./{org_name}/docker-compose-cli.yaml" run --rm cli sh -c "peer lifecycle chaincode queryinstalled" | sed -n 's/.*Package ID: \\([^,]*\\),.*/\\1/p')
 
 echo $PACKAGE_ID
 

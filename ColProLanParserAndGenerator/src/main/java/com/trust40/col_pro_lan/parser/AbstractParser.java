@@ -27,16 +27,17 @@ import java.util.Map;
 
 public abstract class AbstractParser {
 
-	protected Map<String, IDNamedElement> selectedElements;
+	protected Map<String, IDNamedElement> selectedElements = new HashMap<>();
 	public static Document document;
 
-	protected void prepareDocument(String path) throws ParserConfigurationException, SAXException, IOException {
+	protected Document prepareDocument(String path) throws ParserConfigurationException, SAXException, IOException {
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		dbf.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
 		DocumentBuilder db = dbf.newDocumentBuilder();
 		Document document = db.parse(new File(path));
 		document.getDocumentElement().normalize();
 		AbstractParser.document = document;
+		return document;
 	}
 
 	protected void parseModel(String path)
@@ -111,7 +112,8 @@ public abstract class AbstractParser {
 	protected void selectPreviousElements(ProcessElement processElement, Map<String, IDNamedElement> previousElements) {
 		previousElements.put(processElement.getId(), processElement);
 
-		if (processElement instanceof ProcessStep && processElement.isTraced()) {
+		if (processElement instanceof ProcessStep  && (this.getClass().getName().contains("CBPParser")
+				|| (processElement.isTraced() && this.getClass().getName().contains("IPParser")))) {
 			for (Relationship relationship : (processElement.getIncomingRelationship())) {
 				ProcessElement sourceNode = relationship.getSource(); // node, a ne element, jer ne moze biti
 																		// relationship u pitanju
@@ -129,11 +131,7 @@ public abstract class AbstractParser {
 
 			for (Relationship relationship : processElement.getIncomingRelationship()) {
 				IDNamedElement previousProcessElement = selectElement(relationship);
-				previousProcessElement.getFollowingElements().put(processElement.getId(), processElement); // u
-																											// following
-																											// od veze
-																											// ubacuje
-																											// gate
+				previousProcessElement.getFollowingElements().put(processElement.getId(), processElement); // u following od veze ubacuje gate
 
 				previousElements.put(relationship.getId(), previousProcessElement); // u previous od gate ubacuje veze
 			}
